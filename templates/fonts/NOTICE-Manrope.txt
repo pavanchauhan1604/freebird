@@ -1,0 +1,1 @@
+Manrope-var-latin.woff2 is the Latin subset of Manrope (variable, weight 200-800), copyright The Manrope Project Authors (https://github.com/sharanda/manrope), licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org). Downloaded from Google Fonts.

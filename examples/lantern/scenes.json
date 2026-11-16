@@ -1,0 +1,52 @@
+[
+ {
+  "id": "ignite",
+  "key": "intro",
+  "src": "compositions/ignite.html"
+ },
+ {
+  "id": "s-bridge",
+  "key": "bridge",
+  "src": "compositions/s-bridge.html"
+ },
+ {
+  "id": "s-procure",
+  "key": "procure",
+  "src": "compositions/s-procure.html"
+ },
+ {
+  "id": "s-report",
+  "key": "report",
+  "src": "compositions/s-report.html"
+ },
+ {
+  "id": "s-remediate",
+  "key": "remediate",
+  "src": "compositions/s-remediate.html"
+ },
+ {
+  "id": "s-export",
+  "key": "export",
+  "src": "compositions/s-export.html"
+ },
+ {
+  "id": "s-cycle",
+  "key": "cycle",
+  "src": "compositions/s-cycle.html"
+ },
+ {
+  "id": "s-workbench",
+  "key": "workbench",
+  "src": "compositions/s-workbench.html"
+ },
+ {
+  "id": "s-end",
+  "key": "end",
+  "src": "compositions/s-end.html"
+ },
+ {
+  "id": "rail",
+  "key": "rail",
+  "src": "compositions/rail.html"
+ }
+]

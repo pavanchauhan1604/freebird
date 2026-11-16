@@ -1,0 +1,73 @@
+<template>
+  <style>
+    #en { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; }
+    #en-night { position: absolute; inset: 0; background: #0b0b0f; opacity: 0; }
+    .tile { position: absolute; width: 170px; height: 170px; border-radius: 30px; background: #15151a; box-shadow: 0 0 0 2px #25252c; opacity: 0; display: flex; align-items: center; justify-content: center; }
+    .tile svg { width: 74px; height: 74px; overflow: visible; position: absolute; }
+    .tile svg.g { color: #4d4d56; } .tile svg.a { opacity: 0; }
+    #en .ttl { color: #f4f4f1; left: 0; right: 0; text-align: center; top: 340px; font-size: 92px; }
+    #en-glow { position: absolute; left: 360px; top: 190px; width: 1200px; height: 700px; background: radial-gradient(closest-side, rgba(255,176,32,0.30), rgba(255,176,32,0.10) 55%, rgba(255,176,32,0)); opacity: 0; }
+    .tile .lit { position: absolute; inset: 0; border-radius: 30px; opacity: 0; }
+    #en-stage { position: absolute; left: 360px; top: 215px; width: 1200px; height: 600px; opacity: 0; }
+  </style>
+  <script src="assets/ignite/ignite.js"></script>
+  <script src="assets/lib/motion.js"></script>
+  <div id="en" data-composition-id="s-end" data-width="1920" data-height="1080">
+    <div id="en-night"></div>
+    <div id="en-grid"></div>
+    <div id="en-glow"></div>
+    <h2 class="ttl" id="n-a"><span class="ln" style="display:block"><span class="w">Every</span> <span class="w">document</span></span><span class="ln" style="display:block"><span class="w">has</span> <span class="w">something</span> <span class="w"><span class="mk" id="mn-a">to say.</span></span></span></h2>
+    <h2 class="ttl" id="n-b"><span class="ln" style="display:block"><span class="w">Lantern</span> <span class="w">makes</span> <span class="w">sure</span></span><span class="ln" style="display:block"><span class="w">it</span> <span class="w">reaches</span> <span class="w"><span class="mk" id="mn-b">everyone.</span></span></span></h2>
+    <div id="en-stage"></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); };
+      var IC = [
+        '<path d="M32 12h38l22 22v64a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z"/><path d="M70 12v22h22"/><path d="M40 62h40M40 78h40M40 94h26"/>',
+        '<rect x="10" y="22" width="100" height="68" rx="9"/><path d="M24 40h34M24 56h26M24 70h20"/><rect x="66" y="48" width="30" height="28" rx="5"/><path d="M46 104h28M60 90v14"/>',
+        '<path d="M60 28c-12-8-30-9-46-6v70c16-3 34-2 46 6 12-8 30-9 46-6V22c-16-3-34-2-46 6z"/><path d="M60 28v70M26 44h24M26 58h24M70 44h24M70 58h24"/>',
+        '<path d="M32 12h38l22 22v64a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z"/><path d="M38 58c4-8 7-8 9 0s5 8 8 0 5-8 8 0 5 8 8 0M38 76c5-7 8-7 10 0s5 7 9 0 6-7 9 0M38 94c4-6 7-6 9 0s6 6 9 0"/>',
+        '<path d="M18 60v0M32 46v28M46 30v60M60 40v40M74 22v76M88 44v32M102 54v12" stroke-width="7"/>',
+        '<rect x="10" y="26" width="100" height="68" rx="12"/><path d="M52 46v28l24-14z"/>'
+      ];
+      var COLS = 8, ROWS = 4, T = 170, GAP = 36, X0 = (1920 - (COLS * T + (COLS - 1) * GAP)) / 2, Y0 = (1080 - (ROWS * T + (ROWS - 1) * GAP)) / 2, grid = $("#en-grid"), tiles = [], dmax = 0;
+      var ACC = ["#3E7BFA", "#12A3B4", "#7B5CF0", "#2FA463", "#F2711C", "#E64980", "#C93BA6"];
+      for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
+        var cx = X0 + c * (T + GAP) + T / 2, cy = Y0 + r * (T + GAP) + T / 2;
+        if (cx > 540 && cx < 1380) continue;                              // the middle, top to bottom, belongs to the words and then to the lockup: nothing may touch it
+        var el = document.createElement("div"); el.className = "tile"; el.style.cssText = "left:" + (cx - T / 2) + "px;top:" + (cy - T / 2) + "px";
+        var ic = IC[(r * 3 + c) % IC.length], col = ACC[(r * 3 + c * 2) % ACC.length], sv = function (cls, st) { return '<svg class="' + cls + '" style="' + st + '" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg>"; };
+        el.innerHTML = '<div class="lit" style="background:' + col + '14;box-shadow:0 0 0 2px ' + col + ',0 0 34px ' + col + '55"></div>' + sv("g", "") + sv("a", "color:" + col); grid.appendChild(el);
+        var d = Math.hypot(cx - 960, cy - 540); dmax = Math.max(dmax, d); tiles.push({ el: el, d: d });
+      }
+      // the lockup, in its final state (the same file as the intro and the launch screen), night theme; its tagline waits for the end
+      var ig = LanternIgnite.mount($("#en-stage"), { theme: "night", assets: "assets/ignite" }); ig.progress(1);
+      var tag = $("#en-stage .ig-tag"); tag.style.opacity = 0; tag.style.filter = "blur(8px)"; tag.querySelectorAll(".ig-tw").forEach(function (w) { w.style.opacity = 1; w.style.filter = "none"; w.style.transform = "none"; });
+      var amber = "#FFB020";
+      // 0 s: the ground goes slowly to night; the file types come up dim, the nearest to the middle last
+      tl.to("#en-night", { opacity: 1, duration: 1.8, ease: "power2.inOut" }, 0.0);
+      tiles.forEach(function (t) { tl.fromTo(t.el, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 0.5 + (1 - t.d / dmax) * 0.9); });
+      // 0.6 s "Every document has something to say."
+      LM.words(tl, "#n-a", 0.7, 0.12); LM.mark2(tl, "#mn-a", "ul", amber, 2.1, 0.9); LM.out(tl, "#n-a", 3.0, 0.5);
+      // 3.1 s "Lantern makes sure, it reaches everyone.": the light spreads outward from the middle, and every file type takes its own colour
+      LM.words(tl, "#n-b", 3.2, 0.12); LM.mark2(tl, "#mn-b", "circ", amber, 4.75, 0.9);
+      tl.fromTo("#en-glow", { opacity: 0, scale: 0.8 }, { opacity: 0.8, scale: 1, duration: 2.2, ease: "power2.out" }, 3.2);
+      tiles.forEach(function (t) {
+        var at = 3.4 + (t.d / dmax) * 2.3;
+        tl.to(t.el.querySelector(".lit"), { opacity: 1, duration: 0.8, ease: "power2.out" }, at);
+        tl.to(t.el.querySelector("svg.a"), { opacity: 1, duration: 0.7, ease: "power2.out" }, at + 0.05);
+        tl.to(t.el.querySelector("svg.g"), { opacity: 0, duration: 0.6 }, at + 0.1);
+        tl.fromTo(t.el, { scale: 1 }, { scale: 1.06, duration: 0.4, ease: "sine.out", yoyo: true, repeat: 1 }, at);
+      });
+      LM.out(tl, "#n-b", 6.3, 0.5);
+      // 6.4 s "Lantern.": the lockup arrives, lit, in the middle of all of it
+      tl.fromTo("#en-stage", { opacity: 0, scale: 1.04, filter: "blur(10px)", transformOrigin: "50% 50%" }, { opacity: 1, scale: 1.1, filter: "blur(0px)", duration: 1.2, ease: "power3.out" }, 6.55);
+      tl.to("#en-glow", { opacity: 1, duration: 1.4, ease: "sine.inOut" }, 6.6);
+      // 7.9 s: the line that stays on screen, and the picture settles
+      tl.to(tag, { opacity: 1, filter: "blur(0px)", duration: 1.1, ease: "power2.out" }, 8.2);
+      tl.to(["#en-grid", "#en-glow"], { scale: 1.025, duration: 3.2, ease: "sine.inOut", transformOrigin: "50% 50%" }, 7.9); tl.to("#en-stage", { scale: 1.13, duration: 3.2, ease: "sine.inOut" }, 7.9);
+      window.__timelines["s-end"] = tl;
+    })();
+  </script>
+</template>

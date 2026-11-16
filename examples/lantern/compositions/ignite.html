@@ -1,0 +1,23 @@
+<template>
+  <style>
+    #ignite { position: absolute; inset: 0; }
+    #ignite-stage { left: 360px; top: 240px; }
+  </style>
+  <div id="ignite" data-composition-id="ignite" data-width="1920" data-height="1080">
+    <div id="ignite-stage"></div>
+  </div>
+  <script src="assets/ignite/ignite.js"></script>
+  <script>
+    (function () {
+      var v = (window.__hyperframes && window.__hyperframes.getVariables && window.__hyperframes.getVariables()) || {};
+      var tl = window.LanternIgnite.mount(document.getElementById("ignite-stage"), {
+        theme: v.theme || "paper",
+        name: v.name || undefined,
+        tagline: v.tagline || undefined,
+        assets: "assets/ignite",
+      });
+      var ev = tl.__events; if (ev) tl.to(document.getElementById("ignite-stage"), { scale: 1.25, transformOrigin: "50% 50%", duration: 1.3, ease: "power3.inOut" }, ev.pull);   // in the film the finished lockup is given more of the frame
+      window.__timelines["ignite"] = tl;
+    })();
+  </script>
+</template>

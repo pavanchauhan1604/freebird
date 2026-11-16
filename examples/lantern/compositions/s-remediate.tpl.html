@@ -1,0 +1,120 @@
+<template>
+  <style>
+    #rm { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #rm .ttl { left: 880px; top: 96px; }
+    #rm-page { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; background: #fff; box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06); opacity: 0; }
+    #rm-page img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #rm-page .glow { position: absolute; inset: -2px; box-shadow: 0 0 0 4px rgba(47,164,99,0.85), 0 0 70px 10px rgba(47,164,99,0.34); opacity: 0; }
+    #rm-ov { position: absolute; inset: 0; width: 664px; height: 860px; overflow: visible; }
+    #rm-ov rect { stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; opacity: 0; }
+    #rm-band { position: absolute; left: -6px; right: -6px; top: 0; height: 90px; background: linear-gradient(180deg, rgba(123,92,240,0), rgba(123,92,240,0.22) 70%, rgba(123,92,240,0.5) 98%, rgba(123,92,240,0)); opacity: 0; }
+    #rm-veil { position: absolute; inset: 0; background: rgba(255,255,255,0.78); clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, 9.6% 39.8%, 9.6% 67.9%, 90.3% 67.9%, 90.3% 39.8%, 9.6% 39.8%); opacity: 0; }
+    .bd { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 26px; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    #rm-desc { position: absolute; left: 11%; top: 61%; display: flex; gap: 10px; align-items: center; background: #fff; border-radius: 14px; padding: 10px 18px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 26px; opacity: 0; }
+    #rm-desc i { width: 10px; height: 10px; border-radius: 50%; background: #F2711C; display: block; opacity: 0.25; }
+    #rm-ok { position: absolute; right: 18px; top: 18px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 10px 18px 10px 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
+    #rm-ok svg { width: 28px; height: 28px; overflow: visible; }
+    /* the vision model */
+    #rm-vm { position: absolute; left: 880px; top: 330px; width: 910px; padding: 34px 38px; background: #fff; border-radius: 22px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); display: flex; gap: 28px; align-items: center; opacity: 0; }
+    #rm-vm svg { width: 104px; height: 104px; flex: none; overflow: visible; }
+    #rm-vm b { display: block; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; } #rm-vm span { display: block; margin-top: 6px; font-weight: 700; font-size: 30px; color: #6e6e73; line-height: 1.25; }
+    /* the structure */
+    #rm-tree { position: absolute; left: 880px; top: 330px; width: 910px; padding: 20px 28px; background: #fff; border-radius: 22px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    .row { position: relative; display: flex; align-items: center; min-height: 52px; font-size: 28px; line-height: 1.22; opacity: 0; }
+    .row .hl { position: absolute; inset: 3px -12px; border-radius: 12px; background: rgba(123,92,240,0.14); opacity: 0; }
+    .row .rk { position: relative; flex: none; display: inline-flex; align-items: center; height: 38px; padding: 0 14px; border-radius: 9px; font-weight: 800; font-size: 25px; letter-spacing: -0.01em; margin-right: 22px; min-width: 150px; }
+    .row.sub { padding-left: 34px; } .row.sub .rk { min-width: 116px; }
+    .row .rt { position: relative; flex: 1; min-width: 0; font-weight: 700; white-space: nowrap; }
+    .row .tg { position: relative; flex: none; margin-left: 14px; font-weight: 800; font-size: 24px; color: #6e6e73; opacity: 0; letter-spacing: 0.02em; background: #f1f1ee; border-radius: 8px; padding: 2px 10px; }
+    .row.img { align-items: flex-start; min-height: 104px; padding-top: 8px; } .row.img .rt { white-space: normal; } .row .c { opacity: 0; } .row .al { color: #6e6e73; margin-right: 8px; }
+    .c-h { background: #E5DEFF; color: #5B3CD0; } .c-p { background: #D8E5FF; color: #2556C7; } .c-l { background: #D3EEDD; color: #1C7A47; } .c-i { background: #FFE1CD; color: #B4510A; } .c-f { background: #E9E9E4; color: #4d4d52; }
+    #rm-tg { position: absolute; right: 24px; top: -18px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 8px 16px 8px 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
+    #rm-tg svg { width: 28px; height: 28px; overflow: visible; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="rm" data-composition-id="s-remediate" data-width="1920" data-height="1080">
+    <svg id="rm-lead" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none" aria-hidden="true"></svg>
+    <div id="rm-page"><img src="assets/demo/page.jpg" alt="" /><div class="glow" id="rm-glow"></div><svg id="rm-ov" viewBox="0 0 664 860" aria-hidden="true"></svg><div id="rm-band"></div><div id="rm-veil"></div><div id="rm-bd"></div>
+      <div id="rm-desc"><span>Describing</span></div>
+      <div id="rm-ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="rm-okck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Accessible</div></div>
+    <h2 class="ttl" id="t1"><span class="ln" style="display:block"><span class="w">Now</span> <span class="w">comes</span></span><span class="ln" style="display:block"><span class="w">the</span> <span class="w"><span class="mk" id="m1">fixing.</span></span></span></h2>
+    <h2 class="ttl" id="t2"><span class="ln" style="display:block"><span class="w">Read</span> <span class="w">it</span> <span class="w">like</span></span><span class="ln" style="display:block"><span class="w">a</span> <span class="w"><span class="mk" id="m2">person.</span></span></span></h2>
+    <h2 class="ttl" id="t3"><span class="ln" style="display:block"><span class="w">Find</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="m3">structure.</span></span></span></h2>
+    <h2 class="ttl" id="t4"><span class="ln" style="display:block"><span class="w">Describe</span></span><span class="ln" style="display:block"><span class="w">every</span> <span class="w"><span class="mk" id="m4">image.</span></span></span></h2>
+    <h2 class="ttl" id="t5"><span class="ln" style="display:block"><span class="w">Then</span> <span class="w"><span class="mk" id="m5">tag</span></span></span><span class="ln" style="display:block"><span class="w">it</span> <span class="w">all.</span></span></h2>
+    <h2 class="ttl" id="t6"><span class="ln" style="display:block"><span class="w">Same</span> <span class="w">page.</span></span><span class="ln" style="display:block"><span class="w">Now</span> <span class="w"><span class="mk" id="m6">everyone</span></span></span><span class="ln" style="display:block"><span class="w">can</span> <span class="w">use</span> <span class="w">it.</span></span></h2>
+    <div id="rm-vm"><svg viewBox="0 0 104 104" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 52C20 28 36 18 52 18s32 10 46 34C84 76 68 86 52 86S20 76 6 52z" fill="#fff"/><circle cx="52" cy="52" r="17" fill="#E5DEFF"/><circle cx="52" cy="52" r="7" fill="#1d1d1f" stroke="none"/></svg><div><b>Vision model</b><span>Fine-tuned to read a page the way a person does</span></div></div>
+    <div id="rm-tree"><div id="rm-tg"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="rm-tgck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tagged</div>@@ROWS@@</div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C;
+      var P = { w: 664, h: 860 }, R = { h1: [87, 79, 836, 127], h2: [90, 154, 319, 184], p: [92, 197, 805, 240], list: [107, 274, 503, 359], img: [96, 398, 903, 679], foot: [92, 918, 373, 934] };
+      var ORDER = ["h1", "h2", "p", "list", "img", "foot"], px = function (n, ax) { return n / 1000 * (ax ? P.w : P.h); };
+      var ROLE = { h1: "#7B5CF0", h2: "#7B5CF0", p: "#3E7BFA", list: "#2FA463", img: "#F2711C", foot: "#8A8A90" };
+      var ov = $("#rm-ov"), bd = $("#rm-bd"), lead = $("#rm-lead"), seeds = { h1: 3, h2: 5, p: 7, list: 11, img: 13, foot: 17 };
+      ORDER.forEach(function (k, i) {
+        var r = R[k], x = px(r[0], 1), y = px(r[1], 0), w = px(r[2] - r[0], 1), h = px(r[3] - r[1], 0), pad = 5;
+        var pth = document.createElementNS(ns, "rect"); pth.setAttribute("x", x - pad); pth.setAttribute("y", y - pad); pth.setAttribute("width", w + 2 * pad); pth.setAttribute("height", h + 2 * pad); pth.setAttribute("rx", 7); pth.setAttribute("stroke", ROLE[k]); pth.setAttribute("fill", ROLE[k] + "1f"); pth.setAttribute("pathLength", 1); pth.setAttribute("stroke-dasharray", 1); pth.setAttribute("stroke-dashoffset", 1); pth.id = "bx-" + k; pth.style.opacity = 0; ov.appendChild(pth);
+        var b = document.createElement("div"); b.className = "bd"; b.id = "bd-" + k; b.textContent = i + 1; b.style.cssText = "left:" + (x - pad) + "px;top:" + (y - pad) + "px;background:" + ROLE[k]; bd.appendChild(b);
+      });
+      var title = function (id, tin, tout) { LM.words(tl, id, tin, 0.1); if (tout) LM.out(tl, id, tout, 0.35); };
+      // a thin leader from a boxed part of the page to the row it became: it is drawn, holds a moment, and goes
+      var leader = function (k, rowId, t) {
+        var r = R[k], row = $(rowId), x1 = 130 + px(r[2], 1) + 6, y1 = 110 + (px(r[1], 0) + px(r[3], 0)) / 2, y2 = 330 + row.offsetTop + row.offsetHeight / 2, x2 = 868;
+        var p = document.createElementNS(ns, "path"); p.setAttribute("d", LM.curve(x1, y1, x2, y2)); p.setAttribute("fill", "none"); p.setAttribute("stroke", ROLE[k]); p.setAttribute("stroke-width", 3); p.setAttribute("stroke-linecap", "round"); p.setAttribute("opacity", 0); lead.appendChild(p);
+        var L = p.getTotalLength(); p.setAttribute("stroke-dasharray", L + " " + (L + 4)); p.setAttribute("stroke-dashoffset", L);
+        tl.set(p, { opacity: 0.85 }, t); tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, t); tl.to(p, { opacity: 0, duration: 0.6, ease: "power1.inOut" }, t + 0.9);
+      };
+      var row = function (id, t, role) {
+        tl.fromTo(id, { opacity: 0, y: 8, filter: "blur(4px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, t);
+        tl.fromTo(id + " .hl", { opacity: 0 }, { opacity: 1, duration: 0.2 }, t); tl.to(id + " .hl", { opacity: 0, duration: 0.7, ease: "power1.inOut" }, t + 0.5);
+      };
+
+      // ---- 0.3 s the page arrives; "Now comes the fixing."
+      tl.fromTo("#rm-page", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 0.3);
+      title("#t1", 0.55, 1.9); LM.mark2(tl, "#m1", "hl", C.violet[0], 1.2, 0.7);
+      // ---- 2.2 s "Lantern uses a vision model, fine-tuned for exactly this, to read each page the way a person would."
+      title("#t2", 2.25, 8.15); LM.mark2(tl, "#m2", "ul", C.rose[0], 6.0, 0.8);
+      tl.fromTo("#rm-vm", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 2.5);
+      tl.fromTo("#rm-vm svg circle:nth-of-type(2)", { scale: 1, transformOrigin: "50% 50%" }, { scale: 1.25, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 3.0);
+      var B0 = 5.0, B1 = 8.2;
+      tl.set("#rm-band", { y: -90 }, 0); tl.to("#rm-band", { opacity: 1, duration: 0.5, ease: "power1.out" }, B0 - 0.2);
+      tl.to("#rm-band", { y: 860, duration: B1 - B0, ease: "none" }, B0); tl.to("#rm-band", { opacity: 0, duration: 0.4, ease: "power1.in" }, B1);
+      ORDER.forEach(function (k) {
+        var t = B0 + ((R[k][1] / 1000) * 860 + 60) / 950 * (B1 - B0) - 0.3;
+        tl.to("#bx-" + k, { opacity: 1, strokeDashoffset: 0, duration: 0.7, ease: "sine.inOut" }, t);
+      });
+      // ---- 8.6 s "It finds everything a document needs to be accessible: the headings, the lists, the tables, the reading order."
+      tl.to("#rm-vm", { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 8.3);
+      title("#t3", 8.7, 15.75); LM.mark2(tl, "#m3", "hlul", C.violet[0], 9.7, 0.8);
+      tl.fromTo("#rm-tree", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 8.9);
+      row("#r-h1", 12.0); leader("h1", "#r-h1", 12.0); row("#r-h2", 12.3); leader("h2", "#r-h2", 12.3); row("#r-p", 12.6); leader("p", "#r-p", 12.6);
+      row("#r-list", 12.95); leader("list", "#r-list", 12.95); row("#r-li1", 13.25); row("#r-li2", 13.5); row("#r-li3", 13.75);
+      ORDER.forEach(function (k, i) { tl.fromTo("#bd-" + k, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 14.5 + i * 0.17); });
+      // ---- 16.0 s "And for every image, it writes a clear description, in plain, human words."
+      tl.to(["#bd-h1", "#bd-h2", "#bd-p", "#bd-list", "#bd-foot"], { opacity: 0, duration: 0.4 }, 15.75);
+      title("#t4", 16.1, 20.9); LM.mark2(tl, "#m4", "hlul", C.orange[0], 16.9, 0.9);
+      tl.to("#rm-veil", { opacity: 1, duration: 0.7, ease: "power2.out" }, 16.0);
+      tl.fromTo("#rm-desc", { opacity: 0, y: 10, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 17.4);
+      document.querySelectorAll("#rm-desc i").forEach(function (d, i) { tl.fromTo(d, { opacity: 0.25 }, { opacity: 1, duration: 0.22, ease: "power1.out", yoyo: true, repeat: 3 }, 17.6 + i * 0.2); });
+      tl.to("#rm-desc", { opacity: 0, scale: 0.96, duration: 0.4, ease: "power1.in" }, 18.8);
+      row("#r-img", 19.0); leader("img", "#r-img", 19.0);
+      document.querySelectorAll("#r-img .c").forEach(function (ch, i, all) { tl.set(ch, { opacity: 1 }, 19.2 + i * (1.6 / all.length)); });
+      row("#r-foot", 20.4); leader("foot", "#r-foot", 20.4); tl.to("#rm-veil", { opacity: 0, duration: 0.6, ease: "power2.in" }, 20.7);
+      // ---- 21.2 s "Then it tags it all, so a screen reader can follow along."
+      title("#t5", 21.25, 24.45); LM.mark2(tl, "#m5", "hl", C.blue[0], 21.9, 0.6);
+      var TGC = { h1: "#E5DEFF", h2: "#E5DEFF", p: "#D8E5FF", list: "#D3EEDD", li1: "#D3EEDD", li2: "#D3EEDD", li3: "#D3EEDD", img: "#FFE1CD", foot: "#E9E9E4" };
+      ["h1", "h2", "p", "list", "li1", "li2", "li3", "img", "foot"].forEach(function (k, i) { $("#tg-" + k).style.background = TGC[k]; $("#tg-" + k).style.color = "#1d1d1f"; tl.fromTo("#tg-" + k, { opacity: 0, scale: 0.8, x: 8 }, { opacity: 1, scale: 1, x: 0, duration: 0.4, ease: "back.out(1.3)" }, 21.45 + i * 0.17); });
+      tl.fromTo("#rm-tg", { opacity: 0, y: 8, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.2)" }, 23.3); tl.to("#rm-tgck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 23.5);
+      // ---- 24.7 s "The page looks just the same. But now, everyone can use it."
+      title("#t6", 24.8, 28.95); LM.mark2(tl, "#m6", "hl", C.green[0], 27.0, 0.8);
+      tl.to("#rm-tree", { opacity: 0, y: 12, filter: "blur(8px)", duration: 0.6, ease: "power2.in" }, 24.45);
+      tl.to("#rm-ov", { opacity: 0, duration: 0.7, ease: "power1.in" }, 24.5); tl.to("#bd-img", { opacity: 0, duration: 0.4 }, 24.5);
+      tl.to("#rm-glow", { opacity: 1, duration: 1.1, ease: "power2.out" }, 26.7);
+      tl.fromTo("#rm-ok", { opacity: 0, y: -8, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.2)" }, 26.9); tl.to("#rm-okck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 27.2);
+      tl.to(["#rm-glow", "#rm-ok"], { opacity: 0, duration: 0.5, ease: "power1.in" }, 28.9);                         // the page itself stays, exactly as it is, for the scene that follows
+      window.__timelines["s-remediate"] = tl;
+    })();
+  </script>
+</template>

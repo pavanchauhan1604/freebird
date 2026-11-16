@@ -1,0 +1,163 @@
+{
+ "i1": {
+  "text": "Introducing, Lantern.",
+  "target": 1.95,
+  "caption": "Introducing Lantern."
+ },
+ "i2": {
+  "text": "Accessibility, end to end.",
+  "target": 1.7
+ },
+ "b1": {
+  "text": "Lantern is an accessibility platform, built for the whole enterprise.",
+  "target": 4.2
+ },
+ "b2": {
+  "text": "Documents. Slides. Course materials, even handwritten ones. Audio, and video that needs a transcript.",
+  "target": 7.8
+ },
+ "b3": {
+  "text": "Lantern brings all of it together, in one place, and makes it accessible, end to end.",
+  "target": 5.0
+ },
+ "b4": {
+  "text": "So, let's start with the campus lifecycle.",
+  "target": 1.8
+ },
+ "d1": {
+  "text": "First, discovery.",
+  "target": 1.3
+ },
+ "d2": {
+  "text": "Lantern starts at the front door of your domain, and follows every path, until it's found every site.",
+  "target": 5.4
+ },
+ "s1": {
+  "text": "Then, scanning.",
+  "target": 1.0
+ },
+ "s2": {
+  "text": "It opens each site, follows every link, and gathers the files it finds.",
+  "target": 4.2
+ },
+ "s3": {
+  "text": "Every one is checked for accessibility problems, so you know exactly what needs attention.",
+  "target": 4.9
+ },
+ "c1": {
+  "text": "Do that for every site on campus, and something new appears:",
+  "target": 3.5
+ },
+ "c2": {
+  "text": "a complete inventory, of every file that needs remediation, across your whole domain.",
+  "target": 5.5
+ },
+ "c3": {
+  "text": "Every file is fingerprinted too, to find the unique ones, and to catch any that change.",
+  "target": 5.4
+ },
+ "p1": {
+  "text": "Then, reporting.",
+  "target": 1.3
+ },
+ "p2": {
+  "text": "For every site, Lantern builds a report: how many files it hosts, which need remediation, which links are broken, and how it has changed over time.",
+  "target": 9.5
+ },
+ "p3": {
+  "text": "Every report lists each file, with a link to download it, and exactly what was found: tables with no header, images with no alt text, tagging that's missing.",
+  "target": 9.0
+ },
+ "p4": {
+  "text": "Reports are made to be shared, so each site owner knows exactly what to fix.",
+  "target": 4.6
+ },
+ "p5": {
+  "text": "A master report brings the whole campus together: which sites are the most accessible, how many documents each one hosts, and how many broken links they have.",
+  "target": 9.6
+ },
+ "p6": {
+  "text": "And remediation starts from everything these reports found.",
+  "target": 3.6
+ },
+ "r1": {
+  "text": "Now comes the fixing.",
+  "target": 1.35
+ },
+ "r2": {
+  "text": "Lantern uses a vision model, fine-tuned for exactly this, to read each page the way a person would.",
+  "target": 6.0
+ },
+ "r3": {
+  "text": "It finds everything a document needs to be accessible: the headings, the lists, the tables, the reading order.",
+  "target": 6.9
+ },
+ "r4": {
+  "text": "And for every image, it writes a clear description, in plain, human words.",
+  "target": 4.8
+ },
+ "r5": {
+  "text": "Then it tags it all, so a screen reader can follow along.",
+  "target": 3.1
+ },
+ "r6": {
+  "text": "The page looks just the same. But now, everyone can use it.",
+  "target": 4.2
+ },
+ "x1": {
+  "text": "And once a file is remediated, you simply replace the original.",
+  "target": 3.9
+ },
+ "x2": {
+  "text": "The new version looks exactly the same, but carries a complete accessibility layer on top, so it's readable by everyone.",
+  "target": 7.0
+ },
+ "cy1": {
+  "text": "And the cycle never stops.",
+  "target": 2.3
+ },
+ "cy2": {
+  "text": "Lantern runs again, on a schedule, so every new file that's uploaded is found, checked, and remediated, if it needs it.",
+  "target": 7.6
+ },
+ "cy3": {
+  "text": "One unified workflow.",
+  "target": 2.0
+ },
+ "w1": {
+  "text": "But your campus is more than documents on websites. That's where the Workbench comes in.",
+  "target": 4.9
+ },
+ "w2": {
+  "text": "Slide decks, made accessible: alt text for pictures, proper titles, and a clear reading order.",
+  "target": 5.7
+ },
+ "w3": {
+  "text": "Presentations get captions, built from the audio in the slides.",
+  "target": 3.7
+ },
+ "w4": {
+  "text": "Audio and video get full transcripts.",
+  "target": 2.5
+ },
+ "w4b": {
+  "text": "For all of them, Lantern uses a speech-to-text model, to write the words from the file's own audio, along with their timestamps.",
+  "target": 8.0
+ },
+ "w5": {
+  "text": "And scanned, or handwritten, course materials, become clean documents, that you can edit, in Word or HTML.",
+  "target": 6.9
+ },
+ "w6": {
+  "text": "And the Workbench keeps growing, with more tools, and more features, on the way.",
+  "target": 3.9
+ },
+ "e1": {
+  "text": "Every document has something to say.",
+  "target": 2.1
+ },
+ "e2": {
+  "text": "Lantern makes sure, it reaches everyone.",
+  "target": 2.9
+ }
+}

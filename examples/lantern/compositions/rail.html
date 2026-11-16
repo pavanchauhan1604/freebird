@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #rl { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; pointer-events: none; }
+    #rl .st { position: absolute; top: 30px; font-weight: 800; font-size: 30px; letter-spacing: -0.03em; color: #86868B; white-space: nowrap; }
+    #rl .ln { position: absolute; top: 49px; width: 68px; height: 3px; border-radius: 2px; background: #d3d3cd; overflow: hidden; }
+    #rl .ln i { position: absolute; inset: 0; transform-origin: 0 50%; }
+    #rl-ember { position: absolute; left: 0; top: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; opacity: 0; box-shadow: 0 0 12px 3px rgba(255,176,32,0.45); background: radial-gradient(circle at 35% 30%, #ffe27a 0, #ffb020 52%, #f29a00 100%); }
+  </style>
+  <div id="rl" data-composition-id="rail" data-width="1920" data-height="1080">
+    <div id="rl-rail"></div><div id="rl-ember"></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); };
+      var X = [480, 720, 960, 1200, 1440], NAMES = ["Discover", "Scan", "Report", "Remediate", "Export"], COL = ["#3E7BFA", "#12A3B4", "#C93BA6", "#7B5CF0", "#238A50"], host = $("#rl-rail");
+      // when each stage is the active one (seconds from the rail's own start)
+      var ACT = [0.5, 8.0, 36.2, 78.3, 107.3], END = 118.6;
+      NAMES.forEach(function (n, i) {
+        var s = document.createElement("div"); s.className = "st"; s.id = "st" + i; s.textContent = n; s.style.left = X[i] + "px"; host.appendChild(s);
+        if (i < 4) { var l = document.createElement("div"); l.className = "ln"; l.id = "ln" + i; l.style.left = ((X[i] + X[i + 1]) / 2 - 34) + "px"; l.innerHTML = '<i style="background:' + COL[i] + '"></i>'; host.appendChild(l); }
+      });
+      tl.set(".st", { xPercent: -50 }, 0); tl.set(".ln i", { scaleX: 0 }, 0);
+      tl.fromTo([".st", ".ln"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 0);
+      tl.set("#rl-ember", { x: X[0], y: 80 }, 0); tl.fromTo("#rl-ember", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.4);
+      NAMES.forEach(function (n, i) {
+        var t = ACT[i];
+        tl.to("#st" + i, { color: COL[i], duration: 0.5, ease: "power1.out" }, t);
+        if (i > 0) {
+          tl.to("#st" + (i - 1), { color: "#4d4d52", duration: 0.5, ease: "power1.out" }, t);
+          tl.to("#ln" + (i - 1) + " i", { scaleX: 1, duration: 0.8, ease: "sine.inOut" }, t - 0.2);
+          tl.to("#rl-ember", { x: X[i], duration: 0.9, ease: "sine.inOut" }, t - 0.3);
+          tl.to("#rl-ember", { y: 64, duration: 0.45, ease: "sine.out" }, t - 0.3); tl.to("#rl-ember", { y: 80, duration: 0.45, ease: "sine.in" }, t + 0.15);
+        }
+      });
+      tl.to("#rl-rail", { opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, END); tl.to("#rl-ember", { opacity: 0, duration: 0.4 }, END);
+      window.__timelines["rail"] = tl;
+    })();
+  </script>
+</template>

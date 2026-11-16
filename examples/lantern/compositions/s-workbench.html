@@ -1,0 +1,229 @@
+<template>
+  <style>
+    #wb { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #wb-flood { position: absolute; inset: 0; background: #FFF1E8; opacity: 0; }
+    #wb .ttl { left: 130px; top: 100px; }
+    #wb svg { overflow: visible; }
+    #wb-site { position: absolute; left: 1000px; top: 310px; width: 640px; height: 470px; background: #fff; border-radius: 22px; box-shadow: 0 26px 52px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #wb-site .tb { height: 58px; border-bottom: 2px solid #eeeeea; display: flex; align-items: center; padding: 0 24px; font-weight: 800; font-size: 28px; letter-spacing: -0.02em; color: #6e6e73; }
+    #wb-site .rw { display: flex; align-items: center; gap: 18px; height: 64px; padding: 0 28px; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; border-bottom: 2px solid #f3f3f0; } #wb-site .rw svg { width: 30px; height: 36px; flex: none; }
+    #wb-grow { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+    .gt { position: absolute; top: 400px; width: 250px; height: 280px; border-radius: 28px; padding: 30px 28px; box-shadow: 0 22px 44px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.04); opacity: 0; }
+    .gt svg { width: 92px; height: 92px; margin-bottom: 22px; display: block; } .gt span { display: block; font-weight: 800; font-size: 32px; letter-spacing: -0.03em; line-height: 1.15; }
+    .gt.pl { background: transparent; box-shadow: none; border: 3px dashed #cfcfc9; display: flex; flex-direction: column; align-items: center; justify-content: center; } .gt.pl span { color: #86868B; margin-top: 4px; font-size: 30px; }
+    #wb-grow-lb { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; color: #1d1d1f; opacity: 0; }
+    .src { position: absolute; left: 56px; width: 390px; height: 150px; padding: 22px 26px; border-radius: 24px; box-shadow: 0 14px 30px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    .src b { display: block; font-weight: 800; font-size: 32px; letter-spacing: -0.03em; } .src .mw { display: flex; align-items: center; gap: 5px; height: 56px; margin-top: 8px; } .src .mw i { display: block; width: 8px; border-radius: 4px; }
+    #stm { position: absolute; left: 600px; top: 150px; width: 390px; height: 350px; border-radius: 38px; background: #E6F6F8; box-shadow: 0 0 0 3px #12A3B4, 0 24px 48px rgba(18,163,180,0.22); opacity: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; font-weight: 800; font-size: 38px; letter-spacing: -0.035em; line-height: 1.12; }
+    #stm .mw { display: flex; align-items: center; gap: 6px; height: 70px; } #stm .mw i { display: block; width: 10px; border-radius: 5px; background: #12A3B4; }
+    #stm small { display: block; font-weight: 800; font-size: 28px; letter-spacing: -0.015em; color: #0B7C8A; }
+    #stsvg { position: absolute; left: 0; top: 0; width: 1660px; height: 650px; pointer-events: none; }
+    .oh { position: absolute; left: 1070px; top: 46px; display: flex; gap: 12px; opacity: 0; }
+    .ol { position: absolute; left: 1070px; width: 560px; height: 84px; display: flex; align-items: center; gap: 16px; padding: 0 18px; border-radius: 18px; background: #f6f6f3; font-weight: 700; font-size: 28px; letter-spacing: -0.015em; opacity: 0; white-space: nowrap; }
+    .ol b { flex: none; min-width: 96px; height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: center; border-radius: 11px; background: #CBEEF2; color: #0B7C8A; font-weight: 800; font-size: 28px; }
+    .fk { position: absolute; display: flex; align-items: center; gap: 14px; height: 74px; padding: 0 26px 0 20px; border-radius: 20px; font-weight: 800; font-size: 32px; letter-spacing: -0.02em; opacity: 0; white-space: nowrap; box-shadow: 0 16px 32px rgba(0,0,0,0.12); }
+    .fk svg { width: 38px; height: 38px; flex: none; }
+    .tc { position: absolute; top: 400px; width: 390px; height: 410px; border-radius: 30px; padding: 36px 36px; opacity: 0; box-shadow: 0 26px 52px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04); }
+    .tc svg { width: 100px; height: 100px; margin-bottom: 26px; } .tc b { display: block; font-weight: 800; font-size: 44px; letter-spacing: -0.035em; } .tc span { display: block; margin-top: 10px; font-weight: 700; font-size: 29px; line-height: 1.3; color: #4d4d52; }
+    #wb-tabs { position: absolute; left: 130px; top: 236px; display: flex; gap: 18px; opacity: 0; }
+    .tab { height: 62px; padding: 0 28px; display: flex; align-items: center; gap: 14px; border-radius: 18px; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 31px; letter-spacing: -0.025em; color: #6e6e73; } .tab i { width: 14px; height: 14px; border-radius: 50%; display: block; }
+    #wb-panel { position: absolute; left: 130px; top: 322px; width: 1660px; height: 650px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    .pn { position: absolute; inset: 0; opacity: 0; }
+    .slide { position: absolute; left: 56px; top: 46px; width: 760px; height: 428px; border-radius: 18px; background: #fbfbf9; box-shadow: 0 14px 30px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.07); overflow: hidden; }
+    .slide .st { position: absolute; left: 44px; top: 36px; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; }
+    .slide .sp { position: absolute; left: 44px; top: 118px; width: 330px; height: 250px; border-radius: 12px; background: #e6eef6; } .slide .sp i { position: absolute; bottom: 0; width: 44px; background: #7fa6d1; border-radius: 6px 6px 0 0; }
+    .slide .sb { position: absolute; left: 410px; top: 130px; } .slide .sb div { height: 16px; border-radius: 8px; background: #dcdcd7; margin-bottom: 22px; }
+    .thumbs { position: absolute; left: 56px; top: 506px; display: flex; gap: 16px; }
+    .th { position: relative; width: 176px; height: 99px; border-radius: 10px; background: #fbfbf9; box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.07); } .th i { position: absolute; left: 14px; top: 14px; width: 70px; height: 10px; border-radius: 5px; background: #dcdcd7; } .th u { position: absolute; left: 14px; top: 36px; width: 90px; height: 46px; border-radius: 6px; background: #e6eef6; }
+    .th s { position: absolute; right: 8px; bottom: 8px; width: 24px; height: 24px; border-radius: 50%; background: #F2711C; opacity: 0; } .th s svg { position: absolute; inset: 0; width: 24px; height: 24px; }
+    .chipw { position: absolute; display: inline-flex; align-items: center; height: 50px; padding: 0 18px; border-radius: 12px; font-weight: 800; font-size: 28px; letter-spacing: -0.01em; opacity: 0; box-shadow: 0 8px 18px rgba(0,0,0,0.13); white-space: nowrap; color: #fff; }
+    .nb { position: absolute; width: 38px; height: 38px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 28px; display: flex; align-items: center; justify-content: center; opacity: 0; margin: -19px 0 0 -19px; }
+    #ro { position: absolute; left: 0; top: 0; width: 1660px; height: 650px; pointer-events: none; }
+    .fx { position: absolute; left: 900px; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 36px; letter-spacing: -0.025em; opacity: 0; }
+    .fx svg { width: 42px; height: 42px; overflow: visible; flex: none; } .fx .ck { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .cap { position: absolute; left: 44px; right: 44px; bottom: 26px; height: 68px; border-radius: 14px; background: rgba(17,17,17,0.88); color: #fff; font-weight: 700; font-size: 32px; display: flex; align-items: center; padding: 0 24px; opacity: 0; }
+    .cap span { opacity: 0; margin-right: 0.28em; white-space: nowrap; }
+    #tl-track { position: absolute; left: 56px; top: 506px; width: 760px; height: 92px; }
+    #tl-track .lane { position: absolute; left: 0; right: 0; height: 34px; border-radius: 9px; background: #f1f1ee; } #tl-track .seg { position: absolute; top: 0; height: 34px; border-radius: 9px; background: #E64980; opacity: 0; transform-origin: 0 50%; }
+    #tl-track .lb { position: absolute; left: 0; top: -2px; font-weight: 800; font-size: 28px; color: #6e6e73; }
+    .wave { position: absolute; left: 56px; top: 86px; width: 760px; height: 180px; display: flex; align-items: center; gap: 6px; }
+    .wave i { display: block; width: 10px; border-radius: 6px; background: #c9c9c4; flex: none; }
+    #ph { position: absolute; left: 56px; top: 66px; width: 4px; height: 220px; border-radius: 2px; background: #12A3B4; box-shadow: 0 0 12px 2px rgba(18,163,180,0.5); opacity: 0; }
+    .vid { position: absolute; left: 56px; top: 330px; width: 320px; height: 180px; border-radius: 16px; background: #1d1d1f; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    .tr { position: absolute; left: 880px; width: 740px; font-size: 34px; font-weight: 700; line-height: 1.3; opacity: 0; display: flex; gap: 18px; align-items: baseline; }
+    .tr b { flex: none; font-weight: 800; color: #86868B; width: 104px; } .tr em { flex: none; font-style: normal; font-weight: 800; font-size: 28px; color: #fff; border-radius: 9px; padding: 2px 12px; opacity: 0; } .tr span { opacity: 0; }
+    .paperc { position: absolute; left: 56px; top: 44px; width: 600px; height: 560px; border-radius: 16px; background: #fbfbf4; box-shadow: 0 14px 30px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.07); overflow: hidden; background-image: repeating-linear-gradient(transparent 0 69px, #d8e0ec 69px 71px); background-position: 0 40px; }
+    .paperc svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .docc { position: absolute; left: 1010px; top: 44px; width: 590px; height: 560px; border-radius: 16px; background: #fff; box-shadow: 0 14px 30px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.07); padding: 48px 46px; }
+    .docc .dl { font-weight: 700; font-size: 32px; line-height: 1.5; margin-bottom: 20px; min-height: 46px; } .docc .dl.h { font-weight: 800; font-size: 42px; letter-spacing: -0.03em; color: #5B3CD0; } .docc .dl span { opacity: 0; }
+    .arrow { position: absolute; left: 690px; top: 250px; width: 300px; display: flex; flex-direction: column; align-items: center; gap: 22px; opacity: 0; }
+    .arrow svg { width: 260px; height: 40px; overflow: visible; } .arrow .fmts { display: flex; gap: 14px; }
+    .fmt { height: 50px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 12px; font-weight: 800; font-size: 30px; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="wb" data-composition-id="s-workbench" data-width="1920" data-height="1080">
+    <div id="wb-flood"></div>
+    <h2 class="ttl" id="w-a"><span class="ln" style="display:block"><span class="w">More</span> <span class="w">than</span> <span class="w">documents</span></span><span class="ln" style="display:block"><span class="w">on</span> <span class="w"><span class="mk" id="mw-a">websites.</span></span></span></h2>
+    <h2 class="ttl" id="w-b"><span class="w">The</span> <span class="w"><span class="mk" id="mw-b">Workbench.</span></span></h2>
+    <h2 class="ttl" id="w-c"><span class="w">And</span> <span class="w">it</span> <span class="w">keeps</span> <span class="w"><span class="mk" id="mw-c">growing.</span></span></h2>
+    <div id="wb-grow"></div><div id="wb-grow-lb">More tools. More features. All in one place.</div>
+    <div id="wb-site"><div class="tb">calstatela.edu</div><div id="wb-sr"></div></div>
+    <div id="wb-fk"></div>
+    <div id="wb-cards"></div>
+    <div id="wb-tabs"></div>
+    <div id="wb-panel">
+      <svg id="ro" viewBox="0 0 1660 650" aria-hidden="true"><path id="ro-p" d="" fill="none" stroke="#F2711C" stroke-width="3.5" stroke-linecap="round" opacity="0" pathLength="1"/></svg>
+      <div class="pn" id="pn0">
+        <div class="slide"><div class="st">Team update</div><div class="sp" id="sp0"></div><div class="sb"><div style="width:260px"></div><div style="width:200px"></div><div style="width:230px"></div></div></div>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="chipw" id="c-title" style="left:430px;top:66px;background:#F2711C">Title</div>
+        <div class="chipw" id="c-alt" style="left:62px;top:330px;background:#F2711C">Alt text: Bar chart of sales by quarter, rising</div>
+        <div class="nb" id="n1" style="left:62px;top:74px;background:#1d1d1f">1</div><div class="nb" id="n2" style="left:62px;top:168px;background:#1d1d1f">2</div><div class="nb" id="n3" style="left:416px;top:186px;background:#1d1d1f">3</div>
+        <div class="fx" id="f0" style="top:96px"></div><div class="fx" id="f1" style="top:196px"></div><div class="fx" id="f2" style="top:296px"></div>
+      </div>
+      <div class="pn" id="pn1">
+        <div class="slide"><div class="st">Team update</div><div class="sp" id="sp1"></div><div class="sb"><div style="width:260px"></div><div style="width:200px"></div><div style="width:230px"></div></div><div class="cap" id="cap"><span>Welcome,</span><span>everyone.</span><span>Let's</span><span>begin.</span></div></div>
+        <div id="tl-track"><div class="lb">Captions</div><div class="lane" style="top:42px"></div></div>
+        <div class="fx" id="g0" style="top:96px"></div><div class="fx" id="g1" style="top:196px"></div><div class="fx" id="g2" style="top:296px"></div>
+      </div>
+      <div class="pn" id="pn2">
+        <div class="wave" id="wave"></div><div id="ph"></div>
+        <div class="vid" id="vid"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M22 14v36l30-18z" fill="#fff"/></svg></div>
+        <div class="tr" style="top:60px" id="tr0"><b>00:00</b><span>Good morning, and welcome.</span></div>
+        <div class="tr" style="top:170px" id="tr1"><b>00:04</b><span>Thanks, glad to be here.</span></div>
+        <div class="tr" style="top:280px" id="tr2"><b>00:09</b><span>Let's start with the plan.</span></div>
+        <div class="tr" style="top:390px" id="tr3"><b>00:13</b><span>For the semester ahead.</span></div>
+      </div>
+      <div class="pn" id="pn4">
+        <div class="src" id="s0" style="top:50px;background:#FFEDF3"><b>Slide audio</b><div class="mw" id="mw0"></div></div>
+        <div class="src" id="s1" style="top:245px;background:#E6F6F8"><b>Audio file</b><div class="mw" id="mw1"></div></div>
+        <div class="src" id="s2" style="top:440px;background:#EAF1FF"><b>Video file</b><div class="mw" id="mw2"></div></div>
+        <svg id="stsvg" viewBox="0 0 1660 650" aria-hidden="true"></svg>
+        <div id="stm"><div class="mw" id="mwm"></div><div>Speech-to-text<br>model</div><small>words and timestamps</small></div>
+        <div class="oh" id="oh"><span class="chipw" style="position:relative;opacity:1;background:#E64980">Captions</span><span class="chipw" style="position:relative;opacity:1;background:#12A3B4">Transcript</span></div>
+        <div class="ol" id="ol0" style="top:130px"><b>00:00</b><span>Good morning, and welcome.</span></div>
+        <div class="ol" id="ol1" style="top:236px"><b>00:04</b><span>Today we'll walk through</span></div>
+        <div class="ol" id="ol2" style="top:342px"><b>00:09</b><span>the plan for the semester.</span></div>
+        <div class="ol" id="ol3" style="top:448px"><b>00:13</b><span>Let's begin.</span></div>
+      </div>
+      <div class="pn" id="pn3">
+        <div class="paperc"><svg viewBox="0 0 600 560" fill="none" stroke="#4660a8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path class="hwl" pathLength="1" d="M40 90c10-26 18-26 24 0s14 26 24 0 14-26 24 0 14 26 24 0 14-26 24 0 14 26 24 0 14-26 24 0 14 26 24 0" stroke-dasharray="1" stroke-dashoffset="1"/><path class="hwl" pathLength="1" d="M40 160c10-20 18-20 24 0s14 20 24 0 14-20 24 0 14 20 24 0 14-20 24 0 14 20 24 0 14-20 24 0" stroke-dasharray="1" stroke-dashoffset="1"/><path class="hwl" pathLength="1" d="M40 230c10-22 18-22 24 0s14 22 24 0 14-22 24 0 14 22 24 0 14-22 24 0 14 22 24 0" stroke-dasharray="1" stroke-dashoffset="1"/><path class="hwl" pathLength="1" d="M40 300c10-20 18-20 24 0s14 20 24 0 14-20 24 0 14 20 24 0 14-20 24 0" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <g id="hwb" fill="rgba(123,92,240,0.12)" stroke="#7B5CF0" stroke-width="4"><rect class="hb" x="30" y="52" width="480" height="62" rx="6" opacity="0"/><rect class="hb" x="30" y="124" width="450" height="62" rx="6" opacity="0"/><rect class="hb" x="30" y="194" width="410" height="62" rx="6" opacity="0"/><rect class="hb" x="30" y="264" width="340" height="62" rx="6" opacity="0"/></g></svg></div>
+        <div class="arrow" id="arrow"><svg viewBox="0 0 260 40"><path d="M6 20h240M228 6l18 14-18 14" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="fmts"><span class="fmt" style="background:#D8E5FF;color:#2556C7">Word</span><span class="fmt" style="background:#FFE1CD;color:#B4510A">HTML</span></div></div>
+        <div class="docc"><div class="dl h" id="dl0"><span>Chapter 3: Cell division</span></div><div class="dl" id="dl1"><span>Mitosis has four stages.</span></div><div class="dl" id="dl2"><span>Prophase, metaphase,</span></div><div class="dl" id="dl3"><span>anaphase and telophase.</span></div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, $$ = function (s) { return document.querySelectorAll(s); }, C = LM.C;
+      var TOOLS = [
+        { n: "Slide decks", s: "Accessible slides", c: C.orange, f: "#FFF1E8", ic: '<rect x="8" y="18" width="84" height="58" rx="9" fill="#fff" stroke="#F2711C" stroke-width="5"/><path d="M22 36h30" stroke="#F2711C" stroke-width="5" stroke-linecap="round"/><rect x="56" y="42" width="26" height="24" rx="5" fill="#F2711C"/><path d="M40 90h20M50 76v14" stroke="#F2711C" stroke-width="5" stroke-linecap="round"/>' },
+        { n: "Captions", s: "For presentations", c: C.rose, f: "#FFEDF3", ic: '<rect x="8" y="18" width="84" height="58" rx="11" fill="#fff" stroke="#E64980" stroke-width="5"/><path d="M22 52h24M54 52h24M22 64h36" stroke="#E64980" stroke-width="5" stroke-linecap="round"/>' },
+        { n: "Transcripts", s: "Audio and video", c: C.teal, f: "#E6F6F8", ic: '<path d="M12 50v0M26 38v24M40 24v52M54 34v32M68 18v64M82 36v28" stroke="#12A3B4" stroke-width="7" stroke-linecap="round"/>' },
+        { n: "Course materials", s: "Scanned and handwritten", c: C.violet, f: "#F0ECFF", ic: '<path d="M26 8h34l18 18v58a6 6 0 0 1-6 6H26a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="#fff" stroke="#7B5CF0" stroke-width="5" stroke-linejoin="round"/><path d="M32 52c4-8 7-8 9 0s5 8 8 0 5-8 8 0M32 68c5-7 8-7 10 0s5 7 9 0" stroke="#7B5CF0" stroke-width="4.5" fill="none" stroke-linecap="round"/>' }
+      ];
+      var tabs = $("#wb-tabs"), cards = $("#wb-cards");
+      TOOLS.forEach(function (t, i) {
+        var d = document.createElement("div"); d.className = "tc"; d.id = "tc" + i; d.style.cssText = "left:" + (140 + i * 420) + "px;background:" + t.c[1]; d.innerHTML = '<svg viewBox="0 0 100 100" fill="none">' + t.ic + "</svg><b>" + t.n + "</b><span>" + t.s + "</span>"; cards.appendChild(d);
+        var b = document.createElement("div"); b.className = "tab"; b.id = "tab" + i; b.innerHTML = '<i style="background:' + t.c[0] + '"></i>' + t.n; tabs.appendChild(b);
+      });
+      var CK = function (col) { return '<svg viewBox="0 0 38 38"><circle cx="19" cy="19" r="18" fill="' + col + '"/><path class="ck" pathLength="1" d="M10 19.5l6 6 12-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+      var FXS = { f0: "Alt text for pictures", f1: "Proper titles", f2: "A clear reading order", g0: "Captions from the slide's audio", g1: "Timed to the audio", g2: "Saved with the presentation" };
+      Object.keys(FXS).forEach(function (k) { $("#" + k).innerHTML = CK("#2FA463") + FXS[k]; });
+      [[18, 90], [86, 130], [154, 170], [222, 210]].forEach(function (b) { ["#sp0", "#sp1"].forEach(function (id) { var e = document.createElement("i"); e.style.cssText = "left:" + (b[0] + 8) + "px;height:" + b[1] + "px"; $(id).appendChild(e); }); });
+      var th = $("#thumbs"); for (var i = 0; i < 5; i++) { var t = document.createElement("div"); t.className = "th"; t.innerHTML = '<i></i><u></u><s><svg viewBox="0 0 24 24"><path pathLength="1" d="M6 12.5l4 4 8-9" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/></svg></s>'; th.appendChild(t); }
+      var wave = $("#wave"), H = [30, 52, 84, 60, 110, 76, 130, 96, 70, 120, 150, 100, 64, 92, 140, 112, 80, 58, 100, 128, 90, 66, 104, 138, 98, 72, 54, 86, 118, 82, 60, 44, 76, 102, 68, 46, 36, 58, 40, 28];
+      H.forEach(function (h) { var i = document.createElement("i"); i.style.height = h + "px"; wave.appendChild(i); });
+      var DOC = '<svg viewBox="0 0 40 46" fill="none"><path d="M7 3h18l10 10v27a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z" fill="#fff" stroke="#6e6e73" stroke-width="3" stroke-linejoin="round"/><path d="M11 24h18M11 31h14" stroke="#c9c9c4" stroke-width="3" stroke-linecap="round"/></svg>';
+      ["student-handbook.pdf", "course-catalog.pdf", "faculty-guide.pdf", "events-calendar.pdf", "forms.pdf"].forEach(function (n, i) { var r = document.createElement("div"); r.className = "rw"; r.innerHTML = DOC + "<span>" + n + "</span>"; $("#wb-sr").appendChild(r); tl.fromTo(r, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 1.0 + i * 0.12); });
+      var FK = [["Slides", "#FFE1CD", "#B4510A", '<rect x="3" y="8" width="32" height="22" rx="4" fill="none" stroke="#B4510A" stroke-width="3"/><path d="M12 34h14" stroke="#B4510A" stroke-width="3" stroke-linecap="round"/>', 1030, 160], ["Video", "#FFD9E6", "#B7285E", '<rect x="3" y="8" width="32" height="22" rx="6" fill="none" stroke="#B7285E" stroke-width="3"/><path d="M16 14v10l9-5z" fill="#B7285E"/>', 1350, 740], ["Audio", "#CBEEF2", "#0B7C8A", '<path d="M6 19v0M13 13v12M20 8v22M27 13v12M33 17v4" stroke="#0B7C8A" stroke-width="3.4" stroke-linecap="round"/>', 960, 830], ["Handwritten", "#E5DEFF", "#5B3CD0", '<path d="M5 24c3-7 5-7 7 0s4 7 6 0 4-7 6 0 4 7 6 0" stroke="#5B3CD0" stroke-width="3.2" fill="none" stroke-linecap="round"/>', 1470, 170]], fk = $("#wb-fk");
+      FK.forEach(function (f, i) { var d = document.createElement("div"); d.className = "fk"; d.id = "fk" + i; d.style.cssText = "left:" + f[4] + "px;top:" + f[5] + "px;background:" + f[1] + ";color:" + f[2]; d.innerHTML = '<svg viewBox="0 0 38 38" fill="none">' + f[3] + "</svg>" + f[0]; fk.appendChild(d); });
+      var flood = function (col, t) { tl.to("#wb-flood", { backgroundColor: col, duration: 0.9, ease: "power2.inOut" }, t); };
+      var tabOn = function (i, t) { TOOLS.forEach(function (x, k) { if (k === i) { tl.to("#tab" + k, { backgroundColor: TOOLS[k].c[0], color: "#fff", duration: 0.45, ease: "power2.out" }, t); tl.to("#tab" + k + " i", { backgroundColor: "#fff", duration: 0.45 }, t); } else if (k === i - 1) { tl.to("#tab" + k, { backgroundColor: "#fff", color: "#6e6e73", duration: 0.4 }, t); tl.to("#tab" + k + " i", { backgroundColor: TOOLS[k].c[0], duration: 0.4 }, t); } }); };
+      var show = function (i, t, out) { tl.fromTo("#pn" + i, { opacity: 0, y: 12, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t); if (out) tl.to("#pn" + i, { opacity: 0, y: -8, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, out); };
+      var tick = function (sel, t) { tl.to(sel + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.2); };
+      var fxin = function (id, t) { tl.fromTo(id, { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, t); tick(id, t); };
+
+      // ---- 0.3 s "But your campus is more than documents on websites."
+      LM.words(tl, "#w-a", 0.4, 0.11); LM.mark2(tl, "#mw-a", "hl", C.rose[0], 2.2, 0.8);
+      tl.fromTo("#wb-site", { opacity: 0, y: 16, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 0.7);
+      FK.forEach(function (f, i) { tl.fromTo("#fk" + i, { opacity: 0, scale: 0.9, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, 1.9 + i * 0.3); });
+      // ---- 3.7 s "That's where the Workbench comes in."
+      tl.to(["#w-a", "#wb-site", "#wb-fk"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 3.4);
+      LM.words(tl, "#w-b", 3.85, 0.12); LM.mark2(tl, "#mw-b", "scr", "#1d1d1f", 4.6, 0.8);
+      tl.fromTo("#wb-flood", { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power2.inOut" }, 5.7);
+      TOOLS.forEach(function (t, i) { tl.fromTo("#tc" + i, { opacity: 0, y: 24, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 4.3 + i * 0.22); });
+      tl.to("#wb-cards", { opacity: 0, y: -20, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 5.45);
+      tl.fromTo("#wb-tabs", { opacity: 0, y: 10, filter: "blur(5px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 5.7);
+      tl.fromTo("#wb-panel", { opacity: 0, y: 20, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 5.8);
+
+      // ---- 5.9 s "Slide decks, made accessible: alt text for pictures, proper titles, and a clear reading order."
+      tabOn(0, 5.95); show(0, 6.0, 11.7);
+      $$(".th").forEach(function (th_, i) { tl.fromTo(th_, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 6.3 + i * 0.1); });
+      tl.fromTo("#c-alt", { opacity: 0, y: 8, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.2)" }, 8.1); fxin("#f0", 8.35);
+      tl.fromTo("#c-title", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.3)" }, 9.25); fxin("#f1", 9.5);
+      ["#n1", "#n2", "#n3"].forEach(function (n, i) { tl.fromTo(n, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, 10.35 + i * 0.28); });
+      var ro = $("#ro-p"); ro.setAttribute("d", "M62 74 L62 168 C 150 230, 330 250, 416 186"); var roL = ro.getTotalLength(); ro.setAttribute("stroke-dasharray", roL + " " + (roL + 4)); ro.setAttribute("stroke-dashoffset", roL);
+      tl.set(ro, { opacity: 0.8 }, 10.5); tl.fromTo(ro, { strokeDashoffset: roL }, { strokeDashoffset: 0, duration: 1.0, ease: "sine.inOut" }, 10.55); fxin("#f2", 10.6);
+      tl.to(ro, { opacity: 0, duration: 0.4 }, 11.3);
+      $$(".th").forEach(function (th_, i) { tl.fromTo(th_.querySelector("s"), { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, 10.9 + i * 0.12); tl.to(th_.querySelector("s path"), { strokeDashoffset: 0, duration: 0.3 }, 11.05 + i * 0.12); });
+      // ---- 12.0 s "Presentations get captions, built from the audio in the slides."
+      flood(TOOLS[1].f, 11.7); tabOn(1, 11.85); show(1, 12.0, 15.75);
+      tl.fromTo("#cap", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.4);
+      $$("#cap span").forEach(function (w, i) { tl.set(w, { opacity: 1 }, 12.8 + i * 0.4); });
+      var segs = [[0, 90], [100, 70], [180, 120], [310, 80], [400, 140], [550, 110]], trk = $("#tl-track");
+      segs.forEach(function (s, i) { var e = document.createElement("div"); e.className = "seg"; e.style.cssText = "left:" + s[0] + "px;width:" + s[1] + "px;top:42px"; trk.appendChild(e); tl.fromTo(e, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, 13.9 + i * 0.28); });
+      fxin("#g0", 13.95); fxin("#g1", 14.55); fxin("#g2", 15.1);
+      // ---- 16.1 s "Audio and video get full transcripts, with timestamps, and speakers."
+      flood(TOOLS[2].f, 15.75); tabOn(2, 15.9); show(2, 16.05, 18.85);
+      $$("#wave i").forEach(function (b, i) { tl.to(b, { backgroundColor: "#12A3B4", duration: 0.12, ease: "none" }, 16.3 + i * 0.07); });
+      tl.set("#ph", { x: 0 }, 0); tl.fromTo("#ph", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 16.3); tl.to("#ph", { x: 740, duration: 2.2, ease: "none" }, 16.3); tl.to("#ph", { opacity: 0, duration: 0.3 }, 18.5);
+      tl.fromTo("#vid", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, 16.7);
+      ["#tr0", "#tr1", "#tr2", "#tr3"].forEach(function (r, i) {
+        tl.fromTo(r, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 17.0 + i * 0.5); tl.fromTo(r + " span", { opacity: 0, filter: "blur(4px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" }, 17.1 + i * 0.5);
+      });
+      // ---- 19.0 s "For all of them, Lantern uses a speech-to-text model, to write the words from the file's own audio, along with their timestamps."
+      show(4, 19.0, 27.2);
+      var BARS = [18, 30, 44, 26, 52, 38, 22, 48, 34, 20, 42, 28, 16], bn = "http://www.w3.org/2000/svg";
+      [["mw0", "#E64980"], ["mw1", "#12A3B4"], ["mw2", "#3E7BFA"]].forEach(function (m, k) {
+        var host = $("#" + m[0]); BARS.forEach(function (h, i) { var b = document.createElement("i"); b.style.cssText = "height:" + h + "px;background:" + m[1]; host.appendChild(b); tl.fromTo(b, { scaleY: 0.45, transformOrigin: "50% 50%" }, { scaleY: 1, duration: 0.32 + (i % 4) * 0.06, ease: "sine.inOut", yoyo: true, repeat: 11 }, 19.3 + k * 0.12 + i * 0.03); });
+        tl.fromTo("#s" + k, { opacity: 0, x: -24, filter: "blur(6px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 19.25 + k * 0.28);
+      });
+      var mwm = $("#mwm"); BARS.slice(0, 9).forEach(function (h, i) { var b = document.createElement("i"); b.style.height = (h + 14) + "px"; mwm.appendChild(b); tl.fromTo(b, { scaleY: 0.3, transformOrigin: "50% 50%" }, { scaleY: 1, duration: 0.3 + (i % 3) * 0.07, ease: "sine.inOut", yoyo: true, repeat: 19 }, 20.2 + i * 0.04); });
+      tl.fromTo("#stm", { opacity: 0, scale: 0.92, filter: "blur(8px)", transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 20.05);
+      var st = $("#stsvg"), mkp = function (d, col, w) { var e = document.createElementNS(bn, "path"); e.setAttribute("d", d); e.setAttribute("fill", "none"); e.setAttribute("stroke", col); e.setAttribute("stroke-width", w); e.setAttribute("stroke-linecap", "round"); e.setAttribute("opacity", 0); st.appendChild(e); var L = e.getTotalLength(); e.setAttribute("stroke-dasharray", L + " " + (L + 4)); e.setAttribute("stroke-dashoffset", L); return e; };
+      [[125, "#E64980", 20.45], [320, "#12A3B4", 20.6], [515, "#3E7BFA", 20.75]].forEach(function (a) {
+        var e = mkp(LM.curve(446, a[0], 600, 325), a[1], 4); tl.set(e, { opacity: 0.8 }, a[2]); tl.fromTo(e, { strokeDashoffset: e.getTotalLength() }, { strokeDashoffset: 0, duration: 0.8, ease: "sine.inOut" }, a[2]); LM.pulse(tl, e, a[1], a[2] + 0.6, 0.9, 0.22); LM.pulse(tl, e, a[1], a[2] + 1.7, 0.9, 0.22);
+      });
+      var oe = mkp(LM.curve(990, 325, 1060, 325), "#12A3B4", 4); tl.set(oe, { opacity: 0.8 }, 22.7); tl.fromTo(oe, { strokeDashoffset: oe.getTotalLength() }, { strokeDashoffset: 0, duration: 0.5, ease: "sine.inOut" }, 22.7);
+      tl.fromTo("#oh", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 22.9);
+      ["#ol0", "#ol1", "#ol2", "#ol3"].forEach(function (l, i) { tl.fromTo(l, { opacity: 0, x: 18, filter: "blur(5px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 23.0 + i * 0.55); });
+      ["#ol0 b", "#ol1 b", "#ol2 b", "#ol3 b"].forEach(function (b, i) { tl.fromTo(b, { backgroundColor: "#CBEEF2", color: "#0B7C8A" }, { backgroundColor: "#12A3B4", color: "#ffffff", duration: 0.4, ease: "power2.out", immediateRender: false }, 25.55 + i * 0.22); tl.fromTo(b, { scale: 1 }, { scale: 1.1, duration: 0.2, ease: "sine.out", yoyo: true, repeat: 1, immediateRender: false }, 25.55 + i * 0.22); });
+      var parent = tl; tl = gsap.timeline();                                                                                             // what follows is written in its own time and set down after this beat
+      // ---- 20.5 s "And scanned, or handwritten, course materials, become clean documents, that you can edit, in Word or HTML."
+      flood(TOOLS[3].f, 20.2); tabOn(3, 20.35); show(3, 20.5, 0);
+      $$(".hwl").forEach(function (p, i) { tl.to(p, { strokeDashoffset: 0, duration: 0.75, ease: "sine.inOut" }, 20.8 + i * 0.6); });
+      $$(".hb").forEach(function (b, i) { tl.to(b, { opacity: 1, duration: 0.4, ease: "power2.out" }, 21.6 + i * 0.6); });
+      tl.fromTo("#arrow", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 23.2);
+      ["#dl0", "#dl1", "#dl2", "#dl3"].forEach(function (d, i) { tl.fromTo(d + " span", { opacity: 0, filter: "blur(5px)", y: 6 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, ease: "power3.out" }, 23.4 + i * 0.5); });
+      // ---- 27.5 s "And the Workbench keeps growing, with more tools, and more features, on the way."
+      tl.to(["#wb-panel", "#wb-tabs", "#w-b"], { opacity: 0, filter: "blur(10px)", duration: 0.55, ease: "power2.in" }, 27.45);
+      tl.to("#wb-flood", { backgroundColor: "#F6F6F3", duration: 1.0, ease: "power2.inOut" }, 27.5);
+      LM.words(tl, "#w-c", 28.0, 0.11); LM.mark2(tl, "#mw-c", "hlul", C.teal[0], 29.0, 0.9);
+      var grow = $("#wb-grow"), GT = [].concat(TOOLS.map(function (t) { return { c: t.c, ic: t.ic, n: t.n }; }), [{ plus: 1 }, { plus: 1 }]);
+      GT.forEach(function (g, i) {
+        var d = document.createElement("div"); d.className = "gt" + (g.plus ? " pl" : ""); d.id = "gt" + i; d.style.left = (135 + i * 280) + "px";
+        if (g.plus) d.innerHTML = '<svg viewBox="0 0 100 100" fill="none"><path d="M50 30v40M30 50h40" stroke="#b8b8b2" stroke-width="6" stroke-linecap="round"/></svg><span>Next</span>';
+        else { d.style.background = g.c[1]; d.innerHTML = '<svg viewBox="0 0 100 100" fill="none">' + g.ic + "</svg><span>" + g.n + "</span>"; }
+        grow.appendChild(d);
+        tl.fromTo(d, { opacity: 0, y: 24, scale: 0.94, filter: "blur(7px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 28.3 + i * 0.16 + (g.plus ? 0.5 : 0));
+        if (g.plus) tl.fromTo("#gt" + i + " svg", { scale: 0.6, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 29.2 + (i - 4) * 0.25);
+      });
+      tl.fromTo("#wb-grow-lb", { opacity: 0, y: 10, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 30.0);
+      tl.to(["#w-c", "#wb-grow", "#wb-grow-lb", "#wb-flood"], { opacity: 0, filter: "blur(10px)", duration: 0.5, ease: "power2.in" }, 31.25);
+      parent.add(tl, 7.01); tl = parent;
+      window.__timelines["s-workbench"] = tl;
+    })();
+  </script>
+</template>

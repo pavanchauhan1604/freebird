@@ -1,0 +1,146 @@
+<template>
+  <style>
+    #ex { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #ex .ttl { left: 900px; top: 100px; }
+    #ex-page { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; background: #fff; box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06); }
+    #ex-page img, #ex-mini img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #ex-mini { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; background: #fff; box-shadow: 0 30px 60px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06); opacity: 0; transform-origin: 0 0; }
+    #ex-div { position: absolute; left: 130px; top: 104px; width: 3px; height: 872px; background: #2FA463; border-radius: 2px; box-shadow: 0 0 14px 2px rgba(47,164,99,0.5); opacity: 0; }
+    .pill { position: absolute; top: 986px; height: 44px; padding: 0 16px; display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 14px; box-shadow: 0 10px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; white-space: nowrap; opacity: 0; }
+    #ex-dlb { margin-left: -120px; left: 130px; } #ex-dlb span:first-child { color: #6e6e73; } #ex-dlb span:last-child { color: #23834D; } #ex-dlb i { width: 3px; height: 24px; background: #d3d3cd; border-radius: 2px; display: block; }
+    #ex-lbl { left: 130px; background: #7B5CF0; color: #fff; box-shadow: 0 10px 24px rgba(123,92,240,0.35); }
+    #ex-layer { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; border-radius: 4px; background: rgba(123,92,240,0.07); box-shadow: 0 40px 70px rgba(123,92,240,0.24), 0 0 0 3px rgba(123,92,240,0.55); opacity: 0; }
+    #ex-layer .bx { position: absolute; border-radius: 6px; }
+    #ex-layer .cp { position: absolute; margin-top: -19px; height: 38px; padding: 0 12px; display: flex; align-items: center; border-radius: 0 10px 10px 0; color: #fff; font-weight: 800; font-size: 28px; letter-spacing: 0.01em; white-space: nowrap; }
+    /* the site's folder */
+    #ex-win { position: absolute; left: 900px; top: 330px; width: 890px; background: #fff; border-radius: 26px; box-shadow: 0 30px 60px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; overflow: hidden; }
+    #ex-hd { position: relative; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; border-bottom: 2px solid #eeeeea; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; color: #6e6e73; }
+    #ex-hd b { color: #1d1d1f; font-weight: 800; } #ex-cnt { display: flex; align-items: center; gap: 12px; color: #23834D; } #ex-cnt .od { display: inline-flex; }
+    #ex-prog { position: absolute; left: 0; bottom: -2px; height: 4px; width: 100%; background: #2FA463; transform-origin: 0 50%; }
+    .xr { position: relative; display: flex; align-items: center; gap: 26px; height: 118px; padding: 0 32px; border-bottom: 2px solid #f3f3f0; }
+    .xr:last-child { border-bottom: 0; }
+    .xr .th { position: relative; flex: none; width: 66px; height: 86px; }
+    .xr .th > div { position: absolute; inset: 0; border-radius: 7px; overflow: hidden; background: #fff; box-shadow: 0 6px 14px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.08); } .xr .th img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .xr .th .ot img { filter: grayscale(0.85) contrast(0.92); opacity: 0.85; }
+    .xr .th .ring { inset: -5px; border-radius: 11px; background: transparent; box-shadow: 0 0 0 3px #2FA463, 0 0 24px rgba(47,164,99,0.4); opacity: 0; overflow: visible; }
+    .xr .tx { flex: 1; min-width: 0; } .xr .nm { font-weight: 800; font-size: 32px; letter-spacing: -0.02em; white-space: nowrap; } .xr .ad { margin-top: 4px; font-weight: 700; font-size: 28px; color: #86868B; white-space: nowrap; }
+    .xr .ch { position: relative; width: 190px; height: 46px; flex: none; }
+    .xr .ch span { position: absolute; right: 0; top: 0; height: 46px; padding: 0 16px; display: flex; align-items: center; border-radius: 11px; font-weight: 800; font-size: 28px; white-space: nowrap; }
+    .xr .ch .o { background: #E9E9E4; color: #6e6e73; } .xr .ch .n { background: #D3EEDD; color: #1C7A47; opacity: 0; }
+    #ex-same { position: absolute; left: 900px; top: 912px; display: flex; gap: 16px; }
+    .sm { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 20px 0 14px; border-radius: 16px; background: #fff; box-shadow: 0 12px 26px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 29px; letter-spacing: -0.02em; opacity: 0; white-space: nowrap; }
+    .sm svg { width: 30px; height: 30px; flex: none; overflow: visible; }
+    #ex-same2 { position: absolute; left: 900px; top: 370px; width: 890px; }
+    .cm { display: flex; align-items: center; gap: 22px; height: 92px; margin-bottom: 14px; padding: 0 32px; background: #fff; border-radius: 22px; box-shadow: 0 14px 30px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 36px; letter-spacing: -0.025em; opacity: 0; }
+    .cm svg { width: 42px; height: 42px; flex: none; overflow: visible; } .cm b { margin-left: auto; font-weight: 700; font-size: 28px; color: #86868B; }
+    #ex-chips { position: absolute; left: 960px; top: 370px; width: 830px; }
+    .xc { display: flex; align-items: center; gap: 22px; height: 84px; margin-bottom: 14px; padding: 0 30px; background: #fff; border-radius: 20px; box-shadow: 0 14px 30px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 34px; letter-spacing: -0.02em; opacity: 0; }
+    .xc i { flex: none; width: 16px; height: 16px; border-radius: 50%; } .xc b { margin-left: auto; font-weight: 700; font-size: 28px; color: #86868B; white-space: nowrap; }
+    #ex-sr { position: absolute; left: 960px; top: 340px; width: 830px; padding: 30px 34px; background: #fff; border-radius: 26px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #ex-sr .hd3 { display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 29px; color: #6e6e73; margin-bottom: 14px; }
+    #ex-wave { display: flex; align-items: center; gap: 5px; height: 34px; } #ex-wave i { width: 6px; border-radius: 3px; background: #12A3B4; display: block; height: 30px; }
+    .sl { display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 2px solid #eeeeea; font-weight: 800; font-size: 31px; letter-spacing: -0.02em; line-height: 1.25; opacity: 0; }
+    .sl em { flex: none; font-style: normal; font-size: 28px; padding: 2px 12px; border-radius: 8px; color: #fff; min-width: 110px; text-align: center; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="ex" data-composition-id="s-export" data-width="1920" data-height="1080">
+    <div id="ex-page"><img src="assets/demo/page.jpg" alt="" /></div>
+    <div id="ex-layer"></div>
+    <div id="ex-div"></div>
+    <div class="pill" id="ex-dlb"><span>Original</span><i></i><span>Remediated</span></div>
+    <div class="pill" id="ex-lbl"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l10 5-10 5L3 8z"/><path d="M3 13l10 5 10-5M3 18l10 5 10-5"/></svg>Accessibility layer</div>
+    <h2 class="ttl" id="e1"><span class="ln" style="display:block"><span class="w">Replace</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="em1">original.</span></span></span></h2>
+    <h2 class="ttl" id="e2"><span class="ln" style="display:block"><span class="w">Looks</span> <span class="w">exactly</span></span><span class="ln" style="display:block"><span class="w">the</span> <span class="w"><span class="mk" id="em2">same.</span></span></span></h2>
+    <h2 class="ttl" id="e3"><span class="ln" style="display:block"><span class="w">With</span> <span class="w">a</span> <span class="w">complete</span></span><span class="ln" style="display:block"><span class="w">accessibility</span> <span class="w"><span class="mk" id="em3">layer.</span></span></span></h2>
+    <h2 class="ttl" id="e4"><span class="ln" style="display:block"><span class="w">Readable</span> <span class="w">by</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="em4">everyone.</span></span></span></h2>
+    <div id="ex-win"><div id="ex-hd"><span>calstatela.edu / <b>documents</b></span><span id="ex-cnt"><span class="od" id="ex-od"></span> of 4 replaced</span><div id="ex-prog"></div></div><div id="ex-rows"></div></div>
+    <div id="ex-same"></div>
+    <div id="ex-mini"><img src="assets/demo/page.jpg" alt="" /></div>
+    <div id="ex-same2"></div>
+    <div id="ex-chips"></div>
+    <div id="ex-sr"><div class="hd3"><div id="ex-wave"></div>A screen reader reads</div><div id="ex-lines"></div></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C, DUR = 12.4;
+      var P = { w: 664, h: 860 }, R = { h1: [87, 79, 836, 127], h2: [90, 154, 319, 184], p: [92, 197, 805, 240], list: [107, 274, 503, 359], img: [96, 398, 903, 679], foot: [92, 918, 373, 934] };
+      var ROLE = { h1: ["#7B5CF0", "H1"], h2: ["#7B5CF0", "H2"], p: ["#3E7BFA", "P"], list: ["#2FA463", "List"], img: ["#E0620F", "Figure"], foot: ["#8A8A90", "Footer"] };
+      var px = function (n, ax) { return n / 1000 * (ax ? P.w : P.h); }, layer = $("#ex-layer");
+      Object.keys(R).forEach(function (k) {
+        var r = R[k], b = document.createElement("div"); b.className = "bx"; b.id = "lb-" + k; b.style.cssText = "left:" + (px(r[0], 1) - 5) + "px;top:" + (px(r[1], 0) - 5) + "px;width:" + (px(r[2] - r[0], 1) + 10) + "px;height:" + (px(r[3] - r[1], 0) + 10) + "px;box-shadow:0 0 0 3px " + ROLE[k][0] + ";background:" + ROLE[k][0] + "14"; layer.appendChild(b);
+        var c = document.createElement("div"); c.className = "cp"; c.id = "lc-" + k; c.textContent = ROLE[k][1]; c.style.cssText = "left:" + (P.w + 4) + "px;top:" + ((px(r[1], 0) + px(r[3], 0)) / 2) + "px;background:" + ROLE[k][0]; layer.appendChild(c);
+      });
+      var FN = [["orientation-week.pdf", "/documents/orientation-week.pdf"], ["syllabus-template.pdf", "/documents/syllabus-template.pdf"], ["parking-map.pdf", "/documents/parking-map.pdf"], ["financial-aid-faq.pdf", "/documents/financial-aid-faq.pdf"]], rows = $("#ex-rows");
+      FN.forEach(function (n, i) {
+        var r = document.createElement("div"); r.className = "xr"; r.id = "xr" + i;
+        r.innerHTML = '<span class="th"><div class="ot"><img src="assets/demo/page.jpg" alt="" /></div><div class="nt" style="opacity:0"><img src="assets/demo/page.jpg" alt="" /></div><div class="ring"></div></span><span class="tx"><div class="nm">' + n[0] + '</div><div class="ad">' + n[1] + '</div></span><span class="ch"><span class="o">Original</span><span class="n">Remediated</span></span>'; rows.appendChild(r);
+      });
+      var CK = function (col) { return '<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="14" fill="' + col + '"/><path d="M8.5 15.5l4.5 4.5 8.5-9.5" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+      ["Same file name", "Same address", "Same look"].forEach(function (t, i) { var d = document.createElement("div"); d.className = "sm"; d.id = "sm" + i; d.innerHTML = CK("#2FA463") + t; $("#ex-same").appendChild(d); });
+      [["Same layout", "every block where it was"], ["Same text", "every word, as it was"], ["Same images", "every picture, untouched"]].forEach(function (t, i) { var d = document.createElement("div"); d.className = "cm"; d.id = "cm" + i; d.innerHTML = CK("#2FA463") + t[0] + "<b>" + t[1] + "</b>"; $("#ex-same2").appendChild(d); });
+      var title = function (id, tin, tout) { LM.words(tl, id, tin, 0.1); if (tout) LM.out(tl, id, tout, 0.4); };
+      var odo = LM.odometer($("#ex-od"), 1, 30); odo.set(0);
+
+      // ---- 0.6 s "And once a file is remediated, you simply replace the original."
+      title("#e1", 0.6, 4.4); LM.mark2(tl, "#em1", "hl", C.green[0], 1.5, 0.8);
+      tl.fromTo("#ex-win", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 0.8);
+      tl.set("#ex-prog", { scaleX: 0 }, 0);
+      // the remediated page lifts off, travels in one smooth arc and settles into the place of the first original
+      var win = $("#ex-win"), r0 = $("#xr0"), th0 = r0.querySelector(".th");
+      var tx = win.offsetLeft + r0.offsetLeft + th0.offsetLeft - 130, ty = win.offsetTop + $("#ex-hd").offsetHeight + r0.offsetTop + th0.offsetTop - 110 + 0;
+      var S1 = 66 / 664;
+      tl.set("#ex-mini", { x: 0, y: 0, scale: 1 }, 0);
+      tl.fromTo("#ex-mini", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, 1.55);
+      LM.follow(tl, "#ex-mini", [[0, 0], [300, 10], [tx - 300, ty + 70], [tx, ty]], 1.7, 1.15, "power3.inOut", 1, S1);
+      tl.to("#ex-page", { opacity: 0.55, duration: 0.5, ease: "power2.out" }, 1.6); tl.to("#ex-page", { opacity: 1, duration: 0.7, ease: "power2.inOut" }, 2.6);
+      var swap = function (i, t) {
+        tl.to("#xr" + i + " .ot", { scaleX: 0, duration: 0.22, ease: "power2.in" }, t);
+        tl.fromTo("#xr" + i + " .nt", { scaleX: 0, opacity: 1 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, t + 0.2);
+        tl.fromTo("#xr" + i + " .ring", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out", yoyo: true, repeat: 1 }, t + 0.25);
+        tl.to("#xr" + i + " .o", { opacity: 0, y: -8, duration: 0.3, ease: "power2.in" }, t); tl.fromTo("#xr" + i + " .n", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t + 0.18);
+      };
+      tl.set("#xr0 .ot", { transformOrigin: "50% 50%" }, 0); tl.set(["#xr1 .ot", "#xr2 .ot", "#xr3 .ot", "#xr0 .nt", "#xr1 .nt", "#xr2 .nt", "#xr3 .nt"], { transformOrigin: "50% 50%" }, 0);
+      var T0 = [2.8, 3.25, 3.5, 3.75];
+      swap(0, T0[0]); tl.to("#ex-mini", { opacity: 0, duration: 0.25, ease: "power1.in" }, 2.95);
+      swap(1, T0[1]); swap(2, T0[2]); swap(3, T0[3]);
+      tl.to("#ex-prog", { scaleX: 1, duration: 1.2, ease: "power2.inOut" }, 2.9);
+      ["#sm0", "#sm1", "#sm2"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 3.6 + i * 0.2); });
+      // ---- 4.8 s "The new version looks exactly the same,": a line sweeps the page; nothing differs
+      tl.to(["#ex-win", "#ex-same"], { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.6, ease: "power2.in" }, 4.25);
+      title("#e2", 4.9, 7.2); LM.mark2(tl, "#em2", "ul", C.green[0], 5.85, 0.8);
+      tl.set("#ex-div", { x: 0 }, 0); tl.fromTo("#ex-div", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.85);
+      tl.to("#ex-div", { x: 664, duration: 2.1, ease: "sine.inOut" }, 5.0); tl.to("#ex-div", { opacity: 0, duration: 0.4, ease: "power1.in" }, 7.1);
+      tl.set("#ex-dlb", { x: 0 }, 0); tl.fromTo("#ex-dlb", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.95); tl.to("#ex-dlb", { x: 664, duration: 2.1, ease: "sine.inOut" }, 5.0); tl.to("#ex-dlb", { opacity: 0, duration: 0.4 }, 7.1);
+      ["#cm0", "#cm1", "#cm2"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, x: 20, filter: "blur(5px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 5.5 + i * 0.5); });
+      // ---- 7.2 s "but carries a complete accessibility layer on top,": the layer settles over the page, carrying its tags
+      tl.to("#ex-same2", { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 7.1);
+      title("#e3", 7.5, 10.05); LM.mark2(tl, "#em3", "hlul", C.violet[0], 8.6, 0.9);
+      tl.fromTo("#ex-layer", { opacity: 0, scale: 1.0 }, { opacity: 1, scale: 1.025, duration: 0.9, ease: "power3.out", transformOrigin: "50% 50%" }, 7.25);
+      tl.fromTo("#ex-lbl", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 7.7);
+      ["h1", "h2", "p", "list", "img", "foot"].forEach(function (k, i) { tl.fromTo(["#lb-" + k, "#lc-" + k], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 7.7 + i * 0.18); });
+      var CH = [["Structure tags", "headings, lists, tables", "#7B5CF0"], ["Alt text", "for every image", "#E0620F"], ["Reading order", "in the right sequence", "#3E7BFA"], ["Language and title", "set for the document", "#23834D"]], chips = $("#ex-chips");
+      CH.forEach(function (c, i) {
+        var d = document.createElement("div"); d.className = "xc"; d.id = "xc" + i; d.innerHTML = '<i style="background:' + c[2] + '"></i>' + c[0] + "<b>" + c[1] + "</b>"; chips.appendChild(d);
+        tl.fromTo(d, { opacity: 0, x: 24, filter: "blur(5px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 8.0 + i * 0.4);
+      });
+      tl.to("#ex-layer", { scale: 1, duration: 1.2, ease: "power3.inOut" }, 9.0); tl.to("#ex-layer", { boxShadow: "0 0 0 0 rgba(123,92,240,0), 0 0 0 3px rgba(123,92,240,0)", backgroundColor: "rgba(123,92,240,0)", duration: 1.0, ease: "power2.inOut" }, 9.4);
+      tl.to("#ex-lbl", { opacity: 0, y: -8, duration: 0.5, ease: "power2.in" }, 9.3);
+      // ---- 10.1 s "so it's readable by everyone.": a screen reader goes through it, part by part
+      tl.to("#ex-chips", { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 9.95);
+      title("#e4", 10.2, 12.0); LM.mark2(tl, "#em4", "ul", C.teal[0], 10.9, 0.7);
+      tl.fromTo("#ex-sr", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 10.3);
+      var wave = $("#ex-wave"), bars = []; for (var i = 0; i < 9; i++) { var b = document.createElement("i"); wave.appendChild(b); bars.push(b); }
+      bars.forEach(function (b, i) { tl.fromTo(b, { scaleY: 0.25, transformOrigin: "50% 50%" }, { scaleY: 1, duration: 0.3 + (i % 3) * 0.08, ease: "sine.inOut", yoyo: true, repeat: 5 }, 10.5 + i * 0.05); });
+      var LN = [["H1", "#7B5CF0", "Welcome to Orientation Week", "h1", 10.45], ["List", "#23834D", "3 items", "list", 11.05], ["Figure", "#E0620F", "Classical building with columns and a tree under a sun.", "img", 11.65]], lines = $("#ex-lines");
+      LN.forEach(function (l, i) {
+        var d = document.createElement("div"); d.className = "sl"; d.id = "sl" + i; d.innerHTML = '<em style="background:' + l[1] + '">' + l[0] + "</em><span>" + l[2] + "</span>"; lines.appendChild(d);
+        tl.fromTo(d, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, l[4]);
+        tl.fromTo("#lb-" + l[3], { opacity: 0.5 }, { opacity: 1, duration: 0.3, yoyo: true, repeat: 1 }, l[4]);
+      });
+      tl.to(["#ex-page", "#ex-layer", "#ex-sr", "#e4"], { opacity: 0, filter: "blur(9px)", duration: 0.45, ease: "power2.in" }, 12.0);
+      var st = { p: 0 }, paint = function () { var t = st.p * DUR, n = 0; T0.forEach(function (x) { n += Math.min(Math.max((t - x - 0.25) / 0.3, 0), 1); }); odo.set(n); };
+      tl.to(st, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      window.__timelines["s-export"] = tl;
+    })();
+  </script>
+</template>

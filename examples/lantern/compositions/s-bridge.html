@@ -1,0 +1,112 @@
+<template>
+  <style>
+    #br { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #br .ttl { left: 130px; top: 250px; }
+    #br-g { position: absolute; left: 930px; top: 235px; width: 866px; height: 568px; }
+    #br-panel { position: absolute; left: -34px; top: -34px; right: -34px; bottom: -34px; border-radius: 44px; background: #fff; box-shadow: 0 34px 70px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #br .slot { position: absolute; width: 270px; height: 270px; border-radius: 28px; border: 3px dashed #d3d3cd; opacity: 0; box-sizing: border-box; }
+    #br .cd { position: absolute; width: 270px; height: 270px; border-radius: 28px; background: #fff; box-shadow: 0 22px 44px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+    #br .cd svg.ic { width: 112px; height: 112px; overflow: visible; }
+    #br .cd .lb { font-weight: 800; font-size: 30px; letter-spacing: -0.03em; }
+    #br .cd .gl { position: absolute; inset: 0; border-radius: 28px; opacity: 0; }
+    #br .cd .st { position: absolute; right: 16px; top: 16px; width: 34px; height: 34px; overflow: visible; }
+    #br .cd .st circle.r { fill: none; stroke: #d3d3cd; stroke-width: 3.5; }
+    #br .cd .st circle.f { opacity: 0; transform-origin: 50% 50%; }
+    #br .cd .st path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    #br-rail { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; overflow: visible; }
+    #br .nd { position: absolute; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; opacity: 0; white-space: nowrap; }
+    #br-ember { position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; opacity: 0; box-shadow: 0 0 14px 4px rgba(255,176,32,0.45); background: radial-gradient(circle at 35% 30%, #ffe27a 0, #ffb020 52%, #f29a00 100%); }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="br" data-composition-id="s-bridge" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="b-a"><span class="ln" style="display:block"><span class="w">An</span> <span class="w">accessibility</span></span><span class="ln" style="display:block"><span class="w">platform</span> <span class="w">for</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w">whole</span> <span class="w"><span class="mk" id="mk-a">enterprise.</span></span></span></h2>
+    <h2 class="ttl" id="b-b"><span class="ln" style="display:block"><span class="w">All</span> <span class="w">of</span> <span class="w">it,</span> <span class="w">in</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="mk-b">one</span></span> <span class="w"><span class="mk" id="mk-b1">place.</span></span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="mk-b2">End</span></span> <span class="w"><span class="mk" id="mk-b3">to</span></span> <span class="w"><span class="mk" id="mk-b4">end.</span></span></span></h2>
+    <h2 class="ttl" id="b-c" style="top:430px"><span class="ln" style="display:block"><span class="w">The</span> <span class="w">campus</span> <span class="w"><span class="mk" id="mk-c">lifecycle.</span></span></span></h2>
+    <div id="br-g"><div id="br-panel"></div><div id="br-cards"></div></div>
+    <svg id="br-rail" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+    <div id="br-nodes"></div>
+    <div id="br-ember"></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, C = LM.C;
+      var S = function (stroke, body, sw) { return '<svg class="ic" viewBox="0 0 120 120" fill="none" stroke="' + stroke + '" stroke-width="' + (sw || 5) + '" stroke-linecap="round" stroke-linejoin="round">' + body + "</svg>"; };
+      var ICONS = {
+        doc: function (a, p) { return S("#6e6e73", '<path d="M32 12h38l22 22v64a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#fff"/><path d="M70 12v22h22" fill="' + p + '"/><path d="M40 62h40M40 78h40M40 94h26" stroke="' + a + '"/>'); },
+        slides: function (a, p) { return S("#6e6e73", '<rect x="10" y="22" width="100" height="68" rx="9" fill="#fff"/><path d="M24 40h34" stroke="#1d1d1f"/><path d="M24 56h26M24 70h20" stroke="#c9c9c4"/><rect x="66" y="48" width="30" height="28" rx="5" fill="' + a + '" stroke="none"/><path d="M46 104h28M60 90v14"/>'); },
+        course: function (a, p) { return S("#6e6e73", '<path d="M60 28c-12-8-30-9-46-6v70c16-3 34-2 46 6 12-8 30-9 46-6V22c-16-3-34-2-46 6z" fill="#fff"/><path d="M60 28v70"/><path d="M26 44h24M26 58h24" stroke="' + a + '"/><path d="M70 44h24M70 58h24" stroke="#c9c9c4"/>'); },
+        hand: function (a, p) { return S("#6e6e73", '<path d="M32 12h38l22 22v64a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z" fill="#fff"/><path class="hw" pathLength="1" d="M38 58c4-8 7-8 9 0s5 8 8 0 5-8 8 0 5 8 8 0M38 76c5-7 8-7 10 0s5 7 9 0 6-7 9 0M38 94c4-6 7-6 9 0s6 6 9 0" stroke="' + a + '" stroke-width="4.5" stroke-dasharray="1" stroke-dashoffset="1"/>'); },
+        audio: function (a, p) { return S("#1d1d1f", '<path d="M18 60v0M32 46v28M46 30v60M60 40v40M74 22v76M88 44v32M102 54v12" stroke="#c9c9c4"/><path d="M46 30v60M60 40v40M74 22v76" stroke="' + a + '"/>', 7); },
+        video: function (a, p) { return S("#6e6e73", '<rect x="10" y="26" width="100" height="68" rx="12" fill="#fff"/><path d="M52 46v28l24-14z" fill="' + a + '" stroke="' + a + '"/>'); }
+      };
+      var ITEMS = [["doc", "Documents", 5.35, C.blue], ["slides", "Slides", 6.25, C.orange], ["course", "Course materials", 7.35, C.violet], ["hand", "Handwritten", 8.75, C.magenta], ["audio", "Audio", 10.2, C.teal], ["video", "Video", 11.1, C.rose]];
+      var S0 = 270, GP = 28, cards = $("#br-cards");
+      ITEMS.forEach(function (it, i) {
+        var x = (i % 3) * (S0 + GP), y = Math.floor(i / 3) * (S0 + GP), col = it[3];
+        var slot = document.createElement("div"); slot.className = "slot"; slot.id = "slot" + i; slot.style.cssText = "left:" + x + "px;top:" + y + "px"; cards.appendChild(slot);
+        var cd = document.createElement("div"); cd.className = "cd"; cd.id = "cd" + i; cd.style.cssText = "left:" + x + "px;top:" + y + "px";
+        cd.innerHTML = ICONS[it[0]](col[0], col[1]) + '<div class="lb">' + it[1] + '</div><div class="gl" style="box-shadow:0 0 0 3px ' + col[0] + ',0 0 44px ' + col[0] + '55"></div><svg class="st" viewBox="0 0 34 34"><circle class="r" cx="17" cy="17" r="14"/><circle class="f" cx="17" cy="17" r="15" fill="' + col[0] + '"/><path class="ck" pathLength="1" d="M9.5 17.5l5.5 5.5L25 11.5" stroke-dasharray="1" stroke-dashoffset="1"/></svg>';
+        cards.appendChild(cd);
+      });
+      tl.set("#br-g", { transformOrigin: "50% 50%" }, 0);
+      var swap = function (a, b, t) { LM.out(tl, a, t, 0.4); LM.words(tl, b, t + 0.35, 0.1); };
+
+      // 0.5 s "Lantern is an accessibility platform, built for the whole enterprise."
+      LM.words(tl, "#b-a", 0.55, 0.11); LM.mark2(tl, "#mk-a", "hl", C.blue[0], 3.7, 0.8);
+      ITEMS.forEach(function (it, i) { tl.fromTo("#slot" + i, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 1.5 + i * 0.12); });
+      // 5.3 s: each kind of thing is named, and its card takes its slot as it is named
+      ITEMS.forEach(function (it, i) {
+        var t = it[2];
+        tl.to("#slot" + i, { opacity: 0, duration: 0.35, ease: "power1.out" }, t);
+        tl.fromTo("#cd" + i, { opacity: 0, scale: 0.9, y: 16, filter: "blur(8px)" }, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.75, ease: "power3.out" }, t);
+        if (it[0] === "hand") tl.to("#cd" + i + " .hw", { strokeDashoffset: 0, duration: 1.1, ease: "sine.inOut" }, t + 0.25);
+        if (it[0] === "audio") tl.fromTo("#cd" + i + " svg.ic path:last-child", { opacity: 0.2 }, { opacity: 1, duration: 0.5, ease: "sine.inOut" }, t + 0.2);
+      });
+      // 13.4 s "Lantern brings all of it together, in one place, and makes it accessible, end to end."
+      swap("#b-a", "#b-b", 13.15);
+      tl.fromTo("#br-panel", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.inOut" }, 15.3);
+      tl.to("#br-g", { scale: 0.97, x: 0, duration: 1.3, ease: "power2.inOut" }, 15.3);
+      ITEMS.forEach(function (it, i) {
+        var c = i % 3 - 1, r = Math.floor(i / 3) ? -1 : 1;
+        tl.to("#cd" + i, { x: -c * 15, y: r * 9, duration: 1.2, ease: "power2.inOut" }, 15.35);
+      });
+      LM.mark2(tl, "#mk-b", "circ", C.blue[0], 15.55, 0.8); LM.mark2(tl, "#mk-b4", "ul", C.teal[0], 17.2, 0.9);
+      ITEMS.forEach(function (it, i) {
+        var t = 16.9 + i * 0.28, col = it[3][0];
+        tl.fromTo("#cd" + i + " .gl", { opacity: 0 }, { opacity: 1, duration: 0.75, ease: "power2.out" }, t);
+        tl.fromTo("#cd" + i + " .f", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, t + 0.12);
+        tl.to("#cd" + i + " .ck", { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t + 0.35);
+      });
+      // 19.0 s "So, let's start with the campus lifecycle.": the panel steps back and the lifecycle is drawn, with the ember running along it
+      tl.to(["#br-g"], { opacity: 0, scale: 0.9, filter: "blur(10px)", duration: 0.7, ease: "power2.in" }, 18.1);
+      LM.out(tl, "#b-b", 18.1, 0.4); LM.words(tl, "#b-c", 19.0, 0.1); LM.mark2(tl, "#mk-c", "hlul", C.green[0], 19.8, 0.9);
+      var NODES = [["Discover", 320, C.blue], ["Scan", 640, C.teal], ["Report", 960, C.magenta], ["Remediate", 1280, C.violet], ["Export", 1600, C.green]], RY = 640, rail = $("#br-rail"), nodes = $("#br-nodes"), ns = "http://www.w3.org/2000/svg";
+      var mk = function (tag, at) { var e = document.createElementNS(ns, tag); for (var k in at) e.setAttribute(k, at[k]); rail.appendChild(e); return e; };
+      NODES.forEach(function (n, i) {
+        mk("circle", { id: "rn" + i, cx: n[1], cy: RY, r: 17, fill: "#fff", stroke: "#c9c9c4", "stroke-width": 4 }).style.opacity = 0;
+        mk("circle", { id: "rf" + i, cx: n[1], cy: RY, r: 17, fill: n[2][0] }).style.opacity = 0;
+        var d = document.createElement("div"); d.className = "nd"; d.id = "rl" + i; d.textContent = n[0]; d.style.cssText = "left:" + n[1] + "px;top:" + (RY + 38) + "px"; nodes.appendChild(d);
+        if (i < NODES.length - 1) mk("path", { id: "rp" + i, d: LM.curve(n[1] + 26, RY, NODES[i + 1][1] - 26, RY), fill: "none", stroke: "#d3d3cd", "stroke-width": 4, "stroke-linecap": "round", pathLength: 1, "stroke-dasharray": 1, "stroke-dashoffset": 1 });
+      });
+      tl.set(".nd", { xPercent: -50 }, 0); tl.set("#br-ember", { x: NODES[0][1], y: RY - 38 }, 0);
+      NODES.forEach(function (n, i) {
+        var t = 19.1 + i * 0.24;
+        tl.fromTo("#rn" + i, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, t - 0.1);
+        tl.fromTo("#rl" + i, { opacity: 0, filter: "blur(6px)", y: 8 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo("#rf" + i, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, t + 0.3);
+        if (i < NODES.length - 1) tl.to("#rp" + i, { strokeDashoffset: 0, duration: 0.45, ease: "sine.inOut" }, t + 0.1);
+      });
+      tl.fromTo("#br-ember", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 19.2);
+      NODES.forEach(function (n, i) { if (i) { var t = 19.1 + (i - 1) * 0.24 + 0.24; tl.to("#br-ember", { x: n[1], duration: 0.24, ease: "sine.inOut" }, t); } });
+      // 20.5 s: the lifecycle rises to the top and becomes the rail the rest of the film hangs from
+      var RX = [480, 720, 960, 1200, 1440];
+      NODES.forEach(function (n, i) {
+        tl.to("#rl" + i, { x: RX[i] - n[1], y: -(RY + 38 + 30 - 50) , scale: 0.68, duration: 0.85, ease: "power3.inOut" }, 20.45);
+        tl.to(["#rn" + i, "#rf" + i], { opacity: 0, scale: 0.2, duration: 0.45, ease: "power2.in" }, 20.45);
+        if (i < NODES.length - 1) tl.to("#rp" + i, { opacity: 0, duration: 0.4 }, 20.45);
+      });
+      LM.out(tl, "#b-c", 20.3, 0.4); tl.to("#br-ember", { opacity: 0, duration: 0.4, ease: "power1.in" }, 20.45);
+      window.__timelines["s-bridge"] = tl;
+    })();
+  </script>
+</template>

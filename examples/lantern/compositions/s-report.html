@@ -1,0 +1,173 @@
+<template>
+  <style>
+    #rp { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #rp .ttl { left: 130px; top: 100px; }
+    #rp svg { overflow: visible; }
+    .cd { position: absolute; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    /* the site's report */
+    #rp-site { left: 130px; top: 250px; width: 600px; height: 640px; padding: 30px 34px; }
+    .sh { display: flex; align-items: center; justify-content: space-between; height: 48px; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; white-space: nowrap; }
+    .sh b { display: flex; align-items: center; gap: 12px; } .sh b i { width: 14px; height: 14px; border-radius: 50%; background: #C93BA6; display: block; } .sh span { color: #6e6e73; }
+    .kp { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+    .kt { position: relative; height: 122px; padding: 16px 20px; border-radius: 20px; background: #f6f6f3; opacity: 0; }
+    .kt .od { display: inline-flex; height: 62px; } .kt .cp { margin-top: 2px; font-weight: 800; font-size: 28px; letter-spacing: -0.02em; color: #6e6e73; white-space: nowrap; }
+    .kt .ring { position: absolute; inset: 0; border-radius: 20px; opacity: 0; }
+    .hs { margin-top: 26px; } .hs h4 { display: flex; justify-content: space-between; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; color: #6e6e73; } .hs h4 span { color: #23834D; opacity: 0; }
+    #rp-chart { position: relative; height: 190px; margin-top: 10px; }
+    #rp-chart .bar { position: absolute; bottom: 36px; width: 56px; border-radius: 10px 10px 4px 4px; background: #D3EEDD; transform-origin: 50% 100%; }
+    #rp-chart .lb { position: absolute; bottom: 0; width: 86px; text-align: center; font-weight: 800; font-size: 28px; color: #86868B; }
+    #rp-chart svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+    /* the files and what was found */
+    #rp-tbl { left: 760px; top: 250px; width: 1030px; height: 640px; padding: 22px 0 0; overflow: hidden; }
+    .th2 { position: relative; display: flex; align-items: center; height: 56px; padding: 0 36px; font-weight: 800; font-size: 28px; letter-spacing: -0.01em; color: #86868B; }
+    .th2 span:nth-of-type(1) { width: 330px; } .th2 span:nth-of-type(2) { flex: 1; } .th2 span:nth-of-type(3) { width: 150px; text-align: right; }
+    .th2 .fb { position: absolute; left: 360px; right: 190px; top: 4px; bottom: -520px; border-radius: 16px; background: rgba(201,59,166,0.07); opacity: 0; }
+    .fr { position: relative; display: flex; align-items: center; height: 80px; padding: 0 36px; border-top: 2px solid #eeeeea; opacity: 0; }
+    .fr .nm { width: 330px; flex: none; overflow: hidden; display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 28px; letter-spacing: -0.02em; white-space: nowrap; } .fr .nm svg { width: 28px; height: 34px; flex: none; }
+    .fr .fd { flex: 1; display: flex; gap: 10px; align-items: center; }
+    .chip { height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 12px; font-weight: 800; font-size: 28px; letter-spacing: -0.015em; white-space: nowrap; opacity: 0; }
+    .c-t { background: #E5DEFF; color: #5B3CD0; } .c-i { background: #FFE1CD; color: #B4510A; } .c-g { background: #D8E5FF; color: #2556C7; } .c-b { background: #FFD9E6; color: #B7285E; } .c-ok { background: #D3EEDD; color: #1C7A47; }
+    .fr .dl { width: 150px; display: flex; justify-content: flex-end; }
+    .dlp { position: relative; height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 4px; font-weight: 800; font-size: 28px; color: #3E7BFA; opacity: 0; white-space: nowrap; } .dlp svg { width: 22px; height: 22px; flex: none; }
+    .dlp.bad { color: #B7285E; } .dlp.bad span { text-decoration: line-through; text-decoration-thickness: 3px; }
+    /* shared */
+    #rp-share { left: 130px; top: 922px; width: 1660px; height: 98px; display: flex; align-items: center; gap: 22px; padding: 0 34px; border-radius: 26px; }
+    #rp-share .av { width: 58px; height: 58px; border-radius: 50%; background: #C93BA6; color: #fff; font-weight: 800; font-size: 28px; display: flex; align-items: center; justify-content: center; flex: none; }
+    #rp-share .tx { font-weight: 800; font-size: 33px; letter-spacing: -0.025em; white-space: nowrap; } #rp-share .tx em { font-style: normal; color: #6e6e73; font-weight: 700; }
+    #rp-share .fm { display: flex; gap: 12px; } #rp-share .push { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+    #rp-share .ck { width: 42px; height: 42px; flex: none; }
+    /* the master report */
+    #rp-master { left: 130px; top: 230px; width: 1660px; height: 700px; padding: 0; overflow: hidden; }
+    .mh { position: relative; display: flex; align-items: center; justify-content: space-between; height: 118px; padding: 0 44px; border-bottom: 2px solid #eeeeea; }
+    .mh .nm { font-weight: 800; font-size: 40px; letter-spacing: -0.03em; white-space: nowrap; } .mh .nm span { display: block; margin-top: 2px; font-weight: 700; font-size: 28px; letter-spacing: -0.01em; color: #6e6e73; }
+    .mk4 { display: flex; gap: 40px; } .mk4 div { text-align: left; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; line-height: 1; opacity: 0; } .mk4 div span { display: block; margin-top: 6px; font-weight: 800; font-size: 28px; letter-spacing: -0.015em; color: #6e6e73; }
+    .mt { position: relative; }
+    .mth, .mr { position: relative; display: flex; align-items: center; padding: 0 44px; }
+    .mth { height: 58px; font-weight: 800; font-size: 28px; color: #86868B; }
+    .mr { height: 72px; border-top: 2px solid #f1f1ee; font-weight: 800; font-size: 30px; letter-spacing: -0.02em; opacity: 0; }
+    .m1 { width: 300px; } .m2 { width: 600px; display: flex; align-items: center; gap: 20px; } .m3 { width: 230px; text-align: right; } .m4 { width: 230px; text-align: right; } .m5 { width: 200px; text-align: right; }
+    .mth .m2, .mth .m3, .mth .m4, .mth .m5 { }
+    .pb { position: relative; width: 440px; height: 18px; border-radius: 9px; background: #eeeeea; overflow: hidden; } .pb i { position: absolute; inset: 0; border-radius: 9px; transform-origin: 0 50%; }
+    .m2 b { width: 76px; text-align: right; font-weight: 800; }
+    .up { color: #23834D; } .dn { color: #B7285E; } .m4 { color: #B7285E; }
+    .band { position: absolute; top: 118px; bottom: 0; border-radius: 0; opacity: 0; }
+    .mr .me { position: absolute; inset: 4px 24px; border-radius: 16px; box-shadow: 0 0 0 3px #12A3B4; opacity: 0; }
+    /* on to remediation */
+    #rp-q { left: 560px; top: 940px; width: 800px; height: 84px; display: flex; align-items: center; justify-content: center; gap: 22px; border-radius: 24px; background: #7B5CF0; color: #fff; box-shadow: 0 24px 48px rgba(123,92,240,0.35); font-weight: 800; font-size: 36px; letter-spacing: -0.03em; white-space: nowrap; }
+    #rp-q .od { display: inline-flex; }
+    .fl { position: absolute; left: 0; top: 0; width: 34px; height: 26px; margin: -13px 0 0 -17px; border-radius: 8px; opacity: 0; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="rp" data-composition-id="s-report" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="ra"><span class="w">Then,</span> <span class="w"><span class="mk" id="mra">reporting.</span></span></h2>
+    <h2 class="ttl" id="rb"><span class="w">A</span> <span class="w">report</span> <span class="w">for</span> <span class="w"><span class="mk" id="mrb">every</span></span> <span class="w"><span class="mk" id="mrb2">site.</span></span></h2>
+    <h2 class="ttl" id="rc"><span class="w">Every</span> <span class="w">file,</span> <span class="w">every</span> <span class="w"><span class="mk" id="mrc">finding.</span></span></h2>
+    <h2 class="ttl" id="rd"><span class="w">Made</span> <span class="w">to</span> <span class="w">be</span> <span class="w"><span class="mk" id="mrd">shared.</span></span></h2>
+    <h2 class="ttl" id="re"><span class="w">One</span> <span class="w"><span class="mk" id="mre">master</span></span> <span class="w"><span class="mk" id="mre2">report.</span></span></h2>
+    <h2 class="ttl" id="rf"><span class="w">Remediation</span> <span class="w"><span class="mk" id="mrf">starts</span></span> <span class="w">here.</span></h2>
+    <div class="cd" id="rp-site">
+      <div class="sh"><b><i></i>calstatela.edu/its</b><span>Latest scan</span></div>
+      <div class="kp">
+        <div class="kt" id="kt0"><div class="od" id="od0"></div><div class="cp">files hosted</div><div class="ring" style="box-shadow:0 0 0 3px #3E7BFA"></div></div>
+        <div class="kt" id="kt1"><div class="od" id="od1" style="color:#E0620F"></div><div class="cp">need remediation</div><div class="ring" style="box-shadow:0 0 0 3px #F2711C"></div></div>
+        <div class="kt" id="kt2"><div class="od" id="od2" style="color:#B7285E"></div><div class="cp">broken links</div><div class="ring" style="box-shadow:0 0 0 3px #E64980"></div></div>
+        <div class="kt" id="kt3"><div style="display:flex;align-items:flex-start;color:#23834D"><div class="od" id="od3"></div><span style="font-weight:800;font-size:60px;letter-spacing:-0.04em;line-height:64px">%</span></div><div class="cp">accessible</div><div class="ring" style="box-shadow:0 0 0 3px #2FA463"></div></div>
+      </div>
+      <div class="hs"><h4><span style="color:#6e6e73;opacity:1">History</span><span id="rp-delta">+5 points</span></h4><div id="rp-chart"></div></div>
+    </div>
+    <div class="cd" id="rp-tbl"><div class="th2"><div class="fb" id="rp-fb"></div><span>File</span><span>Findings</span><span>Link</span></div><div id="rp-rows"></div></div>
+    <div class="cd" id="rp-share"><div class="av">SO</div><div class="tx">Sent to the site owner <em>· Excel and HTML</em></div><div class="fm"><span class="chip c-g" id="sf0">Excel</span><span class="chip c-t" id="sf1">HTML</span></div><div class="push"><span class="chip c-i" id="s-fix">19 files to fix</span><svg class="ck" viewBox="0 0 42 42"><circle cx="21" cy="21" r="20" fill="#2FA463"/><path id="s-ck" d="M12 21.5l6.5 6.5 12-13" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="cd" id="rp-master">
+      <div class="mh"><div class="nm">Master report<span>calstatela.edu · 283 sites</span></div><div class="mk4"><div id="mk0">283<span>sites</span></div><div id="mk1">57,420<span>files hosted</span></div><div id="mk2" style="color:#23834D">53%<span>accessible</span></div><div id="mk3" style="color:#B7285E">1,284<span>broken links</span></div></div></div>
+      <div class="mt" id="rp-mt"><div class="band" id="bd1" style="left:360px;width:600px;background:rgba(35,131,77,0.07)"></div><div class="band" id="bd2" style="left:1000px;width:250px;background:rgba(62,123,250,0.07)"></div><div class="band" id="bd3" style="left:1260px;width:250px;background:rgba(230,73,128,0.08)"></div>
+        <div class="mth"><span class="m1">Site</span><span class="m2" style="display:block;width:600px">Accessible</span><span class="m3">Documents</span><span class="m4" style="color:#86868B">Broken links</span><span class="m5">Change</span></div><div id="rp-mrows"></div></div>
+    </div>
+    <div class="cd" id="rp-q"><span>Remediation queue</span><span class="od" id="odq"></span><span>files</span></div>
+    <div id="rp-fl"></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, C = LM.C, DUR = 42.5, ns = "http://www.w3.org/2000/svg";
+      var ease = function (q) { q = Math.min(Math.max(q, 0), 1); return 1 - Math.pow(1 - q, 2.6); };
+      var swap = function (a, b, t, tin) { LM.out(tl, a, t, 0.35); LM.words(tl, b, tin === undefined ? t + 0.3 : tin, 0.1); };
+      var FILE = '<svg viewBox="0 0 40 46" fill="none"><path d="M7 3h18l10 10v27a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z" fill="#fff" stroke="#6e6e73" stroke-width="3" stroke-linejoin="round"/><path d="M25 3v10h10" fill="#F9D8F0" stroke="#6e6e73" stroke-width="3" stroke-linejoin="round"/></svg>';
+      var DLI = '<svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3v11M6 10l5 5 5-5M4 19h14"/></svg>';
+      // ---------- the site's report
+      LM.words(tl, "#ra", 0.5, 0.12); LM.mark2(tl, "#mra", "hlul", C.magenta[0], 1.25, 0.9);
+      tl.set("#rp-site", { x: 494, scale: 1.12, transformOrigin: "0% 0%" }, 0);                                                      // alone, the site's report sits in the middle and a little larger; the file table makes room for itself
+      tl.fromTo("#rp-site", { opacity: 0, y: 20, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 1.1);
+      tl.to("#rp-site", { x: 0, scale: 1, duration: 1.0, ease: "power3.inOut" }, 12.2);
+      swap("#ra", "#rb", 2.05, 2.4); LM.mark2(tl, "#mrb2", "ul", C.magenta[0], 3.3, 0.8);
+      var od = [LM.odometer($("#od0"), 2, 60), LM.odometer($("#od1"), 2, 60), LM.odometer($("#od2"), 2, 60), LM.odometer($("#od3"), 2, 60)];
+      od.forEach(function (o) { o.set(0); });
+      ["#kt0", "#kt1", "#kt2", "#kt3"].forEach(function (k, i) { tl.fromTo(k, { opacity: 0, y: 14, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 3.4 + i * 0.14); });
+      var ring = function (i, t) { tl.fromTo("#kt" + i + " .ring", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", yoyo: true, repeat: 1, repeatDelay: 0.5 }, t); };
+      ring(0, 5.3); ring(1, 6.95); ring(2, 8.75); ring(3, 10.25);
+      // the history of the site: accessible share by scan, and the broken links falling
+      var H = [31, 38, 44, 49, 55, 60], BL = [14, 12, 11, 9, 8, 6], LBL = ["Dec", "Jan", "Feb", "Mar", "Apr", "May"], ch = $("#rp-chart"), CW = 552, BX0 = 0;
+      H.forEach(function (h, i) {
+        var x = i * 92 + 18, bar = document.createElement("div"); bar.className = "bar"; bar.id = "hb" + i; bar.style.cssText = "left:" + x + "px;height:" + (h * 1.9) + "px;background:" + (i === 5 ? "#2FA463" : "#CDEBD9"); ch.appendChild(bar);
+        var lb = document.createElement("div"); lb.className = "lb"; lb.style.left = (x - 15) + "px"; lb.textContent = LBL[i]; ch.appendChild(lb);
+        tl.fromTo(bar, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, 10.45 + i * 0.16); tl.fromTo(lb, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.5 + i * 0.16);
+      });
+      var svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 " + CW + " 190"); ch.appendChild(svg);
+      var pts = BL.map(function (b, i) { return [i * 92 + 46, 150 - b * 8]; }), d = "M" + pts[0][0] + " " + pts[0][1];
+      for (var i = 1; i < pts.length; i++) { var m = (pts[i - 1][0] + pts[i][0]) / 2; d += " C" + m + " " + pts[i - 1][1] + " " + m + " " + pts[i][1] + " " + pts[i][0] + " " + pts[i][1]; }
+      var path = document.createElementNS(ns, "path"); path.setAttribute("d", d); path.setAttribute("fill", "none"); path.setAttribute("stroke", "#E64980"); path.setAttribute("stroke-width", 4); path.setAttribute("stroke-linecap", "round"); path.setAttribute("opacity", 0); svg.appendChild(path);
+      var L = path.getTotalLength(); path.setAttribute("stroke-dasharray", L + " " + (L + 4)); path.setAttribute("stroke-dashoffset", L); tl.set(path, { opacity: 1 }, 11.2); tl.fromTo(path, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 11.2);
+      pts.forEach(function (p, i) { var c = document.createElementNS(ns, "circle"); c.setAttribute("cx", p[0]); c.setAttribute("cy", p[1]); c.setAttribute("r", 7); c.setAttribute("fill", "#fff"); c.setAttribute("stroke", "#E64980"); c.setAttribute("stroke-width", 3.5); c.setAttribute("opacity", 0); svg.appendChild(c); tl.fromTo(c, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 11.3 + i * 0.2); });
+      tl.fromTo("#rp-delta", { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 12.0);
+      // ---------- every file, and what was found
+      swap("#rb", "#rc", 12.35, 12.7); LM.mark2(tl, "#mrc", "hlul", C.magenta[0], 13.7, 0.9);
+      tl.fromTo("#rp-tbl", { opacity: 0, x: 50, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 12.55);
+      var ROWS = [["handbook.pdf", [["c-i", "No alt text", 19.05], ["c-g", "Tags missing", 20.85]], "ok"], ["course-catalog.pdf", [["c-t", "No table header", 17.55]], "ok"], ["faculty-guide.pdf", [["c-ok", "Accessible", 21.5]], "ok"], ["events.pdf", [["c-b", "Broken link", 16.2]], "bad"], ["forms.pdf", [["c-t", "No table header", 17.75], ["c-g", "Tags missing", 21.0]], "ok"], ["parking-map.pdf", [["c-i", "No alt text", 19.3]], "ok"]], rows = $("#rp-rows");
+      ROWS.forEach(function (r, i) {
+        var e = document.createElement("div"); e.className = "fr"; e.id = "fr" + i;
+        e.innerHTML = '<div class="nm">' + FILE + "<span>" + r[0] + '</span></div><div class="fd">' + r[1].map(function (c, k) { return '<span class="chip ' + c[0] + '" id="ch' + i + "-" + k + '">' + c[1] + "</span>"; }).join("") + '</div><div class="dl"><span class="dlp' + (r[2] === "bad" ? " bad" : "") + '" id="dl' + i + '">' + DLI + "<span>Download</span></span></div>"; rows.appendChild(e);
+        tl.fromTo(e, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 13.0 + i * 0.2);
+        tl.fromTo("#dl" + i, { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 14.5 + i * 0.28);
+        r[1].forEach(function (c, k) { tl.fromTo("#ch" + i + "-" + k, { opacity: 0, scale: 0.86, x: -6 }, { opacity: 1, scale: 1, x: 0, duration: 0.5, ease: "back.out(1.4)" }, c[2]); });
+      });
+      tl.fromTo("#rp-fb", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 15.9); tl.to("#rp-fb", { opacity: 0, duration: 0.8, ease: "power1.inOut" }, 17.3);
+      // ---------- made to be shared
+      swap("#rc", "#rd", 22.15, 22.5); LM.mark2(tl, "#mrd", "hl", C.magenta[0], 23.3, 0.8);
+      tl.fromTo("#rp-share", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 22.9);
+      ["#sf0", "#sf1"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" }, 23.7 + i * 0.2); });
+      tl.fromTo("#s-fix", { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 24.9); tl.fromTo("#s-ck", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 25.8);
+      ["c-i", "c-t", "c-g"].forEach(function (cls, i) { document.querySelectorAll("#rp-rows ." + cls).forEach(function (c) { tl.fromTo(c, { y: 0 }, { y: -4, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 1 }, 25.1 + i * 0.15); }); });
+      // ---------- the master report
+      tl.to(["#rp-site", "#rp-tbl", "#rp-share"], { opacity: 0, scale: 0.97, filter: "blur(9px)", duration: 0.6, ease: "power2.in" }, 27.0);
+      swap("#rd", "#re", 27.0, 27.6); LM.mark2(tl, "#mre2", "hlul", C.magenta[0], 28.5, 0.9);
+      tl.fromTo("#rp-master", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 27.7);
+      ["#mk0", "#mk1", "#mk2", "#mk3"].forEach(function (k, i) { tl.fromTo(k, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 28.4 + i * 0.2); });
+      var MR = [["admissions", 86, "412", "2", "+6"], ["library", 74, "1,184", "18", "+3"], ["registrar", 61, "305", "9", "+4"], ["its", 60, "47", "6", "+5"], ["financialaid", 48, "236", "21", "−2"], ["advising", 39, "173", "14", "+1"], ["housing", 27, "129", "33", "−4"]], mrows = $("#rp-mrows");
+      MR.forEach(function (r, i) {
+        var up = r[4].charAt(0) === "+", e = document.createElement("div"); e.className = "mr"; e.id = "mr" + i;
+        var col = r[1] >= 60 ? "#2FA463" : r[1] >= 45 ? "#F2B134" : "#F2711C";
+        e.innerHTML = (r[0] === "its" ? '<div class="me" id="me"></div>' : "") + '<span class="m1">' + r[0] + '</span><span class="m2"><span class="pb"><i id="pbi' + i + '" style="background:' + col + '"></i></span><b>' + r[1] + '%</b></span><span class="m3">' + r[2] + '</span><span class="m4">' + r[3] + '</span><span class="m5 ' + (up ? "up" : "dn") + '">' + (up ? "▲ " : "▼ ") + r[4] + '</span>'; mrows.appendChild(e);
+        tl.fromTo(e, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 29.0 + i * 0.16); tl.set("#pbi" + i, { scaleX: 0 }, 0);
+        tl.to("#pbi" + i, { scaleX: r[1] / 100, duration: 0.9, ease: "power3.out" }, 30.95 + i * 0.12);
+      });
+      var band = function (id, t0, t1) { tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, t0); tl.to(id, { opacity: 0, duration: 0.5, ease: "power1.inOut" }, t1); };
+      band("#bd1", 30.8, 32.8); band("#bd2", 33.1, 35.1); band("#bd3", 35.35, 37.2);
+      tl.fromTo("#me", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 32.0); tl.to("#me", { opacity: 0, duration: 0.6 }, 33.2);
+      // ---------- and remediation begins from it
+      swap("#re", "#rf", 37.5, 37.9); LM.mark2(tl, "#mrf", "hlul", C.violet[0], 38.8, 0.9);
+      tl.to("#rp-master", { opacity: 0.35, scale: 0.985, duration: 0.7, ease: "power2.inOut", transformOrigin: "50% 50%" }, 37.8);
+      tl.fromTo("#rp-q", { opacity: 0, y: 24, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 38.1);
+      var oq = LM.odometer($("#odq"), 5, 40, { comma: true }); oq.set(0); tl.fromTo("#odq", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 38.75);
+      var FC = ["#7B5CF0", "#F2711C", "#3E7BFA", "#E64980", "#7B5CF0", "#F2711C", "#3E7BFA", "#E64980", "#F2711C", "#7B5CF0", "#3E7BFA", "#F2711C"], fl = $("#rp-fl");
+      FC.forEach(function (c, i) {
+        var e = document.createElement("div"); e.className = "fl"; e.id = "fl" + i; e.style.background = c; fl.appendChild(e);
+        var sx = 1240 + (i % 3) * 70, sy = 440 + Math.floor(i / 3) * 100, ex = 960 + (i % 4 - 1.5) * 90, ey = 982, t = 38.4 + i * 0.17;
+        tl.set(e, { x: sx, y: sy }, 0); tl.fromTo(e, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t); LM.follow(tl, e, [[sx, sy], [sx + 120, sy + 140], [ex + 60, ey - 200], [ex, ey]], t, 0.9, "power2.inOut", 1, 0.8); tl.to(e, { opacity: 0, duration: 0.15 }, t + 0.8);
+      });
+      tl.to(["#rp-master", "#rp-q", "#rf"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 41.9);
+      var st = { p: 0 }, paint = function () {
+        var t = st.p * DUR; od[0].set(47 * ease((t - 5.3) / 1.5)); od[1].set(19 * ease((t - 6.95) / 1.4)); od[2].set(6 * ease((t - 8.75) / 1.2)); od[3].set(60 * ease((t - 10.25) / 1.3)); oq.set(11341 * ease((t - 38.7) / 2.3));
+      };
+      tl.to(st, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      window.__timelines["s-report"] = tl;
+    })();
+  </script>
+</template>

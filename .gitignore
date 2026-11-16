@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+node_modules/
+.hyperframes/
+assets/voice/_clips/
+*.tmp.mp4
+.DS_Store
+assets/sfx/*.mp3
+assets/sfx/*.wav
+assets/sfx/*.ogg
+assets/sfx/candidates/

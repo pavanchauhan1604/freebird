@@ -1,0 +1,43 @@
+{
+ "bpm": 92,
+ "chords": {
+  "intro": "C",
+  "bridge": "Am",
+  "procure": "F",
+  "report": "G",
+  "remediate": "Am",
+  "export": "F",
+  "cycle": "G",
+  "workbench": "F",
+  "end": "C"
+ },
+ "groove": [
+  [
+   0,
+   0
+  ],
+  [
+   24,
+   0
+  ],
+  [
+   31.6,
+   1
+  ],
+  [
+   195,
+   1.1
+  ],
+  [
+   201.8,
+   0
+  ],
+  [
+   212.8,
+   0
+  ]
+ ],
+ "lit_at": 4.84,
+ "lockup_at": 208.4,
+ "loudness": -20
+}

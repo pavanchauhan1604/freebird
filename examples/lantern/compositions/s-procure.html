@@ -1,0 +1,256 @@
+<template>
+  <style>
+    #pr { position: absolute; left: 0; right: 0; top: 56px; bottom: -56px; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #pr .ttl { left: 130px; top: 70px; }
+    #pr svg { overflow: visible; }
+    #pr-graph { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+    .pl { position: absolute; width: 300px; height: 58px; padding: 0 20px; display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 16px; box-shadow: 0 12px 26px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; opacity: 0; white-space: nowrap; }
+    .pl i { flex: none; width: 12px; height: 12px; border-radius: 50%; background: #3E7BFA; } .pl b { font-weight: 800; color: #86868B; }
+    .dt { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #D8E5FF; box-shadow: 0 0 0 2.5px #3E7BFA; opacity: 0; }
+    #pr-hub { position: absolute; left: 140px; top: 462px; width: 400px; height: 76px; padding: 0 28px; display: flex; align-items: center; gap: 16px; background: #1d1d1f; color: #fff; border-radius: 22px; box-shadow: 0 24px 48px rgba(0,0,0,0.18); font-weight: 800; font-size: 34px; letter-spacing: -0.03em; opacity: 0; white-space: nowrap; }
+    #pr-hub svg { flex: none; width: 36px; height: 36px; } #pr-hub .c { opacity: 0; }
+    #pr-ring { position: absolute; left: 140px; top: 462px; width: 400px; height: 76px; border-radius: 22px; border: 3px solid #3E7BFA; opacity: 0; }
+    #pr-count { position: absolute; left: 140px; top: 590px; opacity: 0; }
+    #pr-cap { margin-top: 8px; font-weight: 800; font-size: 40px; letter-spacing: -0.02em; color: #6e6e73; }
+    /* the site */
+    #pr-site { position: absolute; left: 130px; top: 230px; width: 620px; height: 620px; }
+    #pr-tb { position: absolute; left: 0; top: 0; width: 620px; height: 64px; padding: 0 22px; display: flex; align-items: center; gap: 16px; background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; clip-path: inset(0 100% 0 0); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; white-space: nowrap; }
+    #pr-tb svg { width: 30px; height: 30px; flex: none; } #pr-tb b { color: #12A3B4; font-weight: 800; }
+    #pr-body { position: absolute; left: 0; top: 64px; width: 620px; height: 556px; background: #fff; border-radius: 0 0 18px 18px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); clip-path: inset(0 0 100% 0); overflow: hidden; }
+    .hd { position: absolute; left: 36px; top: 24px; width: 330px; height: 30px; border-radius: 8px; background: #e4e4df; } .hd2 { position: absolute; left: 36px; top: 68px; width: 220px; height: 18px; border-radius: 6px; background: #efefeb; }
+    .sr { position: absolute; left: 0; right: 0; height: 52px; display: flex; align-items: center; gap: 20px; padding: 0 36px; opacity: 0; }
+    .sr.n { padding-left: 76px; }
+    .hl { position: absolute; inset: 2px 14px; border-radius: 12px; background: rgba(18,163,180,0.14); opacity: 0; }
+    .ic { position: relative; flex: none; width: 34px; height: 40px; } .ic svg { display: block; width: 100%; height: 100%; }
+    .chev { position: relative; flex: none; width: 18px; height: 18px; } .chev svg { display: block; width: 100%; height: 100%; }
+    .bar { position: relative; height: 16px; border-radius: 8px; background: #e4e4df; }
+    #pr-beam { position: absolute; left: 0; right: 0; top: 0; height: 84px; opacity: 0; background: linear-gradient(180deg, rgba(18,163,180,0), rgba(18,163,180,0.20) 62%, rgba(18,163,180,0.34) 96%, rgba(18,163,180,0)); }
+    #pr-beam i { position: absolute; left: 0; right: 0; top: 80px; height: 3px; background: #12A3B4; box-shadow: 0 0 14px 2px rgba(18,163,180,0.55); }
+    /* the files, as they are found and checked */
+    #pr-lbl { position: absolute; left: 1090px; top: 178px; font-weight: 800; font-size: 32px; color: #6e6e73; opacity: 0; }
+    #pr-list2 { position: absolute; left: 1090px; top: 252px; width: 700px; height: 540px; }
+    .lr { position: absolute; left: 0; width: 700px; height: 64px; display: flex; align-items: center; gap: 22px; opacity: 0; }
+    .lr .nm { position: relative; flex: 1; font-weight: 800; font-size: 30px; letter-spacing: -0.02em; white-space: nowrap; }
+    .rs { position: relative; display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 28px; opacity: 0; white-space: nowrap; }
+    .rs svg { width: 26px; height: 26px; overflow: visible; }
+    .rs.pass { color: #2FA463; } .rs.fix { color: #E0620F; }
+    .rs.fix i { width: 22px; height: 22px; border-radius: 50%; background: #F2711C; display: block; }
+    .pg { position: absolute; left: 0; bottom: 2px; height: 5px; width: 100%; border-radius: 3px; background: #12A3B4; transform-origin: 0 50%; opacity: 0; }
+    #pr-tally { position: absolute; left: 1090px; top: 790px; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; opacity: 0; white-space: nowrap; }
+    .fly { position: absolute; left: 0; top: 0; width: 34px; height: 40px; margin: -20px 0 0 -17px; opacity: 0; } .fly svg { display: block; width: 100%; height: 100%; }
+    /* the campus */
+    #pr-grid { position: absolute; left: 130px; top: 290px; width: 920px; height: 540px; }
+    .tl { position: absolute; width: 34px; height: 34px; border-radius: 9px; background: #e9e9e4; opacity: 0; }
+    .tl.on { background: #CBEEF2; } .tl.fx { background: #FFE1CD; } .tl.me { background: #fff; box-shadow: 0 0 0 3px #12A3B4; }
+    #pr-scn { position: absolute; left: 130px; top: 856px; opacity: 0; }
+    #pr-scncap { margin-top: 2px; font-weight: 800; font-size: 34px; letter-spacing: -0.02em; color: #6e6e73; }
+    #pr-inv { position: absolute; left: 1130px; top: 250px; width: 660px; height: 560px; padding: 34px 40px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #pr-inv h3 { font-weight: 800; font-size: 30px; letter-spacing: -0.02em; color: #6e6e73; margin-bottom: 14px; }
+    .sr3 { position: relative; display: flex; align-items: center; justify-content: space-between; height: 124px; border-top: 2px solid #eeeeea; }
+    .sr3 .big { display: inline-flex; } .sr3 .cp { text-align: right; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; color: #6e6e73; line-height: 1.2; } .sr3 .cp b { display: block; color: #1d1d1f; font-weight: 800; }
+    #pr-funnel { position: relative; height: 14px; margin-top: 18px; border-radius: 7px; background: #eeeeea; overflow: hidden; } #pr-funnel i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 7px; transform-origin: 0 50%; }
+    #pr-fp { position: absolute; left: 130px; top: 290px; width: 920px; padding: 18px 0; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #pr-fph { display: flex; align-items: center; justify-content: space-between; padding: 6px 36px 16px; font-weight: 800; font-size: 29px; letter-spacing: -0.02em; color: #6e6e73; }
+    #pr-fph b { color: #1d1d1f; } #pr-fpc { color: #3E7BFA; }
+    .fr2 { position: relative; display: flex; align-items: center; gap: 22px; height: 92px; padding: 0 36px; border-top: 2px solid #eeeeea; }
+    .fr2 .ic { width: 34px; height: 40px; } .fr2 .nm { flex: 1; font-weight: 800; font-size: 31px; letter-spacing: -0.02em; white-space: nowrap; }
+    .fr2 .fp { width: 240px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: #eeeeea; font-weight: 800; font-size: 29px; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: #1d1d1f; }
+    .fr2 .tg { width: 230px; display: flex; justify-content: flex-end; } .fr2 .tg span { height: 44px; padding: 0 14px; display: flex; align-items: center; border-radius: 11px; font-weight: 800; font-size: 28px; opacity: 0; white-space: nowrap; }
+    .fr2 .hl2 { position: absolute; inset: 4px 14px; border-radius: 14px; opacity: 0; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="pr" data-composition-id="s-procure" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="p-a"><span class="w">Find</span> <span class="w">every</span> <span class="w"><span class="mk" id="mkp-a">site.</span></span></h2>
+    <h2 class="ttl" id="p-b"><span class="w">Check</span> <span class="w">every</span> <span class="w"><span class="mk" id="mkp-b">file.</span></span></h2>
+    <h2 class="ttl" id="p-c"><span class="w">Every</span> <span class="w">site</span> <span class="w">on</span> <span class="w"><span class="mk" id="mkp-c">campus.</span></span></h2>
+    <h2 class="ttl" id="p-d"><span class="w">A</span> <span class="w">complete</span> <span class="w"><span class="mk" id="mkp-d">inventory.</span></span></h2>
+    <h2 class="ttl" id="p-e"><span class="w">Each</span> <span class="w">file,</span> <span class="w"><span class="mk" id="mkp-e">fingerprinted.</span></span></h2>
+    <svg id="pr-graph" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+    <div id="pr-nodes"></div>
+    <div id="pr-ring"></div>
+    <div id="pr-hub"><svg viewBox="0 0 46 46" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="23" cy="23" r="19"/><ellipse cx="23" cy="23" rx="8" ry="19"/><path d="M4 23h38M7 13h32M7 33h32"/></svg><span id="pr-hubtx"></span></div>
+    <div id="pr-count"><div id="pr-num"></div><div id="pr-cap">sites found</div></div>
+    <div id="pr-site">
+      <div id="pr-tb"><svg viewBox="0 0 46 46" fill="none" stroke="#6e6e73" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="23" cy="23" r="19"/><ellipse cx="23" cy="23" rx="8" ry="19"/><path d="M4 23h38M7 13h32M7 33h32"/></svg><span>calstatela.edu/<b>its</b></span></div>
+      <div id="pr-body"><div class="hd"></div><div class="hd2"></div><div id="pr-rows"></div><div id="pr-beam"><i></i></div></div>
+    </div>
+    <div id="pr-lbl">Files found</div>
+    <div id="pr-list2" data-layout-allow-overflow></div>
+    <div id="pr-tally">6 files checked · <span class="mk" id="mkp-t">4 need fixing</span></div>
+    <div id="pr-flies"></div>
+    <div id="pr-grid"></div>
+    <div id="pr-scn"><div id="pr-scnum"></div><div id="pr-scncap">sites scanned</div></div>
+    <div id="pr-inv">
+      <h3>Inventory · calstatela.edu</h3>
+      <div class="sr3" id="sr3a"><div class="big" id="pr-nfw"><span id="pr-nf"></span></div><div class="cp"><b>files found</b>everything hosted</div></div>
+      <div class="sr3" id="sr3b"><div class="big" id="pr-nuw" style="color:#3E7BFA"><span id="pr-nu"></span></div><div class="cp"><b>unique files</b>by fingerprint</div></div>
+      <div class="sr3" id="sr3c"><div class="big" id="pr-nnw" style="color:#E0620F"><span id="pr-nn"></span></div><div class="cp"><b>need remediation</b>unique files</div></div>
+      <div id="pr-funnel"><i id="fn1" style="width:100%;background:#D8E5FF"></i><i id="fn2" style="width:41.8%;background:#3E7BFA"></i><i id="fn3" style="width:19.8%;background:#F2711C"></i></div>
+    </div>
+    <div id="pr-fp"><div id="pr-fph"><span><b>Fingerprints</b> · from each file's content</span><span id="pr-fpc">5 files</span></div><div id="pr-fpr"></div></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C, DUR = 36.0;
+      var ease = function (q) { q = Math.min(Math.max(q, 0), 1); return 1 - Math.pow(1 - q, 2.6); };
+      var FILE = '<svg viewBox="0 0 40 46" fill="none"><path d="M7 3h18l10 10v27a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z" fill="#fff" stroke="#6e6e73" stroke-width="3" stroke-linejoin="round"/><path d="M25 3v10h10" fill="#CBEEF2" stroke="#6e6e73" stroke-width="3" stroke-linejoin="round"/><path d="M11 24h18M11 31h14" stroke="#c9c9c4" stroke-width="3" stroke-linecap="round"/></svg>';
+      var PAGE = '<svg viewBox="0 0 40 46" fill="none"><rect x="4" y="6" width="32" height="34" rx="5" fill="#fff" stroke="#6e6e73" stroke-width="3"/><path d="M4 16h32" stroke="#6e6e73" stroke-width="3"/><path d="M11 25h18M11 32h12" stroke="#c9c9c4" stroke-width="3" stroke-linecap="round"/></svg>';
+      var CHEV = '<svg viewBox="0 0 18 18" fill="none" stroke="#6e6e73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l6 6-6 6"/></svg>';
+      var mkp = function (tag, at, parent) { var e = document.createElementNS(ns, tag); for (var k in at) e.setAttribute(k, at[k]); (parent || $("#pr-graph")).appendChild(e); return e; };
+      var draw = function (p, t, d, ease_) { var L = p.getTotalLength(); p.setAttribute("stroke-dasharray", L + " " + (L + 4)); p.setAttribute("stroke-dashoffset", L); tl.set(p, { opacity: 1 }, t); tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: ease_ || "power2.inOut" }, t); };
+
+      // ================= DISCOVER (0.5 s) "First, discovery." / "Lantern starts at the front door of your domain, and follows every path, until it's found every site."
+      LM.words(tl, "#p-a", 0.5, 0.11); LM.mark2(tl, "#mkp-a", "hl", C.blue[0], 1.55, 0.8);
+      var HX = 540, HY = 500, PX = 860, NAMES = ["admissions", "financialaid", "advising", "library", "its", "registrar", "housing", "alumni", "careercenter"], NCH = [3, 4, 3, 4, 3, 3, 4, 3, 4], nodes = $("#pr-nodes");
+      NAMES.forEach(function (nm, i) {
+        var py = 215 + 76 * i;
+        var pl = document.createElement("div"); pl.className = "pl"; pl.id = "pl" + i; pl.style.cssText = "left:" + PX + "px;top:" + (py - 28) + "px"; pl.innerHTML = "<i></i><span><b>/</b>" + nm + "</span>"; nodes.appendChild(pl);
+        var e = mkp("path", { id: "e1-" + i, d: LM.curve(HX, HY, PX, py), fill: "none", stroke: "#d3d3cd", "stroke-width": 3, "stroke-linecap": "round", opacity: 0 });
+        var t0 = 4.35 + i * 0.17; draw(e, t0, 0.8, "sine.inOut"); LM.pulse(tl, e, C.blue[0], t0, 0.8, 0.16);
+        tl.fromTo(pl, { opacity: 0, scale: 0.94, x: -10, filter: "blur(5px)" }, { opacity: 1, scale: 1, x: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, t0 + 0.55);
+        for (var k = 0; k < NCH[i]; k++) {
+          var cy = py + (k - (NCH[i] - 1) / 2) * 30, cx = 1400 + (k % 2) * 34, id = "d" + i + "-" + k, t1 = 5.95 + i * 0.12 + k * 0.05;
+          var e2 = mkp("path", { id: "e2-" + id, d: LM.curve(PX + 300, py, cx, cy), fill: "none", stroke: "#e2e2dd", "stroke-width": 2.5, "stroke-linecap": "round", opacity: 0 }); draw(e2, t1, 0.6, "sine.inOut");
+          var dt = document.createElement("div"); dt.className = "dt"; dt.style.cssText = "left:" + cx + "px;top:" + cy + "px"; nodes.appendChild(dt);
+          tl.fromTo(dt, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, t1 + 0.4);
+        }
+      });
+      tl.fromTo("#pr-hub", { opacity: 0, scale: 0.94, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 1.0);
+      var hubtx = $("#pr-hubtx"); "calstatela.edu".split("").forEach(function (ch) { var s = document.createElement("span"); s.className = "c"; s.textContent = ch; hubtx.appendChild(s); });
+      hubtx.querySelectorAll(".c").forEach(function (c, i) { tl.set(c, { opacity: 1 }, 1.5 + i * 0.06); });
+      tl.set("#pr-ring", { opacity: 0.9, scale: 1, transformOrigin: "50% 50%" }, 3.2); tl.to("#pr-ring", { opacity: 0, scale: 1.28, duration: 1.1, ease: "power2.out" }, 3.2);
+      tl.fromTo("#pr-count", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 4.3);
+      var oD = LM.odometer($("#pr-num"), 3, 190);
+
+      // ================= SCAN (8.0 s) "Then, scanning." / "It opens each site, follows every link, and gathers the files it finds." / "Every one is checked ..."
+      tl.to(["#pr-hub", "#pr-graph", "#pr-count"], { opacity: 0, filter: "blur(10px)", duration: 0.6, ease: "power2.in" }, 7.65);
+      NAMES.forEach(function (nm, i) { if (i !== 4) tl.to("#pl" + i, { opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 7.65 + Math.abs(i - 4) * 0.02); });
+      document.querySelectorAll(".dt").forEach(function (d) { tl.to(d, { opacity: 0, duration: 0.4 }, 7.65); });
+      LM.out(tl, "#p-a", 7.55, 0.35); LM.words(tl, "#p-b", 8.0, 0.1); LM.mark2(tl, "#mkp-b", "hlul", C.teal[0], 8.95, 0.9);
+      // the "its" site leaves the graph and becomes the toolbar of the site it names
+      tl.to("#pl4", { x: 130 - PX, y: 230 - (215 + 76 * 4 - 28) + 4, scale: 1, duration: 0.95, ease: "power3.inOut" }, 7.75);
+      tl.to("#pl4", { opacity: 0, duration: 0.3, ease: "power1.in" }, 8.6);
+      tl.set("#pr-tb", { opacity: 1 }, 8.35); tl.to("#pr-tb", { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power3.out" }, 8.4);
+      tl.to("#pr-body", { clipPath: "inset(0 0 0% 0)", duration: 0.8, ease: "power3.out" }, 8.85);
+      // the site's links: pages and files, some nested one level down
+      var RT = ["p", "f", "f", "f", "p", "f", "f", "f"], NEST = [0, 1, 1, 0, 0, 1, 1, 0], BW = [260, 340, 290, 320, 230, 300, 350, 280], R0 = 110, RS = 54, rows = $("#pr-rows");
+      RT.forEach(function (t, i) {
+        var r = document.createElement("div"); r.className = "sr" + (NEST[i] ? " n" : ""); r.id = "sr" + i; r.style.top = (R0 + RS * i) + "px";
+        r.innerHTML = '<div class="hl"></div>' + (t === "p" ? '<span class="chev" id="cv' + i + '">' + CHEV + "</span>" : "") + '<span class="ic" id="ri' + i + '">' + (t === "f" ? FILE : PAGE) + '</span><span class="bar" style="width:' + BW[i] + 'px"></span>'; rows.appendChild(r);
+        tl.fromTo(r, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 9.2 + i * 0.1);
+      });
+      tl.fromTo([".hd", ".hd2"], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 9.0);
+      // the files' tray, and the files in it
+      var FILES = ["software-guide.pdf", "wifi-setup.pdf", "help-desk-hours.pdf", "service-catalog.pdf", "security-policy.pdf", "network-map.pdf"], RES = ["fix", "pass", "fix", "pass", "fix", "fix"], FROM = [1, 2, 3, 5, 6, 7];
+      var LX = 1090, LY = 252, LS = 76, list = $("#pr-list2"), flies = $("#pr-flies");
+      FILES.forEach(function (f, j) {
+        var r = document.createElement("div"); r.className = "lr"; r.id = "lr" + j; r.style.top = (LS * j) + "px";
+        r.innerHTML = '<span class="ic">' + FILE + '</span><span class="nm">' + f + '</span><span class="rs ' + RES[j] + '" id="rs' + j + '">' + (RES[j] === "pass" ? '<svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#2FA463"/><path pathLength="1" id="ck' + j + '" d="M7 13.5l4 4 8-9" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Passed' : "<i></i>Needs fixing") + '</span><span class="pg" id="pg' + j + '"></span>'; list.appendChild(r);
+        var fl = document.createElement("div"); fl.className = "fly"; fl.id = "fly" + j; fl.innerHTML = FILE; flies.appendChild(fl);
+      });
+      tl.fromTo("#pr-lbl", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 10.4);
+      // one steady sweep down the site: pages open as it reaches them, files lift out and glide to the tray
+      var B0 = 10.5, B1 = 14.0, BY0 = 100, BY1 = 546, BX = 230;                                                                // beam seconds and body y range
+      var rowT = function (i) { return B0 + (R0 + RS * i + 26 - BY0) / (BY1 - BY0) * (B1 - B0); };
+      tl.set("#pr-beam", { y: BY0 - 80 }, 0); tl.to("#pr-beam", { opacity: 1, duration: 0.4, ease: "power1.out" }, B0 - 0.3);
+      tl.to("#pr-beam", { y: BY1 - 80, duration: B1 - B0 + 0.1, ease: "none" }, B0 - 0.05); tl.to("#pr-beam", { opacity: 0, duration: 0.45, ease: "power1.in" }, B1 + 0.05);
+      var fj = 0;
+      RT.forEach(function (t, i) {
+        var h = rowT(i);
+        tl.fromTo("#sr" + i + " .hl", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, h - 0.1); tl.to("#sr" + i + " .hl", { opacity: 0.45, duration: 0.7, ease: "power1.inOut" }, h + 0.2);
+        if (t === "p") { tl.to("#cv" + i, { rotation: 90, duration: 0.45, ease: "power2.inOut" }, h - 0.05); return; }
+        var j = fj++, sx = 130 + (NEST[i] ? 76 : 36) + 17, sy = 230 + 64 + R0 + RS * i + 26, tx = LX + 17, ty = LY + 32 + LS * j, id = "#fly" + j;
+        tl.fromTo("#ri" + i, { scale: 1 }, { scale: 1.18, duration: 0.2, ease: "sine.out", yoyo: true, repeat: 1 }, h - 0.05);
+        tl.set(id, { x: sx, y: sy }, h); tl.fromTo(id, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power1.out" }, h);
+        tl.to(id, { x: tx, duration: 1.0, ease: "power2.inOut" }, h + 0.12); tl.to(id, { y: ty, duration: 1.0, ease: "power3.inOut" }, h + 0.12);
+        tl.to(id, { opacity: 0, duration: 0.2, ease: "power1.in" }, h + 1.0);
+        tl.fromTo("#lr" + j, { opacity: 0, scale: 0.96, x: -8, filter: "blur(4px)" }, { opacity: 1, scale: 1, x: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, h + 0.95);
+      });
+      // each file is checked in turn: a line sweeps under it, then its result lands
+      for (var j = 0; j < 6; j++) {
+        var t = 14.2 + j * 0.44;
+        tl.fromTo("#pg" + j, { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.38, ease: "sine.inOut" }, t); tl.to("#pg" + j, { opacity: 0, duration: 0.2 }, t + 0.4);
+        tl.fromTo("#rs" + j, { opacity: 0, x: 10, filter: "blur(3px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, t + 0.34);
+        if (RES[j] === "pass") tl.to("#ck" + j, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.46);
+      }
+      tl.fromTo("#pr-tally", { opacity: 0, y: 8, filter: "blur(5px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 16.8);
+      LM.mark2(tl, "#mkp-t", "hl", C.orange[0], 17.6, 0.8);
+
+      // ================= CAMPUS (19.0 s) "Do that for every site on campus, and something new appears: a complete inventory of every file that needs remediation, across your whole domain."
+      var COLS = 22, N = 283, P = 42, GX0 = 130, GY0 = 290, ME = 60, tiles = [], grid = $("#pr-grid"), meC = ME % COLS, meR = Math.floor(ME / COLS), seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }, dmax = 0;
+      for (var i = 0; i < N; i++) {
+        var c = i % COLS, r = Math.floor(i / COLS), el = document.createElement("div"); el.className = "tl" + (i === ME ? " me" : ""); el.style.cssText = "left:" + (c * P) + "px;top:" + (r * P) + "px"; grid.appendChild(el);
+        var d = Math.hypot(c - meC, (r - meR) * 1.0); dmax = Math.max(dmax, d); tiles.push({ el: el, d: d, fx: i === ME ? true : rnd() < 0.56 });
+      }
+      var wt = tiles.map(function (t) { return 19.9 + t.d / dmax * 3.3; }), wsorted = wt.slice().sort(function (a, b) { return a - b; });
+      // the scanned site shrinks into its place in the grid
+      var SC = 34 / 620;
+      tl.to(["#pr-lbl", "#pr-list2", "#pr-tally"], { opacity: 0, filter: "blur(8px)", duration: 0.55, ease: "power2.in" }, 19.15);
+      LM.out(tl, "#p-b", 18.9, 0.4);
+      tl.to("#pr-site", { x: (GX0 + meC * P) - 130, y: (GY0 + meR * P) - 230, scale: SC, transformOrigin: "0% 0%", duration: 1.0, ease: "power3.inOut" }, 18.85);
+      tl.to("#pr-site", { opacity: 0, duration: 0.3, ease: "power1.in" }, 19.6);
+      tl.fromTo(tiles[ME].el, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 19.45);
+      LM.words(tl, "#p-c", 19.5, 0.1); LM.mark2(tl, "#mkp-c", "ul", C.teal[0], 20.4, 0.9);
+      tiles.forEach(function (t, i) {
+        if (i === ME) return;
+        tl.fromTo(t.el, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, wt[i] - 0.45);
+        tl.to(t.el, { backgroundColor: "#CBEEF2", duration: 0.5, ease: "power1.out" }, wt[i]);
+      });
+      tl.fromTo("#pr-scn", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 19.9);
+      var oS = LM.odometer($("#pr-scnum"), 3, 100);
+      // "and something new appears": the inventory comes in beside the grid
+      LM.out(tl, "#p-c", 22.4, 0.4); LM.words(tl, "#p-d", 23.2, 0.1); LM.mark2(tl, "#mkp-d", "hl", C.violet[0], 24.1, 0.9);
+      tl.fromTo("#pr-inv", { opacity: 0, x: 50, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 21.6);
+      var oF = LM.odometer($("#pr-nf"), 5, 78, { comma: true }), oU = LM.odometer($("#pr-nu"), 5, 78, { comma: true }), oN = LM.odometer($("#pr-nn"), 5, 78, { comma: true });
+      ["#sr3a", "#sr3b", "#sr3c"].forEach(function (r, i) { tl.fromTo(r, { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 23.2 + i * 0.7); });
+      tl.set(["#fn1", "#fn2", "#fn3"], { scaleX: 0 }, 0); tl.fromTo("#pr-funnel", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 24.6);
+      tl.to("#fn1", { scaleX: 1, duration: 1.0, ease: "power3.inOut" }, 24.8); tl.to("#fn2", { scaleX: 1, duration: 1.1, ease: "power3.inOut" }, 26.4); tl.to("#fn3", { scaleX: 1, duration: 1.1, ease: "power3.inOut" }, 27.4);
+      // the tiles that hold a file that needs fixing take the orange of the stage
+      tiles.forEach(function (t, i) { if (t.fx && i !== ME) tl.to(t.el, { backgroundColor: "#FFD3B8", duration: 0.55, ease: "power2.out" }, 24.9 + (i % COLS) / COLS * 2.2 + Math.floor(i / COLS) * 0.03); });
+      LM.mark2(tl, "#pr-nnw", "box", C.orange[0], 28.3, 0.8);
+      // ================= FINGERPRINTS (29.0 s) "Every file is fingerprinted too, to find the unique ones, and to catch any that change."
+      tl.to(["#pr-grid", "#pr-scn"], { opacity: 0, filter: "blur(8px)", duration: 0.6, ease: "power2.in" }, 28.9);
+      LM.out(tl, "#p-d", 28.9, 0.4); LM.words(tl, "#p-e", 29.4, 0.1); LM.mark2(tl, "#mkp-e", "hlul", C.blue[0], 30.4, 0.9);
+      tl.fromTo("#pr-fp", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 29.5);
+      var FP = [["handbook.pdf", "7F3A·E91C", C.violet], ["handbook-copy.pdf", "7F3A·E91C", C.violet], ["course-catalog.pdf", "B2D4·0A57", C.blue], ["forms.pdf", "19EC·D460", C.teal], ["events-calendar.pdf", "A5B8·7C03", C.rose]], CHG = "C81E·93F2", fpr = $("#pr-fpr"), chips = [];
+      FP.forEach(function (f, i) {
+        var r = document.createElement("div"); r.className = "fr2"; r.id = "fr2-" + i;
+        r.innerHTML = '<div class="hl2" id="hl2-' + i + '"></div><span class="ic">' + FILE + '</span><span class="nm">' + f[0] + '</span><span class="fp" id="fp' + i + '"></span><span class="tg"><span id="tg' + i + '"></span></span>'; fpr.appendChild(r);
+        tl.fromTo(r, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 29.9 + i * 0.12); chips.push($("#fp" + i));
+      });
+      FP.forEach(function (f, i) { tl.fromTo("#fp" + i, { backgroundColor: "#eeeeea" }, { backgroundColor: f[2][1], duration: 0.4, ease: "power2.out", immediateRender: false }, 30.6 + i * 0.18 + 0.7); });
+      // the first two share one fingerprint: they are one file, hosted twice
+      tl.fromTo("#hl2-0", { opacity: 0 }, { opacity: 1, backgroundColor: "rgba(123,92,240,0.10)", duration: 0.5 }, 31.6); tl.fromTo("#hl2-1", { opacity: 0 }, { opacity: 1, backgroundColor: "rgba(123,92,240,0.10)", duration: 0.5 }, 31.6);
+      var tag = function (i, txt, bg, fg, t) { var e = $("#tg" + i); e.textContent = txt; e.style.background = bg; e.style.color = fg; tl.fromTo(e, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, t); };
+      tag(0, "Unique", "#D8E5FF", "#2556C7", 32.1); tag(1, "Duplicate", "#E9E9E4", "#6e6e73", 32.35); tag(2, "Unique", "#D8E5FF", "#2556C7", 32.55); tag(3, "Unique", "#D8E5FF", "#2556C7", 32.75); tag(4, "Unique", "#D8E5FF", "#2556C7", 32.95);
+      tl.to("#fr2-1", { opacity: 0.45, duration: 0.6, ease: "power2.inOut" }, 32.6);
+      tl.to("#pr-fpc", { opacity: 0, duration: 0.25 }, 32.3); tl.to("#pr-fpc", { opacity: 1, duration: 0.35 }, 32.56);
+      // and one of them changes: its fingerprint changes with it, and it is queued again
+      tl.fromTo("#hl2-2", { opacity: 0 }, { opacity: 1, backgroundColor: "rgba(242,113,28,0.12)", duration: 0.5 }, 33.5);
+      tl.to("#fp2", { backgroundColor: C.orange[1], duration: 0.4 }, 33.9);
+      var chg = $("#tg2"), fpcEl = $("#pr-fpc"), chgEl = chg; tl.to(chg, { opacity: 0, x: -6, duration: 0.25 }, 33.5); tl.fromTo(chg, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 33.78);
+      tl.to(["#p-e", "#pr-inv", "#pr-fp"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 35.4);
+
+      // all the numbers are pure functions of the timeline
+      var state = { p: 0 };
+      var paint = function () {
+        var t = state.p * DUR; oD.set(283 * ease((t - 4.4) / 3.2));
+        var k = 0; while (k < wsorted.length && wsorted[k] <= t) k++; oS.set(k + (k > 0 && k < wsorted.length ? (t - wsorted[k - 1]) / (wsorted[k] - wsorted[k - 1]) : 0));
+        oF.set(57420 * ease((t - 23.5) / 3.0)); oU.set(23986 * ease((t - 24.6) / 3.0)); oN.set(11341 * ease((t - 25.6) / 3.0));
+        var fpc = t >= 32.55 ? "4 unique" : "5 files"; if (fpcEl.textContent !== fpc) fpcEl.textContent = fpc;
+        var ch = t >= 33.76; if (chgEl.textContent !== (ch ? "Changed · queued" : "Unique")) { chgEl.textContent = ch ? "Changed · queued" : "Unique"; chgEl.style.background = ch ? "#FFE1CD" : "#D8E5FF"; chgEl.style.color = ch ? "#B4510A" : "#2556C7"; }
+        FP.forEach(function (f, i) {                                                                           // each fingerprint is worked out in front of the viewer, then it stays
+          var t0 = 30.6 + i * 0.18, fin = f[1];
+          if (i === 2 && t >= 33.6) { t0 = 33.6; fin = CHG; }
+          var q = (t - t0) / 0.7, txt;
+          if (t < 30.6 || q < 0) txt = (i === 2 && t >= 30.6 && t < 33.6) ? f[1] : "";
+          else if (q < 1) { var h = "", seed = Math.floor(t * 28) * 7 + i * 13; for (var c = 0; c < 8; c++) { seed = (seed * 9301 + 49297) % 233280; h += "0123456789ABCDEF".charAt(seed % 16); if (c === 3) h += "·"; } txt = h; }
+          else txt = fin;
+          if (chips[i].textContent !== txt) chips[i].textContent = txt;
+        });
+      };
+      tl.to(state, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      window.__timelines["s-procure"] = tl;
+    })();
+  </script>
+</template>
