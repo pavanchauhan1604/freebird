@@ -1,5 +1,7 @@
 # The brief: defaults to take, facts to get
 
+First choose the video type ([video-types.md](video-types.md)); the facts below are written for a product film, so for an explainer read "stages" as "steps of the mechanism" and "product" as "subject".
+
 Do not interview the user. Read the product's repo and docs, apply these defaults, and state what you assumed in the first message of the work.
 
 ## Facts to extract from the product (and write into SPEC.md)

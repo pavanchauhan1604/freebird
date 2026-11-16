@@ -1,8 +1,8 @@
 # freebird
 
-A Claude skill for making a **narrated, Notion-styled product launch film** from HTML with [HyperFrames](https://hyperframes.heygen.com): storyline, plain-language script, one-pass voiceover, scene patterns, real licensed sound effects, a music bed, closed captions, a review loop, and a max-quality 1080p60 export.
+A Claude skill for making **any narrated video in one author's taste** (launch film, explainer, tutorial, feature update, concept film, data story, short) from HTML with [HyperFrames](https://hyperframes.heygen.com): storyline spine per video type, plain-language script, one-pass voiceover, scene mechanics, real licensed sound effects, a music bed, closed captions, a review loop, and a max-quality 1080p60 export.
 
-It encodes one author's taste (light paper ground, Manrope, one accent per stage, clean highlight-and-line marks, a dry close voice, honest claims) and the pipeline that made a 3.5-minute film for a real app. The worked example is in [`examples/lantern/`](examples/lantern/).
+It encodes one author's taste (light paper ground, Manrope, one accent per stage, clean highlight-and-line marks, a dry close voice, honest claims) and the pipeline that made a 3.5-minute launch film for a real app. That film is the worked example in [`examples/lantern/`](examples/lantern/); other video types are in [`references/video-types.md`](references/video-types.md).
 
 ## Install (any machine)
 
@@ -12,13 +12,15 @@ git clone git@github.com:<you>/freebird.git ~/.claude/skills/freebird
 ~/.claude/skills/freebird/scripts/install_companions.sh   # Earshot + real-sound skills; prints how to get Recordly
 ```
 
-Needs `ffmpeg`, `node`, and the `hyperframes` skill/CLI (`npx hyperframes@0.9.34`). Nothing in the repo is machine-specific: paths are relative or come from `FREEBIRD_VENV` (default `~/.freebird-venv`) and `FREEBIRD_CACHE` (default `~/.cache/freebird`). To share it with another machine or person, they run the three lines above. Then ask Claude for a launch film ("make a Notion-style launch film for this app") and it follows `SKILL.md`.
+Needs `ffmpeg`, `node`, and the HyperFrames skills/CLI (`npx hyperframes@0.9.34`); `install_companions.sh` checks for them. Everything freebird builds on is listed in [`references/dependencies.md`](references/dependencies.md) and is installed from its own source, never copied here. Nothing in the repo is machine-specific: paths are relative or come from `FREEBIRD_VENV` (default `~/.freebird-venv`) and `FREEBIRD_CACHE` (default `~/.cache/freebird`). To share it with another machine or person, they run the three lines above. Then ask Claude for a launch film ("make a Notion-style launch film for this app") and it follows `SKILL.md`.
 
 ## What is here
 
 | | |
 |---|---|
 | `SKILL.md` | the skill: what good looks like, the ten-phase workflow, hard rules, commands, pitfalls |
+| `references/video-types.md` | **one taste, any video**: the spine, length, narration and closing for each type |
+| `references/dependencies.md` | **what freebird is built on** (HyperFrames skills, Kokoro, Openverse, Earshot, Recordly) and how they relate |
 | `references/taste.md` | the visual system: palette, type, marks, motion, content rules |
 | `references/narration.md` | how to write and time the script |
 | `references/voice.md` | **the voice we chose** (Kokoro `af_heart`, plain take) and why, with settings |
@@ -29,7 +31,7 @@ Needs `ffmpeg`, `node`, and the `hyperframes` skill/CLI (`npx hyperframes@0.9.34
 | `references/pipeline.md` | project layout, the review loop, the creative director's pass, export, pitfalls |
 | `references/brief.md` | defaults to take and facts to extract from the product |
 | `references/feedback-log.md` | the prompting history, grouped, with the rule each item became |
-| `scripts/` | `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `build_index.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
+| `scripts/` | `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `record_demo.sh`, `tap.js`, `build_index.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
 | `templates/` | `lib/motion.js` (titles, marks, odometer, S-curves, pulse, follow-a-path), Manrope (SIL OFL) |
 | `examples/lantern/` | compositions, script, layout, score, sound cues, timing and the SPEC of the example film |
 
@@ -56,7 +58,7 @@ make_captions.py ──▶ .srt .vtt ──export.sh──▶ master (1080p60) +
 
 ## What was and was not run
 
-`retime.py`, `score.py`, `sfx.py` (including real-file cues), `sfx_search.py` (live Openverse search, download and credits), `see_audio.py`, `build_index.py` and `make_captions.py` were run end to end on the example data. **Not re-run after packaging:** `narrate.py` (needs Kokoro and its model download), `install_companions.sh` (clones and installs Earshot; models are ~1.1 GB), `capture_screen.sh` (needs a macOS Screen Recording permission only the user can grant), and Recordly itself.
+`retime.py`, `score.py`, `sfx.py` (including real-file cues), `sfx_search.py` (live Openverse search, download and credits), `see_audio.py`, `capture_screen.sh` and `record_demo.sh` (a real recording of Calculator driven from the terminal), `build_index.py` and `make_captions.py` were run end to end. **Not re-run after packaging:** `narrate.py` (needs Kokoro and its model download), `install_companions.sh` (clones and installs Earshot; models are ~1.1 GB), and Recordly itself.
 
 The example's scene compositions reference the Lantern app's own assets (the lantern pieces, an app icon, a sample page); they show how each pattern is coded and do not run unchanged.
 

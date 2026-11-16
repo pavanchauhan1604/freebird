@@ -11,9 +11,23 @@ Some films need real footage: the product running, not a drawing of it. Use it f
 - **Permissions (macOS):** it records through ScreenCaptureKit, so it needs Screen Recording (and Microphone if used). Only the user can grant these; ask, do not work around.
 - **No CLI or API.** Its README describes a GUI flow only: launch, pick a screen or window, choose audio options, start, stop, then edit. An agent therefore either asks the user to record (give them a shot list), or drives the GUI with the user's Accessibility permission, or uses the scripted fallback below.
 
-## Scripted fallback (`scripts/capture_screen.sh`)
+## Scripted capture from the terminal (verified)
 
-`capture_screen.sh <seconds> <out.mov> [x,y,w,h]` wraps macOS `screencapture -v -V <seconds> [-R region]`. Raw footage lacks Recordly's zoom and cursor polish; apply scale, crop and rounded-card framing in the composition. (Untested here: the first run raises the Screen Recording prompt.)
+Tried on this project's Mac (macOS 26): the terminal can open an app, record the screen, and move the cursor and click, all with no extra software.
+
+```bash
+scripts/capture_screen.sh 8 take.mov                       # screencapture -v -V 8 [-R x,y,w,h]: 3840x2160, 60 fps, h264, real cursor included
+scripts/record_demo.sh Calculator 8 take.mov '[[0.138,0.515],[0.85,0.783]]'   # open the app, find its window, record, glide the cursor and click
+```
+
+`record_demo.sh` reads the window rectangle through System Events, starts the recording, then `tap.js` (JXA, `CGEventPost`) glides the cursor on an eased path and clicks targets given as fractions of the window. Every target must lie inside the window; anything else is dropped. A test with Calculator typed 7 + 8 and the recording showed the app, the moving cursor and the result.
+
+Findings and limits:
+- It needs **Screen Recording** and **Accessibility** for the terminal app (the test machine already had both; a new machine will prompt, and only the user can grant them).
+- Full-screen capture also records **everything else visible**, including other windows' thumbnails (Stage Manager's side strip showed other apps). Record a region (`-R`), hide Stage Manager, close other apps, or crop in the composition. Check the first frame before using any take.
+- Raw captures lack Recordly's auto-zoom and cursor polish; apply scale, crop and a rounded card in the composition, or open the `.mov` in Recordly's editor.
+- macOS has no `timeout`; `-V` ends the recording by itself. 4K/60 output is about 2 MB/s.
+- Quit anything you opened (`osascript -e 'tell application "X" to quit'`) and delete takes you do not keep.
 
 ## Using footage in the film
 
