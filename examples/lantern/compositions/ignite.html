@@ -18,6 +18,8 @@
       });
       var ev = tl.__events; if (ev) tl.to(document.getElementById("ignite-stage"), { scale: 1.25, transformOrigin: "50% 50%", duration: 1.3, ease: "power3.inOut" }, ev.pull);   // in the film the finished lockup is given more of the frame
       if (ev) tl.to(document.getElementById("ignite-stage"), { scale: 1.29, transformOrigin: "50% 50%", duration: 3.2, ease: "none" }, ev.pull + 1.3);   // the lockup drifts in a little instead of freezing
+      var stg = document.getElementById("ignite-stage");
+      tl.to(stg, { opacity: 0, y: -16, duration: 0.7, ease: "power2.in" }, 10.05);   // the lockup leaves cleanly before the next scene speaks: a clear beat of paper between them, not a cut
       window.__timelines["ignite"] = tl;
     })();
   </script>

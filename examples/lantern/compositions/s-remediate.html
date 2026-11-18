@@ -28,6 +28,13 @@
     .row .tg { position: relative; flex: none; margin-left: 14px; font-weight: 800; font-size: 24px; color: #6e6e73; opacity: 0; letter-spacing: 0.02em; background: #f1f1ee; border-radius: 8px; padding: 2px 10px; }
     .row.img { align-items: flex-start; min-height: 104px; padding-top: 8px; } .row.img .rt { white-space: normal; } .row .c { opacity: 0; } .row .al { color: #6e6e73; margin-right: 8px; }
     .c-h { background: #E5DEFF; color: #5B3CD0; } .c-p { background: #D8E5FF; color: #2556C7; } .c-l { background: #D3EEDD; color: #1C7A47; } .c-i { background: #FFE1CD; color: #B4510A; } .c-f { background: #E9E9E4; color: #4d4d52; }
+    /* the standards it is built to */
+    #rm-std { position: absolute; left: 880px; top: 330px; width: 910px; padding: 14px 28px; height: 160px; overflow: hidden; box-sizing: border-box; background: #fff; border-radius: 22px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #rm-std .sd { position: relative; display: flex; align-items: center; gap: 26px; min-height: 132px; opacity: 0; }
+    #rm-std .sd + .sd { border-top: 1.5px solid #ECECE8; }
+    #rm-std .bg { flex: none; width: 236px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 14px; font-weight: 800; font-size: 34px; letter-spacing: -0.02em; }
+    #rm-std .tx { flex: 1; min-width: 0; } #rm-std .tx b { display: block; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; line-height: 1.1; } #rm-std .tx span { display: block; margin-top: 6px; font-weight: 700; font-size: 28px; color: #6e6e73; line-height: 1.2; }
+    #rm-std .ck { flex: none; width: 44px; height: 44px; overflow: visible; }
     #rm-tg { position: absolute; right: 24px; top: -18px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 8px 16px 8px 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
     #rm-tg svg { width: 28px; height: 28px; overflow: visible; }
   </style>
@@ -37,14 +44,16 @@
     <svg id="rm-lead" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none" aria-hidden="true"></svg>
     <div id="rm-page"><img src="assets/demo/page.jpg" alt="" /><div class="glow" id="rm-glow"></div><svg id="rm-ov" viewBox="0 0 664 860" aria-hidden="true"></svg><div id="rm-band"></div><div id="rm-veil"></div><div id="rm-bd"></div>
       <div id="rm-desc"><span>Describing</span></div>
-      <div id="rm-ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="rm-okck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Accessible</div></div>
-    <h2 class="ttl" id="t1"><span class="ln" style="display:block"><span class="w">Now</span> <span class="w">comes</span></span><span class="ln" style="display:block"><span class="w">the</span> <span class="w"><span class="mk" id="m1">fixing.</span></span></span></h2>
+      <div id="rm-ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="rm-okck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Functionally accessible</div></div>
+    <h2 class="ttl" id="t1"><span class="ln" style="display:block"><span class="w">Now</span> <span class="w">we</span> <span class="w">make</span></span><span class="ln" style="display:block"><span class="w">it</span> <span class="w"><span class="mk" id="m1">work.</span></span></span></h2>
     <h2 class="ttl" id="t2"><span class="ln" style="display:block"><span class="w">Read</span> <span class="w">it</span> <span class="w">like</span></span><span class="ln" style="display:block"><span class="w">a</span> <span class="w"><span class="mk" id="m2">person.</span></span></span></h2>
     <h2 class="ttl" id="t3"><span class="ln" style="display:block"><span class="w">Find</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="m3">structure.</span></span></span></h2>
     <h2 class="ttl" id="t4"><span class="ln" style="display:block"><span class="w">Describe</span></span><span class="ln" style="display:block"><span class="w">every</span> <span class="w"><span class="mk" id="m4">image.</span></span></span></h2>
     <h2 class="ttl" id="t5"><span class="ln" style="display:block"><span class="w">Then</span> <span class="w"><span class="mk" id="m5">tag</span></span></span><span class="ln" style="display:block"><span class="w">it</span> <span class="w">all.</span></span></h2>
-    <h2 class="ttl" id="t6"><span class="ln" style="display:block"><span class="w">Same</span> <span class="w">page.</span></span><span class="ln" style="display:block"><span class="w">Now</span> <span class="w"><span class="mk" id="m6">everyone</span></span></span><span class="ln" style="display:block"><span class="w">can</span> <span class="w">use</span> <span class="w">it.</span></span></h2>
+    <h2 class="ttl" id="t5b"><span class="ln" style="display:block"><span class="w">Built</span> <span class="w">to</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="m5b">standards.</span></span></span></h2>
+    <h2 class="ttl" id="t6"><span class="ln" style="display:block"><span class="w">Same</span> <span class="w">page.</span></span><span class="ln" style="display:block"><span class="w">Now</span> <span class="w"><span class="mk" id="m6">anyone</span></span></span><span class="ln" style="display:block"><span class="w">can</span> <span class="w">use</span> <span class="w">it.</span></span></h2>
     <div id="rm-vm"><svg viewBox="0 0 104 104" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 52C20 28 36 18 52 18s32 10 46 34C84 76 68 86 52 86S20 76 6 52z" fill="#fff"/><circle cx="52" cy="52" r="17" fill="#E5DEFF"/><circle cx="52" cy="52" r="7" fill="#1d1d1f" stroke="none"/></svg><div><b>Vision model</b><span>Runs locally, on university computers</span></div></div>
+    <div id="rm-std"><div class="sd" id="sd1"><div class="bg" style="background:#D8E5FF;color:#2556C7">WCAG 2.1</div><div class="tx"><b>Level AA</b><span>Web Content Accessibility Guidelines</span></div><svg class="ck" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="sd1ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div><div class="sd" id="sd2"><div class="bg" style="background:#E5DEFF;color:#5B3CD0">PDF/UA-1</div><div class="tx"><b>ISO 14289-1</b><span>The standard for accessible PDF</span></div><svg class="ck" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="sd2ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
     <div id="rm-tree"><div id="rm-tg"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="rm-tgck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tagged</div><div class="row" id="r-h1"><div class="hl"></div><span class="rk c-h">Heading 1</span><span class="rt">Welcome to Orientation Week</span><span class="tg" id="tg-h1">H1</span></div><div class="row" id="r-h2"><div class="hl"></div><span class="rk c-h">Heading 2</span><span class="rt">What to expect</span><span class="tg" id="tg-h2">H2</span></div><div class="row" id="r-p"><div class="hl"></div><span class="rk c-p">Paragraph</span><span class="rt">Your first week is for finding your…</span><span class="tg" id="tg-p">P</span></div><div class="row" id="r-list"><div class="hl"></div><span class="rk c-l">List</span><span class="rt">3 items</span><span class="tg" id="tg-list">L</span></div><div class="row sub" id="r-li1"><div class="hl"></div><span class="rk c-l">Item</span><span class="rt">Monday – Campus tour, 10 am</span><span class="tg" id="tg-li1">LI</span></div><div class="row sub" id="r-li2"><div class="hl"></div><span class="rk c-l">Item</span><span class="rt">Tuesday – Meet your advisor, 1 pm</span><span class="tg" id="tg-li2">LI</span></div><div class="row sub" id="r-li3"><div class="hl"></div><span class="rk c-l">Item</span><span class="rt">Wednesday – Library workshop, 3 pm</span><span class="tg" id="tg-li3">LI</span></div><div class="row img" id="r-img"><div class="hl"></div><span class="rk c-i">Image</span><span class="rt"><span class="al">Alt text:</span><span class="c">C</span><span class="c">l</span><span class="c">a</span><span class="c">s</span><span class="c">s</span><span class="c">i</span><span class="c">c</span><span class="c">a</span><span class="c">l</span><span class="c"> </span><span class="c">b</span><span class="c">u</span><span class="c">i</span><span class="c">l</span><span class="c">d</span><span class="c">i</span><span class="c">n</span><span class="c">g</span><span class="c"> </span><span class="c">w</span><span class="c">i</span><span class="c">t</span><span class="c">h</span><span class="c"> </span><span class="c">c</span><span class="c">o</span><span class="c">l</span><span class="c">u</span><span class="c">m</span><span class="c">n</span><span class="c">s</span><span class="c"> </span><span class="c">a</span><span class="c">n</span><span class="c">d</span><span class="c"> </span><span class="c">a</span><span class="c"> </span><span class="c">t</span><span class="c">r</span><span class="c">e</span><span class="c">e</span><span class="c"> </span><span class="c">u</span><span class="c">n</span><span class="c">d</span><span class="c">e</span><span class="c">r</span><span class="c"> </span><span class="c">a</span><span class="c"> </span><span class="c">s</span><span class="c">u</span><span class="c">n</span><span class="c">.</span></span><span class="tg" id="tg-img">Figure</span></div><div class="row" id="r-foot"><div class="hl"></div><span class="rk c-f">Footer</span><span class="rt">All events are open to new students.</span><span class="tg" id="tg-foot">Footer</span></div></div>
   </div>
   <script>
@@ -68,16 +77,16 @@
         tl.set(p, { opacity: 0.85 }, t); tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, t); tl.to(p, { opacity: 0, duration: 0.6, ease: "power1.inOut" }, t + 0.9);
       };
       var row = function (id, t, role) {
-        tl.fromTo(id, { opacity: 0, y: 8, filter: "blur(4px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, t);
+        tl.fromTo(id, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, t);
         tl.fromTo(id + " .hl", { opacity: 0 }, { opacity: 1, duration: 0.2 }, t); tl.to(id + " .hl", { opacity: 0, duration: 0.7, ease: "power1.inOut" }, t + 0.5);
       };
 
       // ---- 0.3 s the page arrives; "Now comes the fixing."
-      tl.fromTo("#rm-page", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 0.3);
+      tl.fromTo("#rm-page", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.3);
       title("#t1", 0.55, 1.9); LM.mark2(tl, "#m1", "hl", C.violet[0], 1.2, 0.7);
       // ---- 2.2 s "Lantern uses a vision model that runs on university computers, to read each page the way a person would."
       title("#t2", 2.25, 8.15); LM.mark2(tl, "#m2", "ul", C.rose[0], 6.0, 0.8);
-      tl.fromTo("#rm-vm", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 2.5);
+      tl.fromTo("#rm-vm", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 2.5);
       tl.fromTo("#rm-vm svg circle:nth-of-type(2)", { scale: 1, transformOrigin: "50% 50%" }, { scale: 1.25, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 3.0);
       var B0 = 5.0, B1 = 8.2;
       tl.set("#rm-band", { y: -90 }, 0); tl.to("#rm-band", { opacity: 1, duration: 0.5, ease: "power1.out" }, B0 - 0.2);
@@ -87,9 +96,9 @@
         tl.to("#bx-" + k, { opacity: 1, strokeDashoffset: 0, duration: 0.7, ease: "sine.inOut" }, t);
       });
       // ---- 8.6 s "It finds everything a document needs to be accessible: the headings, the lists, the tables, the reading order."
-      tl.to("#rm-vm", { opacity: 0, y: -10, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 8.3);
+      tl.to("#rm-vm", { opacity: 0, y: -10, duration: 0.5, ease: "power2.in" }, 8.3);
       title("#t3", 8.7, 15.75); LM.mark2(tl, "#m3", "hlul", C.violet[0], 9.7, 0.8);
-      tl.fromTo("#rm-tree", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 8.9);
+      tl.fromTo("#rm-tree", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 8.9);
       row("#r-h1", 12.0); leader("h1", "#r-h1", 12.0); row("#r-h2", 12.3); leader("h2", "#r-h2", 12.3); row("#r-p", 12.6); leader("p", "#r-p", 12.6);
       row("#r-list", 12.95); leader("list", "#r-list", 12.95); row("#r-li1", 13.25); row("#r-li2", 13.5); row("#r-li3", 13.75);
       ORDER.forEach(function (k, i) { tl.fromTo("#bd-" + k, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, 14.5 + i * 0.17); });
@@ -108,17 +117,23 @@
       var TGC = { h1: "#E5DEFF", h2: "#E5DEFF", p: "#D8E5FF", list: "#D3EEDD", li1: "#D3EEDD", li2: "#D3EEDD", li3: "#D3EEDD", img: "#FFE1CD", foot: "#E9E9E4" };
       ["h1", "h2", "p", "list", "li1", "li2", "li3", "img", "foot"].forEach(function (k, i) { $("#tg-" + k).style.background = TGC[k]; $("#tg-" + k).style.color = "#1d1d1f"; tl.fromTo("#tg-" + k, { opacity: 0, scale: 0.8, x: 8 }, { opacity: 1, scale: 1, x: 0, duration: 0.4, ease: "back.out(1.3)" }, 21.45 + i * 0.17); });
       tl.fromTo("#rm-tg", { opacity: 0, y: 8, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.2)" }, 23.3); tl.to("#rm-tgck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 23.5);
-      // ---- 24.7 s "The page looks just the same. But now, everyone can use it."
-      title("#t6", 24.8, 28.95); LM.mark2(tl, "#m6", "hl", C.green[0], 27.0, 0.8);
-      tl.to("#rm-tree", { opacity: 0, y: 12, filter: "blur(8px)", duration: 0.6, ease: "power2.in" }, 24.45);
+      // ---- 24.7 s "All of it is built to the standards that apply: WCAG 2.1 level AA, and PDF/UA-1."
+      tl.to("#rm-tree", { opacity: 0, y: 12, duration: 0.6, ease: "power2.in" }, 24.45);
       tl.to("#rm-ov", { opacity: 0, duration: 0.7, ease: "power1.in" }, 24.5); tl.to("#bd-img", { opacity: 0, duration: 0.4 }, 24.5);
-      tl.to("#rm-glow", { opacity: 1, duration: 1.1, ease: "power2.out" }, 26.7);
-      tl.fromTo("#rm-ok", { opacity: 0, y: -8, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.2)" }, 26.9); tl.to("#rm-okck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 27.2);
-      tl.to(["#rm-glow", "#rm-ok"], { opacity: 0, duration: 0.5, ease: "power1.in" }, 28.9);                         
-      tl.to('[data-composition-id="s-remediate"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 28.98);                         // the scene leaves as one blurred sheet; the page returns in the export scene
-      LM.field(tl, '[data-composition-id="s-remediate"]', "#F0ECFF", 0.0, 28.95);
+      title("#t5b", 24.8, 31.55); LM.mark2(tl, "#m5b", "hl", C.blue[0], 26.0, 0.8);
+      tl.fromTo("#rm-std", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 26.8);
+      tl.fromTo("#sd1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 27.0); tl.to("#sd1ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 29.2);
+      tl.to("#rm-std", { height: 304, duration: 0.6, ease: "power3.out" }, 30.0); tl.fromTo("#sd2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 30.05); tl.to("#sd2ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 31.0);
+      tl.to("#rm-std", { opacity: 0, y: 12, duration: 0.6, ease: "power2.in" }, 31.7);
+      // ---- 31.9 s "It looks just the same. But now, anyone can use it, just as a sighted reader could."
+      title("#t6", 32.0, 37.0); LM.mark2(tl, "#m6", "hl", C.green[0], 34.2, 0.8);
+      tl.to("#rm-glow", { opacity: 1, duration: 1.1, ease: "power2.out" }, 33.9);
+      tl.fromTo("#rm-ok", { opacity: 0, y: -8, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.2)" }, 34.1); tl.to("#rm-okck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 34.4);
+      tl.to(["#rm-glow", "#rm-ok"], { opacity: 0, duration: 0.5, ease: "power1.in" }, 37.4);
+      tl.to('[data-composition-id="s-remediate"]', { opacity: 0, duration: 0.4, ease: "power2.in" }, 37.47);
+      LM.field(tl, '[data-composition-id="s-remediate"]', "#F0ECFF", 0.0, 37.44);
       var HOST = document.querySelector('[data-composition-id="s-remediate"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
-      put("rm-pp", LF.avatar("long", 118, { glasses: true }), "left:1338px;top:168px;"); LF.pop(tl, "#rm-pp", 3.1); LF.blink(tl, "#rm-pp", [5.0]); LF.nod(tl, "#rm-pp", 6.2, 4); LF.out(tl, "#rm-pp", 8.0);
+      put("rm-pp", LF.avatar("long", 118, { glasses: true }), "left:1338px;top:168px;"); LF.pop(tl, "#rm-pp", 3.1); LF.idle(tl, "#rm-pp", 3.2, 7.9, 5); LF.nod(tl, "#rm-pp", 6.2, 4); LF.out(tl, "#rm-pp", 8.0);
       window.__timelines["s-remediate"] = tl;
     })();
   </script>

@@ -12,12 +12,12 @@
   <script>
     (function () {
       var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); };
-      var X = [480, 720, 960, 1200, 1440], NAMES = ["Discover", "Scan", "Report", "Remediate", "Export"], COL = ["#3E7BFA", "#12A3B4", "#C93BA6", "#7B5CF0", "#238A50"], host = $("#rl-rail");
+      var X = [494, 702, 897, 1170, 1441], W = [122, 70, 96, 226, 92], NAMES = ["Discover", "Scan", "Report", "Make accessible", "Export"], COL = ["#3E7BFA", "#12A3B4", "#C93BA6", "#7B5CF0", "#238A50"], host = $("#rl-rail");
       // when each stage is the active one (seconds from the rail's own start)
       var ACT = [0.5, 8.0, 36.2, 78.3, 168.06], END = 179.36;
       NAMES.forEach(function (n, i) {
         var s = document.createElement("div"); s.className = "st"; s.id = "st" + i; s.textContent = n; s.style.left = X[i] + "px"; host.appendChild(s);
-        if (i < 4) { var l = document.createElement("div"); l.className = "ln"; l.id = "ln" + i; l.style.left = ((X[i] + X[i + 1]) / 2 - 34) + "px"; l.innerHTML = '<i style="background:' + COL[i] + '"></i>'; host.appendChild(l); }
+        if (i < 4) { var l = document.createElement("div"); l.className = "ln"; l.id = "ln" + i; l.style.left = ((X[i] + W[i] / 2 + X[i + 1] - W[i + 1] / 2) / 2 - 34) + "px"; l.innerHTML = '<i style="background:' + COL[i] + '"></i>'; host.appendChild(l); }
       });
       tl.set(".st", { xPercent: -50 }, 0); tl.set(".ln i", { scaleX: 0 }, 0);
       tl.fromTo([".st", ".ln"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 0);
@@ -32,7 +32,7 @@
           tl.to("#rl-ember", { y: 64, duration: 0.45, ease: "sine.out" }, t - 0.3); tl.to("#rl-ember", { y: 80, duration: 0.45, ease: "sine.in" }, t + 0.15);
         }
       });
-      tl.to("#rl-rail", { opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, END); tl.to("#rl-ember", { opacity: 0, duration: 0.4 }, END);
+      tl.to("#rl-rail", { opacity: 0, duration: 0.5, ease: "power2.in" }, END); tl.to("#rl-ember", { opacity: 0, duration: 0.4 }, END);
       window.__timelines["rail"] = tl;
     })();
   </script>

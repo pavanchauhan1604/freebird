@@ -84,7 +84,7 @@
       <h3>Inventory · calstatela.edu</h3>
       <div class="sr3" id="sr3a"><div class="big" id="pr-nfw"><span id="pr-nf"></span></div><div class="cp"><b>files found</b>everything hosted</div></div>
       <div class="sr3" id="sr3b"><div class="big" id="pr-nuw" style="color:#3E7BFA"><span id="pr-nu"></span></div><div class="cp"><b>unique files</b>by fingerprint</div></div>
-      <div class="sr3" id="sr3c"><div class="big" id="pr-nnw" style="color:#E0620F"><span id="pr-nn"></span></div><div class="cp"><b>need remediation</b>unique files</div></div>
+      <div class="sr3" id="sr3c"><div class="big" id="pr-nnw" style="color:#E0620F"><span id="pr-nn"></span></div><div class="cp"><b>not yet accessible</b>unique files</div></div>
       <div id="pr-funnel"><i id="fn1" style="width:100%;background:#D8E5FF"></i><i id="fn2" style="width:41.8%;background:#3E7BFA"></i><i id="fn3" style="width:19.8%;background:#F2711C"></i></div>
     </div>
     <div id="pr-fp"><div id="pr-fph"><span><b>Fingerprints</b> · from each file's content</span><span id="pr-fpc">5 files</span></div><div id="pr-fpr"></div></div>
@@ -107,7 +107,7 @@
         var pl = document.createElement("div"); pl.className = "pl"; pl.id = "pl" + i; pl.style.cssText = "left:" + PX + "px;top:" + (py - 28) + "px"; pl.innerHTML = "<i></i><span><b>/</b>" + nm + "</span>"; nodes.appendChild(pl);
         var e = mkp("path", { id: "e1-" + i, d: LM.curve(HX, HY, PX, py), fill: "none", stroke: "#d3d3cd", "stroke-width": 3, "stroke-linecap": "round", opacity: 0 });
         var t0 = 4.35 + i * 0.17; draw(e, t0, 0.8, "sine.inOut"); LM.pulse(tl, e, C.blue[0], t0, 0.8, 0.16);
-        tl.fromTo(pl, { opacity: 0, scale: 0.94, x: -10, filter: "blur(5px)" }, { opacity: 1, scale: 1, x: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, t0 + 0.55);
+        tl.fromTo(pl, { opacity: 0, scale: 0.94, x: -10 }, { opacity: 1, scale: 1, x: 0, duration: 0.55, ease: "power3.out" }, t0 + 0.55);
         for (var k = 0; k < NCH[i]; k++) {
           var cy = py + (k - (NCH[i] - 1) / 2) * 30, cx = 1400 + (k % 2) * 34, id = "d" + i + "-" + k, t1 = 5.95 + i * 0.12 + k * 0.05;
           var e2 = mkp("path", { id: "e2-" + id, d: LM.curve(PX + 300, py, cx, cy), fill: "none", stroke: "#e2e2dd", "stroke-width": 2.5, "stroke-linecap": "round", opacity: 0 }); draw(e2, t1, 0.6, "sine.inOut");
@@ -115,7 +115,7 @@
           tl.fromTo(dt, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, t1 + 0.4);
         }
       });
-      tl.fromTo("#pr-hub", { opacity: 0, scale: 0.94, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 1.0);
+      tl.fromTo("#pr-hub", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, 1.0);
       var hubtx = $("#pr-hubtx"); "calstatela.edu".split("").forEach(function (ch) { var s = document.createElement("span"); s.className = "c"; s.textContent = ch; hubtx.appendChild(s); });
       hubtx.querySelectorAll(".c").forEach(function (c, i) { tl.set(c, { opacity: 1 }, 1.5 + i * 0.06); });
       tl.set("#pr-ring", { opacity: 0.9, scale: 1, transformOrigin: "50% 50%" }, 3.2); tl.to("#pr-ring", { opacity: 0, scale: 1.28, duration: 1.1, ease: "power2.out" }, 3.2);
@@ -123,8 +123,8 @@
       var oD = LM.odometer($("#pr-num"), 3, 190);
 
       // ================= SCAN (8.0 s) "Then, scanning." / "It opens each site, follows every link, and gathers the files it finds." / "Every one is checked ..."
-      tl.to(["#pr-hub", "#pr-graph", "#pr-count"], { opacity: 0, filter: "blur(10px)", duration: 0.6, ease: "power2.in" }, 7.65);
-      NAMES.forEach(function (nm, i) { if (i !== 4) tl.to("#pl" + i, { opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 7.65 + Math.abs(i - 4) * 0.02); });
+      tl.to(["#pr-hub", "#pr-graph", "#pr-count"], { opacity: 0, duration: 0.6, ease: "power2.in" }, 7.65);
+      NAMES.forEach(function (nm, i) { if (i !== 4) tl.to("#pl" + i, { opacity: 0, duration: 0.5, ease: "power2.in" }, 7.65 + Math.abs(i - 4) * 0.02); });
       document.querySelectorAll(".dt").forEach(function (d) { tl.to(d, { opacity: 0, duration: 0.4 }, 7.65); });
       LM.out(tl, "#p-a", 7.55, 0.35); LM.words(tl, "#p-b", 8.0, 0.1); LM.mark2(tl, "#mkp-b", "hlul", C.teal[0], 8.95, 0.9);
       // the "its" site leaves the graph and becomes the toolbar of the site it names
@@ -164,16 +164,16 @@
         tl.set(id, { x: sx, y: sy }, h); tl.fromTo(id, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power1.out" }, h);
         tl.to(id, { x: tx, duration: 1.0, ease: "power2.inOut" }, h + 0.12); tl.to(id, { y: ty, duration: 1.0, ease: "power3.inOut" }, h + 0.12);
         tl.to(id, { opacity: 0, duration: 0.2, ease: "power1.in" }, h + 1.0);
-        tl.fromTo("#lr" + j, { opacity: 0, scale: 0.96, x: -8, filter: "blur(4px)" }, { opacity: 1, scale: 1, x: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, h + 0.95);
+        tl.fromTo("#lr" + j, { opacity: 0, scale: 0.96, x: -8 }, { opacity: 1, scale: 1, x: 0, duration: 0.55, ease: "power3.out" }, h + 0.95);
       });
       // each file is checked in turn: a line sweeps under it, then its result lands
       for (var j = 0; j < 6; j++) {
         var t = 14.2 + j * 0.44;
         tl.fromTo("#pg" + j, { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.38, ease: "sine.inOut" }, t); tl.to("#pg" + j, { opacity: 0, duration: 0.2 }, t + 0.4);
-        tl.fromTo("#rs" + j, { opacity: 0, x: 10, filter: "blur(3px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, t + 0.34);
+        tl.fromTo("#rs" + j, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, t + 0.34);
         if (RES[j] === "pass") tl.to("#ck" + j, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.46);
       }
-      tl.fromTo("#pr-tally", { opacity: 0, y: 8, filter: "blur(5px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 16.8);
+      tl.fromTo("#pr-tally", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 16.8);
       LM.mark2(tl, "#mkp-t", "hl", C.orange[0], 17.6, 0.8);
 
       // ================= CAMPUS (19.0 s) "Do that for every site on campus, and something new appears: a complete inventory of every file that needs remediation, across your whole domain."
@@ -185,7 +185,7 @@
       var wt = tiles.map(function (t) { return 19.9 + t.d / dmax * 3.3; }), wsorted = wt.slice().sort(function (a, b) { return a - b; });
       // the scanned site shrinks into its place in the grid
       var SC = 34 / 620;
-      tl.to(["#pr-lbl", "#pr-list2", "#pr-tally"], { opacity: 0, filter: "blur(8px)", duration: 0.55, ease: "power2.in" }, 19.15);
+      tl.to(["#pr-lbl", "#pr-list2", "#pr-tally"], { opacity: 0, duration: 0.55, ease: "power2.in" }, 19.15);
       LM.out(tl, "#p-b", 18.9, 0.4);
       tl.to("#pr-site", { x: (GX0 + meC * P) - 130, y: (GY0 + meR * P) - 230, scale: SC, transformOrigin: "0% 0%", duration: 1.0, ease: "power3.inOut" }, 18.85);
       tl.to("#pr-site", { opacity: 0, duration: 0.3, ease: "power1.in" }, 19.6);
@@ -202,7 +202,7 @@
       tl.to("#pr-grid", { scale: 1, duration: 1.0, ease: "power3.inOut" }, 21.5); tl.to("#pr-scn", { x: -1290, y: 240, duration: 1.0, ease: "power3.inOut" }, 21.5);
       // "and something new appears": the inventory comes in beside the grid
       LM.out(tl, "#p-c", 22.4, 0.4); LM.words(tl, "#p-d", 23.2, 0.1); LM.mark2(tl, "#mkp-d", "hl", C.violet[0], 24.1, 0.9);
-      tl.fromTo("#pr-inv", { opacity: 0, x: 50, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 21.6);
+      tl.fromTo("#pr-inv", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }, 21.6);
       var oF = LM.odometer($("#pr-nf"), 5, 78, { comma: true }), oU = LM.odometer($("#pr-nu"), 5, 78, { comma: true }), oN = LM.odometer($("#pr-nn"), 5, 78, { comma: true });
       ["#sr3a", "#sr3b", "#sr3c"].forEach(function (r, i) { tl.fromTo(r, { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 23.2 + i * 0.7); });
       tl.set(["#fn1", "#fn2", "#fn3"], { scaleX: 0 }, 0); tl.fromTo("#pr-funnel", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 24.6);
@@ -211,9 +211,9 @@
       tiles.forEach(function (t, i) { if (t.fx && i !== ME) tl.to(t.el, { backgroundColor: "#FFD3B8", duration: 0.55, ease: "power2.out" }, 24.9 + (i % COLS) / COLS * 2.2 + Math.floor(i / COLS) * 0.03); });
       LM.mark2(tl, "#pr-nnw", "box", C.orange[0], 28.3, 0.8);
       // ================= FINGERPRINTS (29.0 s) "Every file is fingerprinted too, to find the unique ones, and to catch any that change."
-      tl.to(["#pr-grid", "#pr-scn"], { opacity: 0, filter: "blur(8px)", duration: 0.6, ease: "power2.in" }, 28.9);
+      tl.to(["#pr-grid", "#pr-scn"], { opacity: 0, duration: 0.6, ease: "power2.in" }, 28.9);
       LM.out(tl, "#p-d", 28.9, 0.4); LM.words(tl, "#p-e", 29.4, 0.1); LM.mark2(tl, "#mkp-e", "hlul", C.blue[0], 30.4, 0.9);
-      tl.fromTo("#pr-fp", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 29.5);
+      tl.fromTo("#pr-fp", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 29.5);
       var FP = [["handbook.pdf", "7F3A·E91C", C.violet], ["handbook-copy.pdf", "7F3A·E91C", C.violet], ["course-catalog.pdf", "B2D4·0A57", C.blue], ["forms.pdf", "19EC·D460", C.teal], ["events-calendar.pdf", "A5B8·7C03", C.rose]], CHG = "C81E·93F2", fpr = $("#pr-fpr"), chips = [];
       FP.forEach(function (f, i) {
         var r = document.createElement("div"); r.className = "fr2"; r.id = "fr2-" + i;
@@ -231,7 +231,7 @@
       tl.fromTo("#hl2-2", { opacity: 0 }, { opacity: 1, backgroundColor: "rgba(242,113,28,0.12)", duration: 0.5 }, 33.5);
       tl.to("#fp2", { backgroundColor: C.orange[1], duration: 0.4 }, 33.9);
       var chg = $("#tg2"), fpcEl = $("#pr-fpc"), chgEl = chg; tl.to(chg, { opacity: 0, x: -6, duration: 0.25 }, 33.5); tl.fromTo(chg, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 33.78);
-      tl.to(["#p-e", "#pr-inv", "#pr-fp"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 35.4);
+      tl.to(["#p-e", "#pr-inv", "#pr-fp"], { opacity: 0, duration: 0.5, ease: "power2.in" }, 35.4);
 
       // all the numbers are pure functions of the timeline
       var state = { p: 0 };

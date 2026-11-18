@@ -44,7 +44,7 @@
   <script>
     (function () {
       var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C;
-      /*TIMING*/ var L = {v1: 0.6, v2: 3.37, v3: 10.49, v4: 15.8, v5: 22.44}, D = {v1: 2.268, v2: 6.626, v3: 4.809, v4: 6.135, v5: 4.616}, END = 28.26; /*END TIMING*/
+      /*TIMING*/ var L = {v1: 0.6, v2: 3.37, v3: 11.02, v4: 16.33, v5: 22.96}, D = {v1: 2.268, v2: 7.151, v3: 4.809, v4: 6.135, v5: 4.616}, END = 28.78; /*END TIMING*/
       var P = { w: 454, h: 588 }, R = { h1: [87, 79, 836, 127], h2: [90, 154, 319, 184], p: [92, 197, 805, 240], list: [107, 274, 503, 359], img: [96, 398, 903, 679], foot: [92, 918, 373, 934] };
       var ORDER = ["h1", "h2", "p", "list", "img", "foot"], px = function (n, ax) { return n / 1000 * (ax ? P.w : P.h); };
       var ov = $("#vf-ov"), tk = $("#vf-tk");
@@ -53,7 +53,7 @@
         var b = document.createElementNS(ns, "rect"); b.setAttribute("x", x - pad); b.setAttribute("y", y - pad); b.setAttribute("width", w + 2 * pad); b.setAttribute("height", h + 2 * pad); b.setAttribute("rx", 6); b.setAttribute("pathLength", 1); b.setAttribute("stroke-dasharray", 1); b.setAttribute("stroke-dashoffset", 1); b.id = "vb-" + k; ov.appendChild(b);
         var t = document.createElement("div"); t.className = "tk"; t.id = "vt-" + k; t.style.left = (x + w + 4) + "px"; t.style.top = (y + h / 2) + "px"; t.innerHTML = '<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; tk.appendChild(t);
       });
-      var rise = function (sel, t, d) { tl.fromTo(sel, { opacity: 0, y: 18, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: d || 0.7, ease: "power3.out" }, t); };
+      var rise = function (sel, t, d) { tl.fromTo(sel, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: d || 0.7, ease: "power3.out" }, t); };
       var focus = function (id, t0, t1) { tl.fromTo(id + " .hl", { opacity: 0 }, { opacity: 1, duration: 0.3 }, t0); tl.to(id + " .hl", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, t1); };
       var done = function (id, t) { tl.to(id + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t); };
       // ---- "But how do we know it read the page correctly?"
@@ -88,7 +88,7 @@
       $("#vf-who").innerHTML = LF.avatar("bun", 128, { glasses: true });
       LF.pop(tl, "#vf-who", L.v5 + 3.5); LF.blink(tl, "#vf-who", [L.v5 + 4.9]); LF.nod(tl, "#vf-who", L.v5 + 4.2, 5);   // a person looks at what could not be proved
       // ---- the scene leaves as one blurred sheet
-      tl.to('[data-composition-id="s-verify"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      tl.to('[data-composition-id="s-verify"]', { opacity: 0, duration: 0.4, ease: "power2.in" }, END - 0.42);
       LM.field(tl, '[data-composition-id="s-verify"]', "#F0ECFF", 0.0, 27.8);
       window.__timelines["s-verify"] = tl;
     })();

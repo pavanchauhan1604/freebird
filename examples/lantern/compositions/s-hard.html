@@ -84,8 +84,8 @@
       var chips = ["#c1", "#c2", "#c3", "#c4"], ms = ["#m1", "#m2", "#m3", "#m4"];
       // ---- "We tested that vision model on the hardest pages."
       LM.words(tl, "#a1", L.t1, 0.1); LM.mark2(tl, "#am", "hlul", C.violet[0], L.t1 + D.t1 * 0.45, 0.8);
-      [0, 0.18, 0.4, 0.55].forEach(function (d, i) { tl.fromTo(chips[i], { opacity: 0, y: 20, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, L.t1 + 0.7 + d); });
-      tl.fromTo("#hc-stage", { opacity: 0, y: 22, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.85, ease: "power3.out" }, L.t1 + 1.1);
+      [0, 0.18, 0.4, 0.55].forEach(function (d, i) { tl.fromTo(chips[i], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, L.t1 + 0.7 + d); });
+      tl.fromTo("#hc-stage", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" }, L.t1 + 1.1);
       // ---- "Scanned documents. Handwritten ones. Pages with several tables. And scans taken at an angle."
       // each name brings its page on: the page crossfades, a band reads it top to bottom, the boxes are drawn
       chips.forEach(function (id, i) {
@@ -102,7 +102,7 @@
       chips.forEach(function (id, i) { var t = L.t3 + 0.2 + [0, 0.4, 0.7, 0.95][i]; tl.fromTo(id + " .ok", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, t); tl.to(id + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.15); });
       tl.to("#hc-stage", { scale: 1.015, transformOrigin: "50% 50%", duration: END - L.t2, ease: "none" }, L.t2);   // ambient: the page drifts very slowly
       // ---- the scene leaves as one blurred sheet
-      tl.to('[data-composition-id="s-hard"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      tl.to('[data-composition-id="s-hard"]', { opacity: 0, duration: 0.4, ease: "power2.in" }, END - 0.42);
       LM.field(tl, '[data-composition-id="s-hard"]', "#F0ECFF", 0.0, END - 0.45);
       window.__timelines["s-hard"] = tl;
     })();

@@ -6,10 +6,10 @@
   // a title lands word by word: a small rise and a blur clearing, then it stays dead still
   LM.words = function (tl, sel, t, step) {
     step = step || 0.09;
-    document.querySelectorAll(sel + " .w").forEach(function (w, i) { tl.fromTo(w, { opacity: 0, filter: "blur(9px)", y: 8 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.46, ease: "power3.out" }, t + i * step); });
+    document.querySelectorAll(sel + " .w").forEach(function (w, i) { tl.fromTo(w, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.46, ease: "power3.out" }, t + i * step); });
   };
   // a title leaves as one blurred line
-  LM.out = function (tl, sel, t, d) { tl.to(sel, { opacity: 0, filter: "blur(10px)", duration: d || 0.32, ease: "power2.in" }, t); };
+  LM.out = function (tl, sel, t, d) { tl.to(sel, { opacity: 0, duration: d || 0.32, ease: "power2.in" }, t); };
   // a marker stroke is drawn behind a word (markup: <span class="mk"><i></i>word</span>)
   LM.mark = function (tl, sel, t, d) { tl.fromTo(sel + " i", { scaleX: 0, rotation: -1.2, transformOrigin: "0% 50%" }, { scaleX: 1, duration: d || 0.6, ease: "power2.inOut" }, t); };
   // a hand-drawn rectangle: a path with small, seeded wobbles, so it reads as drawn and never as a CSS border

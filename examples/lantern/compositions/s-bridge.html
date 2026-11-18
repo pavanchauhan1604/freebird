@@ -60,7 +60,7 @@
       ITEMS.forEach(function (it, i) {
         var t = it[2];
         tl.to("#slot" + i, { opacity: 0, duration: 0.35, ease: "power1.out" }, t);
-        tl.fromTo("#cd" + i, { opacity: 0, scale: 0.9, y: 16, filter: "blur(8px)" }, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.75, ease: "power3.out" }, t);
+        tl.fromTo("#cd" + i, { opacity: 0, scale: 0.9, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.75, ease: "power3.out" }, t);
         if (it[0] === "hand") tl.to("#cd" + i + " .hw", { strokeDashoffset: 0, duration: 1.1, ease: "sine.inOut" }, t + 0.25);
         if (it[0] === "audio") tl.fromTo("#cd" + i + " svg.ic path:last-child", { opacity: 0.2 }, { opacity: 1, duration: 0.5, ease: "sine.inOut" }, t + 0.2);
       });
@@ -80,9 +80,9 @@
         tl.to("#cd" + i + " .ck", { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t + 0.35);
       });
       // 19.0 s "So, let's start with the campus lifecycle.": the panel steps back and the lifecycle is drawn, with the ember running along it
-      tl.to(["#br-g"], { opacity: 0, scale: 0.9, filter: "blur(10px)", duration: 0.7, ease: "power2.in" }, 18.1);
+      tl.to(["#br-g"], { opacity: 0, scale: 0.9, duration: 0.7, ease: "power2.in" }, 18.1);
       LM.out(tl, "#b-b", 18.1, 0.4); LM.words(tl, "#b-c", 19.0, 0.1); LM.mark2(tl, "#mk-c", "hlul", C.green[0], 19.8, 0.9);
-      var NODES = [["Discover", 320, C.blue], ["Scan", 640, C.teal], ["Report", 960, C.magenta], ["Remediate", 1280, C.violet], ["Export", 1600, C.green]], RY = 640, rail = $("#br-rail"), nodes = $("#br-nodes"), ns = "http://www.w3.org/2000/svg";
+      var NODES = [["Discover", 320, C.blue], ["Scan", 640, C.teal], ["Report", 960, C.magenta], ["Make accessible", 1280, C.violet], ["Export", 1600, C.green]], RY = 640, rail = $("#br-rail"), nodes = $("#br-nodes"), ns = "http://www.w3.org/2000/svg";
       var mk = function (tag, at) { var e = document.createElementNS(ns, tag); for (var k in at) e.setAttribute(k, at[k]); rail.appendChild(e); return e; };
       NODES.forEach(function (n, i) {
         mk("circle", { id: "rn" + i, cx: n[1], cy: RY, r: 17, fill: "#fff", stroke: "#c9c9c4", "stroke-width": 4 }).style.opacity = 0;
@@ -94,14 +94,14 @@
       NODES.forEach(function (n, i) {
         var t = 19.1 + i * 0.24;
         tl.fromTo("#rn" + i, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.out" }, t - 0.1);
-        tl.fromTo("#rl" + i, { opacity: 0, filter: "blur(6px)", y: 8 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo("#rl" + i, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t);
         tl.fromTo("#rf" + i, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, t + 0.3);
         if (i < NODES.length - 1) tl.to("#rp" + i, { strokeDashoffset: 0, duration: 0.45, ease: "sine.inOut" }, t + 0.1);
       });
       tl.fromTo("#br-ember", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 19.2);
       NODES.forEach(function (n, i) { if (i) { var t = 19.1 + (i - 1) * 0.24 + 0.24; tl.to("#br-ember", { x: n[1], duration: 0.24, ease: "sine.inOut" }, t); } });
       // 20.5 s: the lifecycle rises to the top and becomes the rail the rest of the film hangs from
-      var RX = [480, 720, 960, 1200, 1440];
+      var RX = [494, 702, 897, 1170, 1441];
       NODES.forEach(function (n, i) {
         tl.to("#rl" + i, { x: RX[i] - n[1], y: -(RY + 38 + 30 - 50) , scale: 0.68, duration: 0.85, ease: "power3.inOut" }, 20.45);
         tl.to(["#rn" + i, "#rf" + i], { opacity: 0, scale: 0.2, duration: 0.45, ease: "power2.in" }, 20.45);
@@ -109,7 +109,7 @@
       });
       LM.out(tl, "#b-c", 20.3, 0.4); tl.to("#br-ember", { opacity: 0, duration: 0.4, ease: "power1.in" }, 20.45);
       var HOST = document.querySelector('[data-composition-id="s-bridge"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
-      put("br-ppl", LF.group(["bob", "short", "bun"], 96), "left:130px;top:668px;"); LF.pop(tl, "#br-ppl", 4.1); LF.blink(tl, "#br-ppl", [6.2, 9.4]); LF.out(tl, "#br-ppl", 13.1);
+      put("br-ppl", LF.group(["bob", "short", "bun"], 96), "left:130px;top:668px;"); LF.pop(tl, "#br-ppl", 4.1); LF.idle(tl, "#br-ppl", 4.2, 13.0, 3); LF.out(tl, "#br-ppl", 13.1);
       window.__timelines["s-bridge"] = tl;
     })();
   </script>

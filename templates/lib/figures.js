@@ -48,7 +48,9 @@
       (style === "curly" ? '<path d="M31 46C36 34 48 29 60 29C73 29 85 34 90 46C80 40 70 38 60 38C50 38 40 40 31 46Z" fill="' + ink + '"/>' : "") +
       '<g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9">' + (h.hi || []).map(function (d) { return '<path d="' + d + '"/>'; }).join("") + "</g>" +
       brows + glasses +
-      '<g class="lf-eyes" style="transform-origin:60px 58px"><g class="lf-look"><ellipse cx="47" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/><ellipse cx="73" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/></g></g>' +
+      '<g class="lf-eyes"><g class="lf-look"><g class="lf-open"><ellipse cx="47" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/><ellipse cx="73" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/></g>' +
+      '<g class="lf-half" opacity="0"><ellipse cx="47" cy="59.9" rx="2.6" ry="1.35" fill="' + ink + '"/><ellipse cx="73" cy="59.9" rx="2.6" ry="1.35" fill="' + ink + '"/></g>' +
+      '<g class="lf-shut" opacity="0" fill="none" stroke="' + ink + '" stroke-width="2.2" stroke-linecap="round"><path d="M44.3 59.5Q47 61.9 49.7 59.5"/><path d="M70.3 59.5Q73 61.9 75.7 59.5"/></g></g></g>' +
       freckles + '<path d="M60 60C58.5 66 56 69.5 60.5 70.5" fill="none" stroke="' + ink + '" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<g class="lf-mouth">' + mouth + "</g>" + headset + "</svg>";
   };
@@ -65,7 +67,19 @@
 
   // ---- motion: every move is a tween on the timeline, nothing runs by itself
   LF.pop = function (tl, sel, t, d) { tl.fromTo(sel, { opacity: 0, scale: 0.85, y: 8, transformOrigin: "50% 80%" }, { opacity: 1, scale: 1, y: 0, duration: d || 0.5, ease: "back.out(1.15)" }, t); };     // arrives: rises a little, grows from 0.85 (never from nothing)
-  LF.blink = function (tl, sel, times) { [].concat(times).forEach(function (t) { tl.to(sel + " .lf-eyes", { scaleY: 0.08, duration: 0.07, ease: "power1.in" }, t); tl.to(sel + " .lf-eyes", { scaleY: 1, duration: 0.11, ease: "power1.out" }, t + 0.09); }); };
+  // a blink is drawn, not scaled: open eyes, a half-closed frame, a closed eye (a short curve), half again, open. Discrete steps on the timeline (about 0.17 s), per face, so
+  // a group never blinks in unison and the eyes never move or squash. LF.idle schedules uneven blinks (2.3-4.4 s apart, now and then a double) over the time a face is on screen.
+  var faces = function (sel) { return [].slice.call(document.querySelectorAll(sel)).reduce(function (a, n) { return a.concat([].slice.call(n.querySelectorAll(".lf-eyes"))); }, []); };
+  var blinkOne = function (tl, f, t) {
+    var o = f.querySelector(".lf-open"), h = f.querySelector(".lf-half"), c = f.querySelector(".lf-shut"), st = function (el, v, at) { tl.set(el, { opacity: v }, at); };
+    st(o, 0, t); st(h, 1, t); st(h, 0, t + 0.04); st(c, 1, t + 0.04); st(c, 0, t + 0.11); st(h, 1, t + 0.11); st(h, 0, t + 0.16); st(o, 1, t + 0.16);
+  };
+  LF.blink = function (tl, sel, times) { var fs = faces(sel); [].concat(times).forEach(function (t) { fs.forEach(function (f, i) { blinkOne(tl, f, t + (i % 4) * 0.07 + (i > 3 ? 0.03 : 0)); }); }); };
+  LF.idle = function (tl, sel, t0, t1, seed) {
+    var r = (seed || 1) * 9301 + 49297, rnd = function () { r = (r * 9301 + 49297) % 233280; return r / 233280; }, t = t0 + 0.7 + rnd() * 1.4, ts = [];
+    while (t < t1) { ts.push(+t.toFixed(2)); if (rnd() < 0.2 && t + 0.5 < t1) ts.push(+(t + 0.3).toFixed(2)); t += 2.3 + rnd() * 2.1; }
+    LF.blink(tl, sel, ts);
+  };
   LF.nod = function (tl, sel, t, deg) { deg = deg == null ? 5 : deg; tl.to(sel, { rotation: deg, duration: 0.28, ease: "sine.inOut", transformOrigin: "50% 90%" }, t); tl.to(sel, { rotation: 0, duration: 0.4, ease: "sine.inOut" }, t + 0.3); };
   LF.look = function (tl, sel, t, dx, dy) { tl.to(sel + " .lf-look", { x: dx || 0, y: dy || 0, duration: 0.3, ease: "power2.inOut" }, t); };                                                          // the eyes glance (in the face's own units, a few at most)
   // speech: the mouth moves through real shapes (open a, round o, narrow e, closed) in an uneven rhythm, with a tiny head movement, then rests closed. dur is in seconds.

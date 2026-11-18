@@ -143,22 +143,22 @@
       FK.forEach(function (f, i) { var d = document.createElement("div"); d.className = "fk"; d.id = "fk" + i; d.style.cssText = "left:" + f[4] + "px;top:" + f[5] + "px;background:" + f[1] + ";color:" + f[2]; d.innerHTML = '<svg viewBox="0 0 38 38" fill="none">' + f[3] + "</svg>" + f[0]; fk.appendChild(d); });
       var flood = function (col, t) { tl.to("#wb-flood", { backgroundColor: col, duration: 0.9, ease: "power2.inOut" }, t); };
       var tabOn = function (i, t) { TOOLS.forEach(function (x, k) { if (k === i) { tl.to("#tab" + k, { backgroundColor: TOOLS[k].c[0], color: "#fff", duration: 0.45, ease: "power2.out" }, t); tl.to("#tab" + k + " i", { backgroundColor: "#fff", duration: 0.45 }, t); } else if (k === i - 1) { tl.to("#tab" + k, { backgroundColor: "#fff", color: "#6e6e73", duration: 0.4 }, t); tl.to("#tab" + k + " i", { backgroundColor: TOOLS[k].c[0], duration: 0.4 }, t); } }); };
-      var show = function (i, t, out) { tl.fromTo("#pn" + i, { opacity: 0, y: 12, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t); if (out) tl.to("#pn" + i, { opacity: 0, y: -8, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, out); };
+      var show = function (i, t, out) { tl.fromTo("#pn" + i, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, t); if (out) tl.to("#pn" + i, { opacity: 0, y: -8, duration: 0.5, ease: "power2.in" }, out); };
       var tick = function (sel, t) { tl.to(sel + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 0.2); };
       var fxin = function (id, t) { tl.fromTo(id, { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, t); tick(id, t); };
 
       // ---- 0.3 s "But your campus is more than documents on websites."
       LM.words(tl, "#w-a", 0.4, 0.11); LM.mark2(tl, "#mw-a", "hl", C.rose[0], 2.2, 0.8);
-      tl.fromTo("#wb-site", { opacity: 0, y: 16, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 0.7);
+      tl.fromTo("#wb-site", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.7);
       FK.forEach(function (f, i) { tl.fromTo("#fk" + i, { opacity: 0, scale: 0.9, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, 1.9 + i * 0.3); });
       // ---- 3.7 s "That's where the Workbench comes in."
-      tl.to(["#w-a", "#wb-site", "#wb-fk"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 3.4);
+      tl.to(["#w-a", "#wb-site", "#wb-fk"], { opacity: 0, duration: 0.5, ease: "power2.in" }, 3.4);
       LM.words(tl, "#w-b", 3.85, 0.12); LM.mark2(tl, "#mw-b", "scr", "#1d1d1f", 4.6, 0.8);
       tl.fromTo("#wb-flood", { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power2.inOut" }, 5.7);
-      TOOLS.forEach(function (t, i) { tl.fromTo("#tc" + i, { opacity: 0, y: 24, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 4.3 + i * 0.22); });
-      tl.to("#wb-cards", { opacity: 0, y: -20, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 5.45);
-      tl.fromTo("#wb-tabs", { opacity: 0, y: 10, filter: "blur(5px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 5.7);
-      tl.fromTo("#wb-panel", { opacity: 0, y: 20, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 5.8);
+      TOOLS.forEach(function (t, i) { tl.fromTo("#tc" + i, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 4.3 + i * 0.22); });
+      tl.to("#wb-cards", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 5.45);
+      tl.fromTo("#wb-tabs", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.7);
+      tl.fromTo("#wb-panel", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 5.8);
 
       // ---- 5.9 s "Slide decks, made accessible: alt text for pictures, proper titles, and a clear reading order."
       tabOn(0, 5.95); show(0, 6.0, 11.7);
@@ -183,24 +183,24 @@
       tl.set("#ph", { x: 0 }, 0); tl.fromTo("#ph", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 16.3); tl.to("#ph", { x: 740, duration: 2.2, ease: "none" }, 16.3); tl.to("#ph", { opacity: 0, duration: 0.3 }, 18.5);
       tl.fromTo("#vid", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, 16.7);
       ["#tr0", "#tr1", "#tr2", "#tr3"].forEach(function (r, i) {
-        tl.fromTo(r, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 17.0 + i * 0.5); tl.fromTo(r + " span", { opacity: 0, filter: "blur(4px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" }, 17.1 + i * 0.5);
+        tl.fromTo(r, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 17.0 + i * 0.5); tl.fromTo(r + " span", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 17.1 + i * 0.5);
       });
       // ---- 19.0 s "For all of them, Lantern uses a speech-to-text model, to write the words from the file's own audio, along with their timestamps."
       show(4, 19.0, 27.2);
       var BARS = [18, 30, 44, 26, 52, 38, 22, 48, 34, 20, 42, 28, 16], bn = "http://www.w3.org/2000/svg";
       [["mw0", "#E64980"], ["mw1", "#12A3B4"], ["mw2", "#3E7BFA"]].forEach(function (m, k) {
         var host = $("#" + m[0]); BARS.forEach(function (h, i) { var b = document.createElement("i"); b.style.cssText = "height:" + h + "px;background:" + m[1]; host.appendChild(b); tl.fromTo(b, { scaleY: 0.45, transformOrigin: "50% 50%" }, { scaleY: 1, duration: 0.32 + (i % 4) * 0.06, ease: "sine.inOut", yoyo: true, repeat: 11 }, 19.3 + k * 0.12 + i * 0.03); });
-        tl.fromTo("#s" + k, { opacity: 0, x: -24, filter: "blur(6px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 19.25 + k * 0.28);
+        tl.fromTo("#s" + k, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 19.25 + k * 0.28);
       });
       var mwm = $("#mwm"); BARS.slice(0, 9).forEach(function (h, i) { var b = document.createElement("i"); b.style.height = (h + 14) + "px"; mwm.appendChild(b); tl.fromTo(b, { scaleY: 0.3, transformOrigin: "50% 50%" }, { scaleY: 1, duration: 0.3 + (i % 3) * 0.07, ease: "sine.inOut", yoyo: true, repeat: 19 }, 20.2 + i * 0.04); });
-      tl.fromTo("#stm", { opacity: 0, scale: 0.92, filter: "blur(8px)", transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 20.05);
+      tl.fromTo("#stm", { opacity: 0, scale: 0.92, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, 20.05);
       var st = $("#stsvg"), mkp = function (d, col, w) { var e = document.createElementNS(bn, "path"); e.setAttribute("d", d); e.setAttribute("fill", "none"); e.setAttribute("stroke", col); e.setAttribute("stroke-width", w); e.setAttribute("stroke-linecap", "round"); e.setAttribute("opacity", 0); st.appendChild(e); var L = e.getTotalLength(); e.setAttribute("stroke-dasharray", L + " " + (L + 4)); e.setAttribute("stroke-dashoffset", L); return e; };
       [[125, "#E64980", 20.45], [320, "#12A3B4", 20.6], [515, "#3E7BFA", 20.75]].forEach(function (a) {
         var e = mkp(LM.curve(446, a[0], 600, 325), a[1], 4); tl.set(e, { opacity: 0.8 }, a[2]); tl.fromTo(e, { strokeDashoffset: e.getTotalLength() }, { strokeDashoffset: 0, duration: 0.8, ease: "sine.inOut" }, a[2]); LM.pulse(tl, e, a[1], a[2] + 0.6, 0.9, 0.22); LM.pulse(tl, e, a[1], a[2] + 1.7, 0.9, 0.22);
       });
       var oe = mkp(LM.curve(990, 325, 1060, 325), "#12A3B4", 4); tl.set(oe, { opacity: 0.8 }, 22.7); tl.fromTo(oe, { strokeDashoffset: oe.getTotalLength() }, { strokeDashoffset: 0, duration: 0.5, ease: "sine.inOut" }, 22.7);
       tl.fromTo("#oh", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 22.9);
-      ["#ol0", "#ol1", "#ol2", "#ol3"].forEach(function (l, i) { tl.fromTo(l, { opacity: 0, x: 18, filter: "blur(5px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 23.0 + i * 0.55); });
+      ["#ol0", "#ol1", "#ol2", "#ol3"].forEach(function (l, i) { tl.fromTo(l, { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 23.0 + i * 0.55); });
       ["#ol0 b", "#ol1 b", "#ol2 b", "#ol3 b"].forEach(function (b, i) { tl.fromTo(b, { backgroundColor: "#CBEEF2", color: "#0B7C8A" }, { backgroundColor: "#12A3B4", color: "#ffffff", duration: 0.4, ease: "power2.out", immediateRender: false }, 25.55 + i * 0.22); tl.fromTo(b, { scale: 1 }, { scale: 1.1, duration: 0.2, ease: "sine.out", yoyo: true, repeat: 1, immediateRender: false }, 25.55 + i * 0.22); });
       var parent = tl; tl = gsap.timeline();                                                                                             // what follows is written in its own time and set down after this beat
       // ---- 20.5 s "And scanned, or handwritten, course materials, become clean documents, that you can edit, in Word or HTML."
@@ -208,9 +208,9 @@
       $$(".hwl").forEach(function (p, i) { tl.to(p, { strokeDashoffset: 0, duration: 0.75, ease: "sine.inOut" }, 20.8 + i * 0.6); });
       $$(".hb").forEach(function (b, i) { tl.to(b, { opacity: 1, duration: 0.4, ease: "power2.out" }, 21.6 + i * 0.6); });
       tl.fromTo("#arrow", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 23.2);
-      ["#dl0", "#dl1", "#dl2", "#dl3"].forEach(function (d, i) { tl.fromTo(d + " span", { opacity: 0, filter: "blur(5px)", y: 6 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, ease: "power3.out" }, 23.4 + i * 0.5); });
+      ["#dl0", "#dl1", "#dl2", "#dl3"].forEach(function (d, i) { tl.fromTo(d + " span", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 23.4 + i * 0.5); });
       // ---- 27.5 s "And the Workbench keeps growing, with more tools, and more features, on the way."
-      tl.to(["#wb-panel", "#wb-tabs", "#w-b"], { opacity: 0, filter: "blur(10px)", duration: 0.55, ease: "power2.in" }, 27.45);
+      tl.to(["#wb-panel", "#wb-tabs", "#w-b"], { opacity: 0, duration: 0.55, ease: "power2.in" }, 27.45);
       tl.to("#wb-flood", { backgroundColor: "#F6F6F3", duration: 1.0, ease: "power2.inOut" }, 27.5);
       LM.words(tl, "#w-c", 28.0, 0.11); LM.mark2(tl, "#mw-c", "hlul", C.teal[0], 29.0, 0.9);
       var grow = $("#wb-grow"), GT = [].concat(TOOLS.map(function (t) { return { c: t.c, ic: t.ic, n: t.n }; }), [{ plus: 1 }]);
@@ -219,14 +219,14 @@
         if (g.plus) d.innerHTML = '<svg viewBox="0 0 100 100" fill="none"><path d="M50 30v40M30 50h40" stroke="#b8b8b2" stroke-width="6" stroke-linecap="round"/></svg><span>Next</span>';
         else { d.style.background = g.c[1]; d.innerHTML = '<svg viewBox="0 0 100 100" fill="none">' + g.ic + "</svg><span>" + g.n + "</span>"; }
         grow.appendChild(d);
-        tl.fromTo(d, { opacity: 0, y: 24, scale: 0.94, filter: "blur(7px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 28.3 + i * 0.16 + (g.plus ? 0.5 : 0));
+        tl.fromTo(d, { opacity: 0, y: 24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" }, 28.3 + i * 0.16 + (g.plus ? 0.5 : 0));
         if (g.plus) tl.fromTo("#gt" + i + " svg", { scale: 0.6, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 29.2 + (i - 4) * 0.25);
       });
-      tl.fromTo("#wb-grow-lb", { opacity: 0, y: 10, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 30.0);
-      tl.to(["#w-c", "#wb-grow", "#wb-grow-lb", "#wb-flood"], { opacity: 0, filter: "blur(10px)", duration: 0.5, ease: "power2.in" }, 31.25);
+      tl.fromTo("#wb-grow-lb", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 30.0);
+      tl.to(["#w-c", "#wb-grow", "#wb-grow-lb", "#wb-flood"], { opacity: 0, duration: 0.5, ease: "power2.in" }, 31.25);
       parent.add(tl, 7.01); tl = parent;
       var HOST = document.querySelector('[data-composition-id="s-workbench"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
-      put("wb-spk", LF.avatar("curly", 104, { freckles: true }), "left:868px;top:456px;"); LF.pop(tl, "#wb-spk", 16.3); LF.talk(tl, "#wb-spk", 16.75, 0.62); LF.talk(tl, "#wb-spk", 17.45, 0.6); LF.talk(tl, "#wb-spk", 18.1, 0.55); LF.out(tl, "#wb-spk", 18.6);
+      put("wb-spk", LF.avatar("curly", 104, { freckles: true }), "left:868px;top:456px;"); LF.pop(tl, "#wb-spk", 16.3); LF.idle(tl, "#wb-spk", 16.5, 18.5, 2); LF.talk(tl, "#wb-spk", 16.75, 0.62); LF.talk(tl, "#wb-spk", 17.45, 0.6); LF.talk(tl, "#wb-spk", 18.1, 0.55); LF.out(tl, "#wb-spk", 18.6);
       window.__timelines["s-workbench"] = tl;
     })();
   </script>

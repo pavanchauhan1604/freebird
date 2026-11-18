@@ -65,6 +65,8 @@ One row per moving object. "Not checked" is not an allowed cell.
 
 **L. The hooks.** The first ten seconds and the last ten seconds are reviewed first and longest, as if they were the whole film. Write the one sentence a viewer will remember. Every stage must visibly become the next (a transformation is physically continuous: each frame resembles the one before; no crossfade between unrelated shapes, no pop, no stray object waiting alone in the frame), the camera has one clear job, the sound lands on the beats, and the hand-off into the rest of the film is smooth. A hook that is merely clean is not finished; it must be worth remembering.
 
+**M. Copy-fit (run again every time any wording changes).** Changing a label is a layout change. List every string that changed (`grep` the compositions and the script), and for each one, in every place it appears and in every state it passes through (idle, active, highlighted, shrunk, in a loop or rail), view one **full-size** frame (never only a contact sheet: overflow, off-centre text and cramped chips disappear when a frame is shrunk) at the moment the label is fully visible. Check: the text sits inside its container with at least 12 px of padding, it is centred as designed, it wraps only where the design wraps, neighbours do not touch or collide, and equal siblings stay equal. A longer word in a fixed-size chip, rail, pill, node or table cell is the usual failure ("Remediate" became "Make accessible" and spilled out of a loop node that fitted the old word). The report lists each changed string with the frame times viewed; a string with no full-size frame is "not checked", which is not allowed. Linters do not catch this (the HyperFrames check passed with the broken node), so it is a procedure, not a tool.
+
 **H. Sound** ([sound.md](sound.md)): Earshot `critique` without `--fast`, `sheet` for sync, voice against bed.
 
 ## The report (a table, then a list of changes made)
@@ -86,6 +88,12 @@ Then: **verdict per scene** (keep / refine / redesign, one line each), **the thr
 - A figure that enters from below the frame but leaves by fading, or leaves late in a diagonal trail.
 - A reader dot floating alone before the thing it reads exists; a crossfade whose square corners peek out behind a rounded shape.
 
+- Blur-in/blur-out transitions, 3D tilt or sway on text, text rasterised soft under a camera scale, uneven line pitch (check one full-size frame).
+- A look-alike drawn in CSS standing in for the product asset in a hand-off, instead of its real unlit/lit states.
+- A camera that crops the final assembled object (check the frame where the cap lands).
+- A relabelled node, chip, pill or rail stage whose new text is longer than the old (text left-aligned, spilling out of or touching the edge of its container). Found by the user, not by the review: audit M exists because of it.
+- A hand-off where one thing is still arriving when it is already leaving (faces rising for 0.7 s but leaving after 0.6 s), or a whole lockup that hard-cuts to the next scene's first word with no empty beat.
+- An eye blink made by scaling the eyes (they squash, drift off position and vanish): draw the blink as open / half / closed-curve / half / open steps, per face, never in unison.
 - A loop's arrowhead pointing against its rotation and against the light that travels around it (Lantern, "unified workflow" scene).
 - A label pill touching a title's underline; a chip covering a page footer.
 - Evenly spaced stagger that reads as a metronome.

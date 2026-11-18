@@ -65,12 +65,12 @@
     <h2 class="ttl" id="rc"><span class="w">Every</span> <span class="w">file,</span> <span class="w">every</span> <span class="w"><span class="mk" id="mrc">finding.</span></span></h2>
     <h2 class="ttl" id="rd"><span class="w">Made</span> <span class="w">to</span> <span class="w">be</span> <span class="w"><span class="mk" id="mrd">shared.</span></span></h2>
     <h2 class="ttl" id="re"><span class="w">One</span> <span class="w"><span class="mk" id="mre">master</span></span> <span class="w"><span class="mk" id="mre2">report.</span></span></h2>
-    <h2 class="ttl" id="rf"><span class="w">Remediation</span> <span class="w"><span class="mk" id="mrf">starts</span></span> <span class="w">here.</span></h2>
+    <h2 class="ttl" id="rf"><span class="w">Making</span> <span class="w">files</span> <span class="w">accessible</span> <span class="w"><span class="mk" id="mrf">starts</span></span> <span class="w">here.</span></h2>
     <div class="cd" id="rp-site">
       <div class="sh"><b><i></i>calstatela.edu/its</b><span>Latest scan</span></div>
       <div class="kp">
         <div class="kt" id="kt0"><div class="od" id="od0"></div><div class="cp">files hosted</div><div class="ring" style="box-shadow:0 0 0 3px #3E7BFA"></div></div>
-        <div class="kt" id="kt1"><div class="od" id="od1" style="color:#C9540A"></div><div class="cp">need remediation</div><div class="ring" style="box-shadow:0 0 0 3px #F2711C"></div></div>
+        <div class="kt" id="kt1"><div class="od" id="od1" style="color:#C9540A"></div><div class="cp">not yet accessible</div><div class="ring" style="box-shadow:0 0 0 3px #F2711C"></div></div>
         <div class="kt" id="kt2"><div class="od" id="od2" style="color:#B7285E"></div><div class="cp">broken links</div><div class="ring" style="box-shadow:0 0 0 3px #E64980"></div></div>
         <div class="kt" id="kt3"><div style="display:flex;align-items:flex-start;color:#23834D"><div class="od" id="od3"></div><span style="font-weight:800;font-size:60px;letter-spacing:-0.04em;line-height:64px">%</span></div><div class="cp">accessible</div><div class="ring" style="box-shadow:0 0 0 3px #2FA463"></div></div>
       </div>
@@ -83,7 +83,7 @@
       <div class="mt" id="rp-mt"><div class="band" id="bd1" style="left:360px;width:600px;background:rgba(35,131,77,0.07)"></div><div class="band" id="bd2" style="left:1000px;width:250px;background:rgba(62,123,250,0.07)"></div><div class="band" id="bd3" style="left:1260px;width:250px;background:rgba(230,73,128,0.08)"></div>
         <div class="mth"><span class="m1">Site</span><span class="m2" style="display:block;width:600px">Accessible</span><span class="m3">Documents</span><span class="m4" style="color:#86868B">Broken links</span><span class="m5">Change</span></div><div id="rp-mrows"></div></div>
     </div>
-    <div class="cd" id="rp-q"><span>Remediation queue</span><span class="od" id="odq"></span><span>files</span></div>
+    <div class="cd" id="rp-q"><span>Accessibility queue</span><span class="od" id="odq"></span><span>files</span></div>
     <div id="rp-fl"></div>
   </div>
   <script>
@@ -96,7 +96,7 @@
       // ---------- the site's report
       LM.words(tl, "#ra", 0.5, 0.12); LM.mark2(tl, "#mra", "hlul", C.magenta[0], 1.25, 0.9);
       tl.set("#rp-site", { x: 494, scale: 1.12, transformOrigin: "0% 0%" }, 0);                                                      // alone, the site's report sits in the middle and a little larger; the file table makes room for itself
-      tl.fromTo("#rp-site", { opacity: 0, y: 20, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 1.1);
+      tl.fromTo("#rp-site", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 1.1);
       tl.to("#rp-site", { x: 0, scale: 1, duration: 1.0, ease: "power3.inOut" }, 12.2);
       swap("#ra", "#rb", 2.05, 2.4); LM.mark2(tl, "#mrb2", "ul", C.magenta[0], 3.3, 0.8);
       var od = [LM.odometer($("#od0"), 2, 60), LM.odometer($("#od1"), 2, 60), LM.odometer($("#od2"), 2, 60), LM.odometer($("#od3"), 2, 60)];
@@ -117,7 +117,7 @@
       tl.fromTo("#rp-delta", { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 12.0);
       // ---------- every file, and what was found
       swap("#rb", "#rc", 12.35, 12.7); LM.mark2(tl, "#mrc", "hlul", C.magenta[0], 13.7, 0.9);
-      tl.fromTo("#rp-tbl", { opacity: 0, x: 50, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 12.55);
+      tl.fromTo("#rp-tbl", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 12.55);
       var ROWS = [["handbook.pdf", [["c-i", "No alt text", 19.05], ["c-g", "Tags missing", 20.85]], "ok"], ["course-catalog.pdf", [["c-t", "No table header", 17.55]], "ok"], ["faculty-guide.pdf", [["c-ok", "Accessible", 21.5]], "ok"], ["events.pdf", [["c-b", "Broken link", 16.2]], "bad"], ["forms.pdf", [["c-t", "No table header", 17.75], ["c-g", "Tags missing", 21.0]], "ok"], ["parking-map.pdf", [["c-i", "No alt text", 19.3]], "ok"]], rows = $("#rp-rows");
       ROWS.forEach(function (r, i) {
         var e = document.createElement("div"); e.className = "fr"; e.id = "fr" + i;
@@ -131,15 +131,15 @@
       swap("#rc", "#rd", 22.15, 22.5); LM.mark2(tl, "#mrd", "hl", C.magenta[0], 23.3, 0.8);
       $("#rp-av").innerHTML = LF.avatar("curly", 72, { freckles: true });
       $("#rp-mav").innerHTML = LF.group(["short", "long"], 64);
-      tl.fromTo("#rp-share", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 22.9);
+      tl.fromTo("#rp-share", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 22.9);
       LF.blink(tl, "#rp-av", [24.6, 26.4]); LF.nod(tl, "#rp-av", 23.75, 4);
       ["#sf0", "#sf1"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" }, 23.7 + i * 0.2); });
       tl.fromTo("#s-fix", { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 24.9); tl.fromTo("#s-ck", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 25.8);
       ["c-i", "c-t", "c-g"].forEach(function (cls, i) { document.querySelectorAll("#rp-rows ." + cls).forEach(function (c) { tl.fromTo(c, { y: 0 }, { y: -4, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 1 }, 25.1 + i * 0.15); }); });
       // ---------- the master report
-      tl.to(["#rp-site", "#rp-tbl", "#rp-share"], { opacity: 0, scale: 0.97, filter: "blur(9px)", duration: 0.6, ease: "power2.in" }, 27.0);
+      tl.to(["#rp-site", "#rp-tbl", "#rp-share"], { opacity: 0, scale: 0.97, duration: 0.6, ease: "power2.in" }, 27.0);
       swap("#rd", "#re", 27.0, 27.6); LM.mark2(tl, "#mre2", "hlul", C.magenta[0], 28.5, 0.9);
-      tl.fromTo("#rp-master", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 27.7);
+      tl.fromTo("#rp-master", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 27.7);
       ["#mk0", "#mk1", "#mk2", "#mk3"].forEach(function (k, i) { tl.fromTo(k, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 28.4 + i * 0.2); });
       var MR = [["admissions", 86, "412", "2", "+6"], ["library", 74, "1,184", "18", "+3"], ["registrar", 61, "305", "9", "+4"], ["its", 60, "47", "6", "+5"], ["financialaid", 48, "236", "21", "−2"], ["advising", 39, "173", "14", "+1"], ["housing", 27, "129", "33", "−4"]], mrows = $("#rp-mrows");
       MR.forEach(function (r, i) {
@@ -163,7 +163,7 @@
         var sx = 1240 + (i % 3) * 70, sy = 440 + Math.floor(i / 3) * 100, ex = 960 + (i % 4 - 1.5) * 90, ey = 982, t = 38.4 + i * 0.17;
         tl.set(e, { x: sx, y: sy }, 0); tl.fromTo(e, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t); LM.follow(tl, e, [[sx, sy], [sx + 120, sy + 140], [ex + 60, ey - 200], [ex, ey]], t, 0.9, "power2.inOut", 1, 0.8); tl.to(e, { opacity: 0, duration: 0.15 }, t + 0.8);
       });
-      tl.to(["#rp-master", "#rp-q", "#rf"], { opacity: 0, filter: "blur(9px)", duration: 0.5, ease: "power2.in" }, 41.9);
+      tl.to(["#rp-master", "#rp-q", "#rf"], { opacity: 0, duration: 0.5, ease: "power2.in" }, 41.9);
       var st = { p: 0 }, paint = function () {
         var t = st.p * DUR; od[0].set(47 * ease((t - 5.3) / 1.5)); od[1].set(19 * ease((t - 6.95) / 1.4)); od[2].set(6 * ease((t - 8.75) / 1.2)); od[3].set(60 * ease((t - 10.25) / 1.3)); oq.set(11341 * ease((t - 38.7) / 2.3));
       };

@@ -44,7 +44,7 @@
       }
       // the lockup, in its final state (the same file as the intro and the launch screen), night theme; its tagline waits for the end
       var ig = LanternIgnite.mount($("#en-stage"), { theme: "night", assets: "assets/ignite" }); ig.progress(1);
-      var tag = $("#en-stage .ig-tag"); tag.style.opacity = 0; tag.style.filter = "blur(8px)"; tag.querySelectorAll(".ig-tw").forEach(function (w) { w.style.opacity = 1; w.style.filter = "none"; w.style.transform = "none"; });
+      var tag = $("#en-stage .ig-tag"); tag.style.opacity = 0; tag.querySelectorAll(".ig-tw").forEach(function (w) { w.style.opacity = 1; w.style.filter = "none"; w.style.transform = "none"; });
       var amber = "#FFB020";
       // 0 s: the ground goes slowly to night; the file types come up dim, the nearest to the middle last
       tl.to("#en-night", { opacity: 1, duration: 1.8, ease: "power2.inOut" }, 0.0);
@@ -63,18 +63,20 @@
       });
       LM.out(tl, "#n-b", 5.85, 0.45);
       // 6.4 s "Lantern.": the lockup arrives, lit, in the middle of all of it
-      tl.fromTo("#en-stage", { opacity: 0, scale: 1.04, filter: "blur(10px)", transformOrigin: "50% 50%" }, { opacity: 1, scale: 1.1, filter: "blur(0px)", duration: 1.2, ease: "power3.out" }, 6.55);
+      tl.set("#en-stage", { opacity: 1 }, 6.5); tl.fromTo("#en-stage", { scale: 1.04, transformOrigin: "50% 50%" }, { scale: 1.1, duration: 1.4, ease: "power3.out" }, 6.55);
+      tl.fromTo("#en-stage .ig-lantern", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 6.55);
+      tl.fromTo("#en-stage .ig-name", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 6.75);
       tl.to("#en-glow", { opacity: 1, duration: 1.4, ease: "sine.inOut" }, 6.6);
       // 7.9 s: the line that stays on screen, and the picture settles
-      tl.to(tag, { opacity: 1, filter: "blur(0px)", duration: 1.1, ease: "power2.out" }, 8.2);
+      tl.to(tag, { opacity: 1, duration: 1.1, ease: "power2.out" }, 8.2);
       tl.to(["#en-grid", "#en-glow"], { scale: 1.025, duration: 3.2, ease: "sine.inOut", transformOrigin: "50% 50%" }, 7.9); tl.to("#en-stage", { scale: 1.13, duration: 3.2, ease: "sine.inOut" }, 7.9);
       var HOST = document.querySelector('[data-composition-id="s-end"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
       put("en-ppl", LF.group(["bob", "curly", "short", "long"], 92, 0.06), "left:775px;top:590px;opacity:1;");
       // they rise in from below the frame after the line, and leave the same way, one after another, before the lantern arrives (6.55 s)
-      var EPL = document.querySelectorAll("#en-ppl .lf-group > span"); LF.blink(tl, "#en-ppl", [5.9]);
+      var EPL = document.querySelectorAll("#en-ppl .lf-group > span"); LF.blink(tl, "#en-ppl", [5.3]);
       EPL.forEach(function (e, i) {
-        tl.fromTo(e, { y: 520, opacity: 1 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 4.95 + i * 0.04);
-        tl.to(e, { y: 520, duration: 0.55, ease: "power3.in" }, 5.55 + i * 0.045);
+        tl.fromTo(e, { y: 520, opacity: 1 }, { y: 0, opacity: 1, duration: 0.75, ease: "power3.out" }, 4.55 + i * 0.035);
+        tl.to(e, { y: 520, duration: 0.5, ease: "power2.in" }, 5.75);
       });
       window.__timelines["s-end"] = tl;
     })();

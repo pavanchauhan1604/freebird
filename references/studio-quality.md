@@ -45,6 +45,14 @@ Hairlines (1-1.5 px) not borders; corner radii from one set; optical alignment o
 
 A glowing orb or comet trail. A soft amber haze behind anything. A gradient on a card or icon "for depth". Over-rounded glossy cards. Placeholder bars. Evenly spaced staggers. The same entrance on everything. A title that blur-fades over a still image. Icons from a stock set in six colours. Emoji. A big mascot. A stage colour used for something that is not that stage. Text in a card smaller than 28 px.
 
+## 7b. No blur, no distortion (hard rule)
+
+Never fade anything in or out through a blur filter, and never tilt, skew or sway text or pages in 3D. A blur-in makes the first frames of a film look low resolution, and a 3D-transformed layer is rasterised once and then scaled, so text turns soft or pixelated under a camera move. Enter and leave with opacity and a short translate; keep text layers in 2D; put text on whole-pixel positions (integer line pitch) so lines keep an even rhythm when a camera scales them; check one full-size frame of every scene that has small text. (Soft *shadows* are fine: they are shadows, not transitions.)
+
+## 7c. Reuse the real asset's states
+
+When one thing becomes another (a page becomes a lantern's glass), use the product asset's own states (the unlit and lit renders share one silhouette, bevel and fold) and reveal one through the other. Do not redraw a look-alike in CSS: its edges, fold and shading will never match the real asset, and the mismatch is the crude hand-off.
+
 ## 8. Process, every time
 
 1. Write the idea sentences (three), choose one, and **draw the layout in words** (section 4) before opening an editor.
