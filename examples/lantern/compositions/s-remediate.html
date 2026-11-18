@@ -32,6 +32,7 @@
     #rm-tg svg { width: 28px; height: 28px; overflow: visible; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="rm" data-composition-id="s-remediate" data-width="1920" data-height="1080">
     <svg id="rm-lead" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none" aria-hidden="true"></svg>
     <div id="rm-page"><img src="assets/demo/page.jpg" alt="" /><div class="glow" id="rm-glow"></div><svg id="rm-ov" viewBox="0 0 664 860" aria-hidden="true"></svg><div id="rm-band"></div><div id="rm-veil"></div><div id="rm-bd"></div>
@@ -116,6 +117,8 @@
       tl.to(["#rm-glow", "#rm-ok"], { opacity: 0, duration: 0.5, ease: "power1.in" }, 28.9);                         
       tl.to('[data-composition-id="s-remediate"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 28.98);                         // the scene leaves as one blurred sheet; the page returns in the export scene
       LM.field(tl, '[data-composition-id="s-remediate"]', "#F0ECFF", 0.0, 28.95);
+      var HOST = document.querySelector('[data-composition-id="s-remediate"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("rm-pp", LF.avatar("long", 118, { glasses: true }), "left:1338px;top:168px;"); LF.pop(tl, "#rm-pp", 3.1); LF.blink(tl, "#rm-pp", [5.0]); LF.nod(tl, "#rm-pp", 6.2, 4); LF.out(tl, "#rm-pp", 8.0);
       window.__timelines["s-remediate"] = tl;
     })();
   </script>

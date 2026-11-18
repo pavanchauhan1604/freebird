@@ -12,6 +12,7 @@
   </style>
   <script src="assets/ignite/ignite.js"></script>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="en" data-composition-id="s-end" data-width="1920" data-height="1080">
     <div id="en-night"></div>
     <div id="en-grid"></div>
@@ -38,7 +39,7 @@
         if (cx > 540 && cx < 1380) continue;                              // the middle, top to bottom, belongs to the words and then to the lockup: nothing may touch it
         var el = document.createElement("div"); el.className = "tile"; el.style.cssText = "left:" + (cx - T / 2) + "px;top:" + (cy - T / 2) + "px";
         var ic = IC[(r * 3 + c) % IC.length], col = TYPECOL[(r * 3 + c) % IC.length], sv = function (cls, st) { return '<svg class="' + cls + '" style="' + st + '" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg>"; };
-        el.innerHTML = '<div class="lit" style="background:' + col + '14;box-shadow:0 0 0 2px ' + col + ',0 0 34px ' + col + '55"></div>' + sv("g", "") + sv("a", "color:" + col); grid.appendChild(el);
+        el.innerHTML = '<div class="lit" style="background:' + col + '26;box-shadow:0 0 0 2px ' + col + '"></div>' + sv("g", "") + sv("a", "color:" + col); grid.appendChild(el);
         var d = Math.hypot(cx - 960, cy - 540); dmax = Math.max(dmax, d); tiles.push({ el: el, d: d });
       }
       // the lockup, in its final state (the same file as the intro and the launch screen), night theme; its tagline waits for the end
@@ -52,7 +53,7 @@
       LM.words(tl, "#n-a", 0.7, 0.12); LM.mark2(tl, "#mn-a", "ul", amber, 2.1, 0.9); LM.out(tl, "#n-a", 3.0, 0.5);
       // 3.1 s "Lantern makes sure, it reaches everyone.": the light spreads outward from the middle, and every file type takes its own colour
       LM.words(tl, "#n-b", 3.2, 0.12); LM.mark2(tl, "#mn-b", "circ", amber, 4.75, 0.9);
-      tl.fromTo("#en-glow", { opacity: 0, scale: 0.8 }, { opacity: 0.8, scale: 1, duration: 2.2, ease: "power2.out" }, 3.2);
+      tl.fromTo("#en-glow", { opacity: 0, scale: 0.8 }, { opacity: 0.3, scale: 1, duration: 2.2, ease: "power2.out" }, 3.2);
       tiles.forEach(function (t) {
         var at = 3.4 + (t.d / dmax) * 2.3;
         tl.to(t.el.querySelector(".lit"), { opacity: 1, duration: 0.8, ease: "power2.out" }, at);
@@ -67,6 +68,8 @@
       // 7.9 s: the line that stays on screen, and the picture settles
       tl.to(tag, { opacity: 1, filter: "blur(0px)", duration: 1.1, ease: "power2.out" }, 8.2);
       tl.to(["#en-grid", "#en-glow"], { scale: 1.025, duration: 3.2, ease: "sine.inOut", transformOrigin: "50% 50%" }, 7.9); tl.to("#en-stage", { scale: 1.13, duration: 3.2, ease: "sine.inOut" }, 7.9);
+      var HOST = document.querySelector('[data-composition-id="s-end"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("en-ppl", LF.group(["bob", "curly", "short", "long"], 92, 0.06), "left:775px;top:590px;"); LF.pop(tl, "#en-ppl", 5.0); LF.blink(tl, "#en-ppl", [6.4]); LF.out(tl, "#en-ppl", 6.9);
       window.__timelines["s-end"] = tl;
     })();
   </script>

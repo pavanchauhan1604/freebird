@@ -79,7 +79,7 @@
     <div class="cd" id="rp-tbl"><div class="th2"><div class="fb" id="rp-fb"></div><span>File</span><span>Findings</span><span>Link</span></div><div id="rp-rows"></div></div>
     <div class="cd" id="rp-share"><div class="av" id="rp-av"></div><div class="tx">Sent to the site owner <em>· Excel and HTML</em></div><div class="fm"><span class="chip c-g" id="sf0">Excel</span><span class="chip c-t" id="sf1">HTML</span></div><div class="push"><span class="chip c-i" id="s-fix">19 files to fix</span><svg class="ck" viewBox="0 0 42 42"><circle cx="21" cy="21" r="20" fill="#2FA463"/><path id="s-ck" d="M12 21.5l6.5 6.5 12-13" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     <div class="cd" id="rp-master">
-      <div class="mh"><div class="nm">Master report<span>calstatela.edu · 283 sites</span></div><div class="mk4"><div id="mk0">283<span>sites</span></div><div id="mk1">57,420<span>files hosted</span></div><div id="mk2" style="color:#23834D">53%<span>accessible</span></div><div id="mk3" style="color:#B7285E">1,284<span>broken links</span></div></div></div>
+      <div class="mh"><div class="nm"><i id="rp-mav" style="display:inline-block;vertical-align:middle;margin-right:20px"></i>Master report<span>calstatela.edu · 283 sites</span></div><div class="mk4"><div id="mk0">283<span>sites</span></div><div id="mk1">57,420<span>files hosted</span></div><div id="mk2" style="color:#23834D">53%<span>accessible</span></div><div id="mk3" style="color:#B7285E">1,284<span>broken links</span></div></div></div>
       <div class="mt" id="rp-mt"><div class="band" id="bd1" style="left:360px;width:600px;background:rgba(35,131,77,0.07)"></div><div class="band" id="bd2" style="left:1000px;width:250px;background:rgba(62,123,250,0.07)"></div><div class="band" id="bd3" style="left:1260px;width:250px;background:rgba(230,73,128,0.08)"></div>
         <div class="mth"><span class="m1">Site</span><span class="m2" style="display:block;width:600px">Accessible</span><span class="m3">Documents</span><span class="m4" style="color:#86868B">Broken links</span><span class="m5">Change</span></div><div id="rp-mrows"></div></div>
     </div>
@@ -130,6 +130,7 @@
       // ---------- made to be shared
       swap("#rc", "#rd", 22.15, 22.5); LM.mark2(tl, "#mrd", "hl", C.magenta[0], 23.3, 0.8);
       $("#rp-av").innerHTML = LF.avatar("curly", 72, { freckles: true });
+      $("#rp-mav").innerHTML = LF.group(["short", "long"], 64);
       tl.fromTo("#rp-share", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 22.9);
       LF.blink(tl, "#rp-av", [24.6, 26.4]); LF.nod(tl, "#rp-av", 23.75, 4);
       ["#sf0", "#sf1"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" }, 23.7 + i * 0.2); });

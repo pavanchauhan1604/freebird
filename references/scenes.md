@@ -8,13 +8,12 @@ Each pattern below exists as working code in [`examples/lantern/compositions/`](
 
 ## Intro: the name
 
-The product's mark animates itself, and it does so by **reading**: this is the idea, and it is kept even when the first execution is rejected. In the Lantern example ([`examples/lantern/ignite/ignite.js`](../examples/lantern/ignite/ignite.js)):
-1. A sentence in large **real** type (about 64 px on screen) sits left of an empty **vessel**, the lantern's glass drawn as a hairline with the folded corner of a page. The words begin **blurred and illegible**: a page nobody can read.
-2. A small **reading eye** (an amber ring and dot, flat) moves word by word. Each word it passes clears to crisp ink and is underlined in amber; the eye hops between words and blinks as it changes line.
-3. Each read word lifts along a curve into the vessel and settles inside it, small, in warm brown. The vessel **fills with light from the bottom** (a crisp level, no glow) as words arrive.
-4. The eye follows the last word into the glass and becomes its light; the sentence is left inside the lit glass for a moment and then melts into it.
-5. The lantern assembles around the light (cap lowers with a small swing, base rises, the glass takes the weight), the camera pulls back, the name swells to full weight with the lit amber letter, the tagline clears in.
-What failed the first time and must not come back (studio-quality.md): a glossy 3D page, grey dash bars standing for text, a glowing orb with a comet trail, an amber haze, concentric rings. The first execution of a good idea is rebuilt flat and crisp; the idea is not abandoned. Keep one file for the animation if the app plays it too.
+The product's mark animates itself, and it does so by **reading**: a page is read by a light and the page becomes the lantern. This idea survived three rebuilds; what failed each time was the execution (a glossy page, grey bars for text, a glowing orb, rings, a plain card with a scan line, a sentence with words flying into a glass). In the Lantern example ([`examples/lantern/ignite/ignite.js`](../examples/lantern/ignite/ignite.js)) the idea is a real physical transformation:
+1. **One long sheet of real text** (five lines of a public-domain classic, set in the film's own type at about 32 px on screen) lifts in with a soft contact shadow and sways slowly in 3D, grey and unread. The sheet is as wide as the circumference of the lantern's glass, so it can close around it exactly.
+2. **A flat amber dot reads it**, riding the edge of the ink line by line; each line turns from grey to ink behind the dot.
+3. **The sheet rolls itself up around the dot.** It is cut into 32 strips, each carrying its slice of the same page, bent into a cylinder by a pure function of time (curvature grows with the roll). Light spreads outward from the middle strips as it closes: paper to amber, bright at the middle and deeper at the edges, the text wrapping round the cylinder. This is the memorable moment: a page physically becoming a glowing paper lantern.
+4. The closed, lit cylinder crossfades into the lantern's glass; the cap lowers with a small swing and the base rises; the camera pulls back into the lockup; the name swells to full weight with the lit amber letter; the tagline clears in.
+Rules that came out of it: the transformation is the idea (do not replace it with a scan line or a fill); the first half is flat and crisp with real text; the rendered 3D lantern is the reward at the end; no glows, rings or orbs; the reader is the film's one amber dot. Keep one file for the animation if the app plays it too.
 
 ## Bridge
 

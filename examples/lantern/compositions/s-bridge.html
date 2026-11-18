@@ -18,6 +18,7 @@
     #br-ember { position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; opacity: 0; box-shadow: 0 0 14px 4px rgba(255,176,32,0.45); background: radial-gradient(circle at 35% 30%, #ffe27a 0, #ffb020 52%, #f29a00 100%); }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="br" data-composition-id="s-bridge" data-width="1920" data-height="1080">
     <h2 class="ttl" id="b-a"><span class="ln" style="display:block"><span class="w">An</span> <span class="w">accessibility</span></span><span class="ln" style="display:block"><span class="w">platform</span> <span class="w">for</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w">whole</span> <span class="w"><span class="mk" id="mk-a">enterprise.</span></span></span></h2>
     <h2 class="ttl" id="b-b"><span class="ln" style="display:block"><span class="w">All</span> <span class="w">of</span> <span class="w">it,</span> <span class="w">in</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="mk-b">one</span></span> <span class="w"><span class="mk" id="mk-b1">place.</span></span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="mk-b2">End</span></span> <span class="w"><span class="mk" id="mk-b3">to</span></span> <span class="w"><span class="mk" id="mk-b4">end.</span></span></span></h2>
@@ -39,20 +40,21 @@
         audio: function (a, p) { return S("#1d1d1f", '<path d="M18 60v0M32 46v28M46 30v60M60 40v40M74 22v76M88 44v32M102 54v12" stroke="#c9c9c4"/><path d="M46 30v60M60 40v40M74 22v76" stroke="' + a + '"/>', 7); },
         video: function (a, p) { return S("#6e6e73", '<rect x="10" y="26" width="100" height="68" rx="12" fill="#fff"/><path d="M52 46v28l24-14z" fill="' + a + '" stroke="' + a + '"/>'); }
       };
-      var ITEMS = [["doc", "Documents", 5.35, C.blue], ["slides", "Slides", 6.25, C.orange], ["course", "Course materials", 7.35, C.violet], ["hand", "Handwritten", 8.75, C.magenta], ["audio", "Audio", 10.2, C.teal], ["video", "Video", 11.1, C.rose]];
+      var NEU = ["#4D4D52", "#E9E9E4"], AMB = "#F2A31B";                      // no stage exists yet, so the kinds of content stay in ink; amber is the lantern's light and marks what is taken in
+      var ITEMS = [["doc", "Documents", 5.35, NEU], ["slides", "Slides", 6.25, NEU], ["course", "Course materials", 7.35, NEU], ["hand", "Handwritten", 8.75, NEU], ["audio", "Audio", 10.2, NEU], ["video", "Video", 11.1, NEU]];
       var S0 = 270, GP = 28, cards = $("#br-cards");
       ITEMS.forEach(function (it, i) {
         var x = (i % 3) * (S0 + GP), y = Math.floor(i / 3) * (S0 + GP), col = it[3];
         var slot = document.createElement("div"); slot.className = "slot"; slot.id = "slot" + i; slot.style.cssText = "left:" + x + "px;top:" + y + "px"; cards.appendChild(slot);
         var cd = document.createElement("div"); cd.className = "cd"; cd.id = "cd" + i; cd.style.cssText = "left:" + x + "px;top:" + y + "px";
-        cd.innerHTML = ICONS[it[0]](col[0], col[1]) + '<div class="lb">' + it[1] + '</div><div class="gl" style="box-shadow:0 0 0 3px ' + col[0] + ',0 0 44px ' + col[0] + '55"></div><svg class="st" viewBox="0 0 34 34"><circle class="r" cx="17" cy="17" r="14"/><circle class="f" cx="17" cy="17" r="15" fill="' + col[0] + '"/><path class="ck" pathLength="1" d="M9.5 17.5l5.5 5.5L25 11.5" stroke-dasharray="1" stroke-dashoffset="1"/></svg>';
+        cd.innerHTML = ICONS[it[0]](col[0], col[1]) + '<div class="lb">' + it[1] + '</div><div class="gl" style="box-shadow:0 0 0 3px ' + AMB + '"></div><svg class="st" viewBox="0 0 34 34"><circle class="r" cx="17" cy="17" r="14"/><circle class="f" cx="17" cy="17" r="15" fill="' + AMB + '"/><path class="ck" pathLength="1" d="M9.5 17.5l5.5 5.5L25 11.5" stroke-dasharray="1" stroke-dashoffset="1"/></svg>';
         cards.appendChild(cd);
       });
       tl.set("#br-g", { transformOrigin: "50% 50%" }, 0);
       var swap = function (a, b, t) { LM.out(tl, a, t, 0.4); LM.words(tl, b, t + 0.35, 0.1); };
 
       // 0.5 s "Lantern is an accessibility platform, built for the whole enterprise."
-      LM.words(tl, "#b-a", 0.55, 0.11); LM.mark2(tl, "#mk-a", "hl", C.blue[0], 3.7, 0.8);
+      LM.words(tl, "#b-a", 0.55, 0.11); LM.mark2(tl, "#mk-a", "hl", AMB, 3.7, 0.8);
       ITEMS.forEach(function (it, i) { tl.fromTo("#slot" + i, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 1.5 + i * 0.12); });
       // 5.3 s: each kind of thing is named, and its card takes its slot as it is named
       ITEMS.forEach(function (it, i) {
@@ -70,7 +72,7 @@
         var c = i % 3 - 1, r = Math.floor(i / 3) ? -1 : 1;
         tl.to("#cd" + i, { x: -c * 15, y: r * 9, duration: 1.2, ease: "power2.inOut" }, 15.35);
       });
-      LM.mark2(tl, "#mk-b", "circ", C.blue[0], 15.55, 0.8); LM.mark2(tl, "#mk-b4", "ul", C.teal[0], 17.2, 0.9);
+      LM.mark2(tl, "#mk-b", "circ", AMB, 15.55, 0.8); LM.mark2(tl, "#mk-b4", "ul", AMB, 17.2, 0.9);
       ITEMS.forEach(function (it, i) {
         var t = 16.9 + i * 0.28, col = it[3][0];
         tl.fromTo("#cd" + i + " .gl", { opacity: 0 }, { opacity: 1, duration: 0.75, ease: "power2.out" }, t);
@@ -106,6 +108,8 @@
         if (i < NODES.length - 1) tl.to("#rp" + i, { opacity: 0, duration: 0.4 }, 20.45);
       });
       LM.out(tl, "#b-c", 20.3, 0.4); tl.to("#br-ember", { opacity: 0, duration: 0.4, ease: "power1.in" }, 20.45);
+      var HOST = document.querySelector('[data-composition-id="s-bridge"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("br-ppl", LF.group(["bob", "short", "bun"], 96), "left:130px;top:668px;"); LF.pop(tl, "#br-ppl", 4.1); LF.blink(tl, "#br-ppl", [6.2, 9.4]); LF.out(tl, "#br-ppl", 13.1);
       window.__timelines["s-bridge"] = tl;
     })();
   </script>

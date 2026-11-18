@@ -19,6 +19,7 @@
     .ch svg { flex: none; width: 36px; height: 36px; overflow: visible; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="pv" data-composition-id="s-private" data-width="1920" data-height="1080">
     <h2 class="ttl" id="f1"><span class="ln" style="display:block"><span class="w">Your</span> <span class="w">files</span> <span class="w">stay</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="fm1">secure.</span></span></span></h2>
     <h2 class="ttl" id="f2"><span class="ln" style="display:block"><span class="w">Read</span> <span class="w">right</span> <span class="w">here,</span></span><span class="ln" style="display:block"><span class="w">on</span> <span class="w"><span class="mk" id="fm2">campus.</span></span></span></h2>
@@ -70,6 +71,8 @@
       // ---- the scene leaves as one blurred sheet
       tl.to('[data-composition-id="s-private"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
       LM.field(tl, '[data-composition-id="s-private"]', "#F0ECFF", 0.0, 17.9);
+      var HOST = document.querySelector('[data-composition-id="s-private"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("pv-me", LF.avatar("bob", 92), "left:412px;top:486px;"); LF.pop(tl, "#pv-me", L.f2 + 2.35); LF.blink(tl, "#pv-me", [L.f2 + 4.6]);
       window.__timelines["s-private"] = tl;
     })();
   </script>

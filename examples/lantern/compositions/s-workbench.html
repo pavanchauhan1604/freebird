@@ -27,6 +27,7 @@
     .tc svg { width: 100px; height: 100px; margin-bottom: 26px; } .tc b { display: block; font-weight: 800; font-size: 44px; letter-spacing: -0.035em; } .tc span { display: block; margin-top: 10px; font-weight: 700; font-size: 29px; line-height: 1.3; color: #4d4d52; }
     #wb-tabs { position: absolute; left: 130px; top: 236px; display: flex; gap: 18px; opacity: 0; }
     .tab { height: 62px; padding: 0 28px; display: flex; align-items: center; gap: 14px; border-radius: 18px; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 31px; letter-spacing: -0.025em; color: #6e6e73; } .tab i { width: 14px; height: 14px; border-radius: 50%; display: block; }
+    #wb-panel #pn0, #wb-panel #pn1 { transform: scale(1.16); transform-origin: 0 0; }
     #wb-panel { position: absolute; left: 130px; top: 322px; width: 1660px; height: 650px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
     .pn { position: absolute; inset: 0; opacity: 0; }
     .slide { position: absolute; left: 56px; top: 46px; width: 760px; height: 428px; border-radius: 18px; background: #fbfbf9; box-shadow: 0 14px 30px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.07); overflow: hidden; }
@@ -61,6 +62,7 @@
     .fmt { height: 50px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 12px; font-weight: 800; font-size: 30px; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="wb" data-composition-id="s-workbench" data-width="1920" data-height="1080">
     <div id="wb-flood"></div>
     <h2 class="ttl" id="w-a"><span class="ln" style="display:block"><span class="w">More</span> <span class="w">than</span> <span class="w">documents</span></span><span class="ln" style="display:block"><span class="w">on</span> <span class="w"><span class="mk" id="mw-a">websites.</span></span></span></h2>
@@ -211,7 +213,7 @@
       tl.to(["#wb-panel", "#wb-tabs", "#w-b"], { opacity: 0, filter: "blur(10px)", duration: 0.55, ease: "power2.in" }, 27.45);
       tl.to("#wb-flood", { backgroundColor: "#F6F6F3", duration: 1.0, ease: "power2.inOut" }, 27.5);
       LM.words(tl, "#w-c", 28.0, 0.11); LM.mark2(tl, "#mw-c", "hlul", C.teal[0], 29.0, 0.9);
-      var grow = $("#wb-grow"), GT = [].concat(TOOLS.map(function (t) { return { c: t.c, ic: t.ic, n: t.n }; }), [{ plus: 1 }, { plus: 1 }]);
+      var grow = $("#wb-grow"), GT = [].concat(TOOLS.map(function (t) { return { c: t.c, ic: t.ic, n: t.n }; }), [{ plus: 1 }]);
       GT.forEach(function (g, i) {
         var d = document.createElement("div"); d.className = "gt" + (g.plus ? " pl" : ""); d.id = "gt" + i; d.style.left = (135 + i * 280) + "px";
         if (g.plus) d.innerHTML = '<svg viewBox="0 0 100 100" fill="none"><path d="M50 30v40M30 50h40" stroke="#b8b8b2" stroke-width="6" stroke-linecap="round"/></svg><span>Next</span>';
@@ -223,6 +225,8 @@
       tl.fromTo("#wb-grow-lb", { opacity: 0, y: 10, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, 30.0);
       tl.to(["#w-c", "#wb-grow", "#wb-grow-lb", "#wb-flood"], { opacity: 0, filter: "blur(10px)", duration: 0.5, ease: "power2.in" }, 31.25);
       parent.add(tl, 7.01); tl = parent;
+      var HOST = document.querySelector('[data-composition-id="s-workbench"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("wb-spk", LF.avatar("curly", 104, { freckles: true }), "left:868px;top:456px;"); LF.pop(tl, "#wb-spk", 16.3); LF.talk(tl, "#wb-spk", 16.7, 8); LF.out(tl, "#wb-spk", 18.6);
       window.__timelines["s-workbench"] = tl;
     })();
   </script>

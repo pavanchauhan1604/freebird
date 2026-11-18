@@ -55,9 +55,9 @@
     return '<span class="lf-avatar" style="display:inline-block;position:relative;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + (o.disc || DISC) + ';overflow:hidden;flex:none;transform:translateZ(0)">' +
       '<span style="position:absolute;left:' + (-size * 0.06) + 'px;top:' + (size * 0.06) + 'px">' + LF.face(style, { size: size * 1.12, glasses: o.glasses, freckles: o.freckles, brows: o.brows, headset: o.headset, cloth: o.cloth, dots: o.dots == null ? (size >= 80 && !o.freckles) : o.dots, mouth: o.mouth }) + "</span></span>";
   };
-  LF.group = function (styles, size) {
+  LF.group = function (styles, size, overlap) {
     var cl = ["#E6E3DD", "#DDE7F5", "#F5E4DA", "#DFF0E6"];
-    return '<span class="lf-group" style="display:inline-flex">' + styles.map(function (s, i) { return '<span style="margin-left:' + (i ? -size * 0.24 : 0) + 'px;border-radius:50%;box-shadow:0 0 0 ' + Math.max(2, size * 0.04) + 'px #fff">' + LF.avatar(s, size, { disc: cl[i % 4] }) + "</span>"; }).join("") + "</span>";
+    return '<span class="lf-group" style="display:inline-flex">' + styles.map(function (s, i) { return '<span style="margin-left:' + (i ? -size * (overlap == null ? 0.16 : overlap) : 0) + 'px;border-radius:50%;box-shadow:0 0 0 ' + Math.max(2, size * 0.04) + 'px #fff">' + LF.avatar(s, size, { disc: cl[i % 4] }) + "</span>"; }).join("") + "</span>";
   };
 
   // ---- motion: every move is a tween on the timeline, nothing runs by itself

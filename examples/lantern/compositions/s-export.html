@@ -43,6 +43,7 @@
     .sl em { flex: none; font-style: normal; font-size: 28px; padding: 2px 12px; border-radius: 8px; color: #fff; min-width: 110px; text-align: center; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="ex" data-composition-id="s-export" data-width="1920" data-height="1080">
     <div id="ex-page"><img src="assets/demo/page.jpg" alt="" /></div>
     <div id="ex-layer"></div>
@@ -142,6 +143,8 @@
       var st = { p: 0 }, paint = function () { var t = st.p * DUR, n = 0; T0.forEach(function (x) { n += Math.min(Math.max((t - x - 0.25) / 0.3, 0), 1); }); odo.set(n); };
       tl.to(st, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
       LM.field(tl, '[data-composition-id="s-export"]', "#E9F6EE", 0.0, 11.95);
+      var HOST = document.querySelector('[data-composition-id="s-export"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
+      put("ex-ls", LF.avatar("short", 108, { headset: true }), "left:1684px;top:242px;"); LF.pop(tl, "#ex-ls", 10.7); LF.nod(tl, "#ex-ls", 11.3, 5); LF.blink(tl, "#ex-ls", [11.9]);
       window.__timelines["s-export"] = tl;
     })();
   </script>
