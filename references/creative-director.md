@@ -23,6 +23,8 @@ Never judge motion from one still. Build the evidence before writing a word:
 | One scene | 8-12 frames across it, at the beats the narration names | what arrives, what leaves, hand-offs |
 | One motion | 3-4 frames 0.3-0.6 s apart for anything that moves, turns or travels | direction, speed, overshoot |
 | One frame | full size, nothing downsampled | clipping, gaps, alignment, type |
+| A boundary | 8-12 frames 0.2 s apart across 1 s either side of every scene change and every beat change | what is still leaving while the next thing arrives: ghosted text, overlaps, pops |
+| An animated figure | crops of the figure, enlarged 3x, 0.07 s apart through its action | mouth shapes, blinks, nods, entrances and exits, any shape that stretches or distorts |
 | Next to Notion | the same layout beside a Notion frame doing the same job | whether it is as clear, as large, as calm |
 
 ## The audits (each one is a table with a row per finding)
@@ -56,6 +58,13 @@ One row per moving object. "Not checked" is not an allowed cell.
 
 **I. Vibe-coded tells** ([studio-quality.md](studio-quality.md) section 7): look for each tell in every scene (glows, orbs, gradients for depth, placeholder bars, mixed visual languages, uniform stagger, small type, a stage colour on the wrong thing). Each one found is a defect with a fix, not a note.
 
+
+**J. Hand-offs and boundaries (the choppiness audit).** For every element that enters and every element that leaves, write a row: what it is, when it starts to arrive, when it has fully arrived, when it starts to leave, when it has fully left. Then check the rows against each other at every beat and scene change: an exit must be **finished** before the thing that replaces it starts to arrive (no ghosted text under an arriving logo, no figure still on screen when the next beat is on screen), and an entrance and its exit must use the same path (a figure that rises in from below the frame leaves below the frame). Verify on a boundary strip, not on a still. Anything leaving while something arrives in the same place is a defect.
+
+**K. Animated figures and micro-motion.** Every animated figure (avatars that talk, blink, nod, look; counters; dots) is checked on enlarged crops 0.07 s apart through its whole action. Mouths use real shapes (closed, open, round, narrow), never a stretched smile; eyes blink and open fully; nothing deforms; the motion rests in a clean state. If it moves, someone watches it move.
+
+**L. The hooks.** The first ten seconds and the last ten seconds are reviewed first and longest, as if they were the whole film. Write the one sentence a viewer will remember. Every stage must visibly become the next (a transformation is physically continuous: each frame resembles the one before; no crossfade between unrelated shapes, no pop, no stray object waiting alone in the frame), the camera has one clear job, the sound lands on the beats, and the hand-off into the rest of the film is smooth. A hook that is merely clean is not finished; it must be worth remembering.
+
 **H. Sound** ([sound.md](sound.md)): Earshot `critique` without `--fast`, `sheet` for sync, voice against bed.
 
 ## The report (a table, then a list of changes made)
@@ -71,6 +80,11 @@ Then: **verdict per scene** (keep / refine / redesign, one line each), **the thr
 2. **Pass 2** on the changed film: re-run the audits on everything that moved, plus a fresh whole-film sheet, with the same independent reviewer if possible. Pass 2 must either find new things or state, with the evidence, why there are none.
 
 ## Regression list (defects past reviews missed; check these first, every time)
+
+- A talking mouth made by stretching the smile; use real mouth shapes ([figures.js](../templates/lib/figures.js) `LF.talk`).
+- Text still fading out while the logo or lockup blurs in over it; figures still on screen when the next beat arrives.
+- A figure that enters from below the frame but leaves by fading, or leaves late in a diagonal trail.
+- A reader dot floating alone before the thing it reads exists; a crossfade whose square corners peek out behind a rounded shape.
 
 - A loop's arrowhead pointing against its rotation and against the light that travels around it (Lantern, "unified workflow" scene).
 - A label pill touching a title's underline; a chip covering a page footer.

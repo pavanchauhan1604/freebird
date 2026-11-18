@@ -27,7 +27,7 @@
   var TRACK = -0.05, NAME_PX = 150, BASE_OFF = 0.883, XH = 0.54;              // the baseline sits 0.883 em below the top of a line box of line-height 1
   var LANTERN = { h: 340, ratio: 464 / 872, top: 130 };                       // the lantern's box in the lockup
   var G = { x0: 0.065, x1: 0.935, y0: 0.329, y1: 0.893 };                      // the glass, as fractions of the lantern's box
-  var GAP = 56, TAG_PX = 30, S0 = 2.0, S1 = 2.2, VX = 600, VY = 300;       // S0: the camera's scale when the lantern is built; S1: its scale while the sheet is read; VX, VY: where the sheet and the lantern sit on the stage
+  var GAP = 56, TAG_PX = 30, S0 = 2.0, S1 = 2.25, VX = 600, VY = 300;       // S0: the camera's scale when the lantern is built; S1: its scale while the sheet is read; VX, VY: where the sheet and the lantern sit on the stage
   var THEMES = {
     paper: { ink: "#1D1D1F", ghost: "#8A8A8F", tag: "#6E6E73", glow: 0, shadow: 0.14, line: "#CFCFCA", lit: "#F0A000" },
     night: { ink: "#F5F5F7", ghost: "#7A7A82", tag: "#98989D", glow: 0.2, shadow: 0, line: "#B9B9B4", lit: "#FFB020" }
@@ -61,33 +61,37 @@
     var base = img(dir + "lantern-base.png", "opacity:0"), backing = img(dir + "lantern-glass-backing.png", "opacity:0"), paper = img(dir + "lantern-glass-paper.png", "opacity:0"), lit = img(dir + "lantern-glass-lit.png", "opacity:0"), cap = img(dir + "lantern-cap.png", "opacity:0");
     // the sheet: one long sheet of real text, in the film's type, that a light reads line by line and that then rolls itself up around that light into the lantern's glass.
     // The sheet is cut into strips; each strip carries its own slice of the same page and is bent into a cylinder by paint() (a pure function of the time).
-    var PW = Math.PI * gw, PH = gh, NS = 32, SW = PW / NS, LW = PW - 68, TX0 = 34;              // the sheet's size: its width is the circumference of the glass, so it closes exactly around it
-    var DICK = ["It was the best of times, it was the worst of times,", "it was the age of wisdom, it was the age of foolishness,", "it was the epoch of belief, it was the epoch of incredulity,", "it was the season of Light, it was the season of Darkness,", "it was the spring of hope, it was the winter of despair."];
-    var DEM = [22.966, 25.411, 26.431, 26.413, 24.707], FS = LW / Math.max.apply(null, DEM), LP = FS * 1.62, TY0 = (PH - LP * 5) / 2 + (LP - FS) / 2;       // Manrope 600 line widths in em (from the font file); the longest line fills the sheet
+    var PW = Math.PI * gw, PH = gh - 5, NS = 48, SW = PW / NS;                                         // the sheet's width is the circumference of the glass, so it closes around it exactly
+    var DICK = ["It was the best of times,", "it was the age of wisdom,", "it was the season of Light,"];
+    var DEM = [11.167, 11.771, 12.181], FS = 24, LP = FS * 1.62, TY0 = (PH - LP * 3) / 2 + (LP - FS) / 2;     // Manrope 700 line widths in em (from the font file); each line is centred on the sheet
     var TW = DEM.map(function (e) { return e * FS; });
-    var T0 = 0.6, LD = [0.42, 0.46, 0.48, 0.46, 0.42], LG = 0.12, lines = [], tt = T0;
-    DICK.forEach(function (txt, k) { lines.push({ tr: tt, d: LD[k], w: TW[k], y: TY0 + k * LP }); tt += LD[k] + LG; });
-    var tReadEnd = lines[4].tr + lines[4].d;
-    var sheet = el("div", "ig-sheet", "position:absolute;left:" + (gcx - PW / 2) + "px;top:" + gt + "px;width:" + PW + "px;height:" + PH + "px;transform-style:preserve-3d;opacity:0");
+    var T_UN0 = 0.15, T_UN1 = 1.3, T0 = 1.5, LD = [0.5, 0.52, 0.56], LG = 0.14, lines = [], tt = T0;
+    DICK.forEach(function (txt, k) { lines.push({ tr: tt, d: LD[k], w: TW[k], x: (PW - TW[k]) / 2, y: TY0 + k * LP }); tt += LD[k] + LG; });
+    var tReadEnd = lines[2].tr + lines[2].d;
+    var sheet = el("div", "ig-sheet", "position:absolute;left:" + (gcx - PW / 2) + "px;top:" + (gt + 2.5) + "px;width:" + PW + "px;height:" + PH + "px;transform-style:preserve-3d;opacity:0");
     sheet.setAttribute("data-layout-allow-overlap", "");
-    var strips = [];
+    var strips = [], UL = Math.max(1.7, FS * 0.075);
     for (var si = 0; si < NS; si++) {
-      var st = el("div", "ig-strip", "position:absolute;left:" + (si * SW) + "px;top:0;width:" + (SW + 0.7) + "px;height:" + PH + "px;overflow:hidden;background:#FFFFFF;backface-visibility:hidden;-webkit-backface-visibility:hidden;" + (si === 0 ? "border-left:1px solid rgba(0,0,0,.09);" : "") + (si === NS - 1 ? "border-right:1px solid rgba(0,0,0,.09);" : "") + "border-top:1px solid rgba(0,0,0,.09);border-bottom:1px solid rgba(0,0,0,.09);box-sizing:border-box");
+      var st = el("div", "ig-strip", "position:absolute;left:" + (si * SW) + "px;top:0;width:" + (SW + 1.2) + "px;height:" + PH + "px;overflow:hidden;background:#FDFCF9;backface-visibility:hidden;-webkit-backface-visibility:hidden;" + (si === 0 ? "border-left:1px solid rgba(0,0,0,.10);" : "") + (si === NS - 1 ? "border-right:1px solid rgba(0,0,0,.10);" : "") + "border-top:1px solid rgba(0,0,0,.10);border-bottom:1px solid rgba(0,0,0,.10);box-sizing:border-box");
       st.setAttribute("data-layout-allow-overlap", "");
       var pg = el("div", null, "position:absolute;left:" + (-si * SW) + "px;top:0;width:" + PW + "px;height:" + PH + "px");
       var grey = el("div", null, "position:absolute;inset:0"), inkw = el("div", null, "position:absolute;inset:0"), warmw = el("div", null, "position:absolute;inset:0;opacity:0"), inks = [], warms = [];
+      [grey, inkw, warmw].forEach(function (q) { q.setAttribute("data-layout-allow-overlap", ""); });
       DICK.forEach(function (txt, k) {
-        var mk = function (parent, col, clip) { var d = el("div", null, "position:absolute;left:" + TX0 + "px;top:" + lines[k].y + "px;white-space:nowrap;font-weight:600;font-size:" + FS + "px;line-height:" + (FS * 1.2) + "px;letter-spacing:-.01em;color:" + col + (clip ? ";clip-path:inset(0 100% 0 0)" : "")); d.textContent = txt; parent.appendChild(d); return d; };
-        [grey, inkw, warmw].forEach(function (q) { q.setAttribute("data-layout-allow-overlap", ""); });
-        mk(grey, "#B3B3B8", false); inks.push(mk(inkw, "#1D1D1F", true)); warms.push(mk(warmw, "rgba(120,66,0,.72)", true));
+        var mk = function (parent, col, ulcol, clip) {
+          var d = el("div", null, "position:absolute;left:" + lines[k].x + "px;top:" + lines[k].y + "px;white-space:nowrap;font-weight:700;font-size:" + FS + "px;line-height:" + (FS * 1.2) + "px;letter-spacing:-.015em;color:" + col + (clip ? ";clip-path:inset(0 100% 0 0)" : "")); d.textContent = txt; parent.appendChild(d);
+          if (ulcol) { var u = el("div", null, "position:absolute;left:" + lines[k].x + "px;top:" + (lines[k].y + FS * 1.2 + 1.5) + "px;width:" + lines[k].w + "px;height:" + UL + "px;border-radius:1px;background:" + ulcol + (clip ? ";clip-path:inset(0 100% 0 0)" : "")); parent.appendChild(u); return [d, u]; }
+          return [d];
+        };
+        mk(grey, "#B7B7BC", null, false); inks.push(mk(inkw, "#1D1D1F", "#F2A31B", true)); warms.push(mk(warmw, "rgba(120,64,0,.55)", "rgba(160,84,0,.5)", true));
       });
-      var shade = el("div", null, "position:absolute;inset:0;background:#000;opacity:0");
-      pg.appendChild(grey); pg.appendChild(inkw); pg.appendChild(warmw); st.appendChild(pg); st.appendChild(shade); sheet.appendChild(st);
-      strips.push({ el: st, inkw: inkw, warmw: warmw, inks: inks, warms: warms, shade: shade, s: (si + 0.5) * SW - PW / 2 });
+      var shade = el("div", null, "position:absolute;inset:0;background:#000;opacity:0"), sheen = el("div", null, "position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 40%,rgba(0,0,0,.14));opacity:0");
+      pg.appendChild(grey); pg.appendChild(inkw); pg.appendChild(warmw); st.appendChild(pg); st.appendChild(sheen); st.appendChild(shade); sheet.appendChild(st);
+      strips.push({ el: st, inkw: inkw, warmw: warmw, inks: inks, warms: warms, shade: shade, sheen: sheen, s: (si + 0.5) * SW - PW / 2 });
     }
     var csh = el("div", "ig-csh", "position:absolute;left:" + (gcx - PW / 2) + "px;top:" + (gt + PH - 2) + "px;width:" + PW + "px;height:26px;border-radius:50%;background:#000;filter:blur(15px);opacity:0");
     // the reader: a flat amber dot that rides the edge of the ink along each line
-    var DOT = 15, dot = el("div", "ig-dot", "position:absolute;left:0;top:0;width:" + DOT + "px;height:" + DOT + "px;margin:" + (-DOT / 2) + "px 0 0 " + (-DOT / 2) + "px;border-radius:50%;background:#F2A31B;opacity:0");
+    var DOT = 16, dot = el("div", "ig-dot", "position:absolute;left:0;top:0;width:" + DOT + "px;height:" + DOT + "px;margin:" + (-DOT / 2) + "px 0 0 " + (-DOT / 2) + "px;border-radius:50%;background:#F2A31B;opacity:0");
     lan.style.perspective = "900px"; lan.style.perspectiveOrigin = gcx + "px " + gcy + "px";
     [glow, shadow, base, backing, csh, sheet, lit, dot, cap].forEach(function (c) { lan.appendChild(c); });
     container.appendChild(lan);
@@ -107,17 +111,16 @@
     var dx = VX - (lx + gcx), dy = VY - (LANTERN.top + gcy);
     tl.set(lan, { x: dx, y: dy, scale: S1, transformOrigin: gcx + "px " + gcy + "px" }, 0);
 
-    // 1. the sheet settles in, tilted a little, and lies flat: a long page of real text, still grey and unread
+    // 1. it begins as a closed tube of paper, a scroll, and unrolls to show a line of real type, still grey and unread (paint() draws the roll from the time)
     var tLit = 4.84, tRise = 4.24, tRest = tReadEnd, reads = lines.map(function (l, k) { return { t: +l.tr.toFixed(3), d: +l.d.toFixed(3), line: k }; });
-    tl.fromTo(sheet, { opacity: 0, rotationX: 14, y: 26 }, { opacity: 1, rotationX: 0, y: 0, duration: 1.0, ease: "power3.out" }, 0.05);
-    tl.fromTo(sheet, { rotationY: -7 }, { rotationY: 6, duration: 3.1, ease: "sine.inOut", immediateRender: false }, 0.2); tl.to(sheet, { rotationY: 0, duration: 0.45, ease: "sine.inOut" }, 3.3);   // a slow sway gives the sheet depth
-    tl.to(lan, { scale: S0, duration: 4.5, ease: "power1.inOut" }, 0.4);                         // the camera comes slowly in while the sheet is read and rolled
-    tl.fromTo(dot, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, lines[0].tr - 0.3);
+    tl.fromTo(sheet, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 0);
+    tl.fromTo(sheet, { rotationY: -6 }, { rotationY: 5, duration: 3.0, ease: "sine.inOut", immediateRender: false }, 0.3); tl.to(sheet, { rotationY: 0, duration: 0.5, ease: "sine.inOut" }, 3.0);   // a slow sway gives the paper depth
+    tl.to(lan, { scale: S0, duration: 4.6, ease: "power1.inOut" }, 0.2);                         // the camera comes slowly in while it is unrolled, read and rolled
 
-    // 2. the light reads each line (paint() draws it from the time); then it goes to the middle of the page and the sheet rolls up around it, lighting as it closes
+    // 2. the light reads each line and underlines it in amber; then it rests in the middle and the sheet rolls up around it, lit from the middle outward
     // 3. the closed, lit cylinder becomes the lantern's glass
-    tl.to(sheet, { opacity: 0, duration: 0.3, ease: "power1.in" }, tLit + 0.05);
-    tl.to(lit, { opacity: 1, duration: 0.35, ease: "power1.out" }, tLit - 0.05);
+    tl.to(sheet, { opacity: 0, duration: 0.16, ease: "power1.in" }, tLit + 0.0);
+    tl.to(lit, { opacity: 1, duration: 0.24, ease: "power1.out" }, tLit - 0.08);
     tl.fromTo(glow, { opacity: 0, scale: 0.7, transformOrigin: "50% 50%" }, { opacity: th.glow, scale: 1, duration: 1.1, ease: "power2.out" }, tLit);
 
     // 5. the lantern assembles around the light: the cap lowers and settles with a small swing, the base rises into place, the glass takes their weight
@@ -142,35 +145,37 @@
     function rgb(h) { return [parseInt(h.substr(1, 2), 16), parseInt(h.substr(3, 2), 16), parseInt(h.substr(5, 2), 16)]; }
     g = rgb(th.ghost); c = rgb(th.ink); a = rgb(th.lit);
     var EASE = function (q) { return q < 0.5 ? 4 * q * q * q : 1 - Math.pow(-2 * q + 2, 3) / 2; }, SINE = function (q) { return 0.5 - 0.5 * Math.cos(Math.PI * q); }, CL = function (v) { return Math.min(Math.max(v, 0), 1); };
-    var T_ROLL0 = 3.45, T_ROLL1 = tLit, PAPER = [255, 255, 255], AMB_EDGE = [240, 140, 18], AMB_CORE = [255, 214, 120];
+    var T_ROLL0 = 3.25, T_ROLL1 = tLit, PAPER = [253, 252, 249], AMB_EDGE = [240, 132, 14], AMB_CORE = [255, 226, 138];
     var mixc = function (a, b, e) { return "rgb(" + Math.round(a[0] + (b[0] - a[0]) * e) + "," + Math.round(a[1] + (b[1] - a[1]) * e) + "," + Math.round(a[2] + (b[2] - a[2]) * e) + ")"; };
     var rgbOf = function (c) { var m = c.match(/\d+/g); return [+m[0], +m[1], +m[2]]; };
     function paint() {
       var t = state.p * DURATION, i, k;
-      // the edge of the reading on each line
       var edge = lines.map(function (l) { return l.w * SINE(CL((t - l.tr) / l.d)); });
-      // the dot: on the edge of the line being read, a hop down to the next line, then to the middle of the sheet, where it rests as the sheet rolls up around it
-      var dx0 = gcx - PW / 2 + TX0, dpx, dpy, dopa = 1, dsc = 1, cur = lines.length - 1;
+      // the dot rides the edge of the ink along each line (on its underline), hops to the next line, then goes to the middle of the sheet and rests there as the sheet rolls up around it
+      var dpx, dpy, dopa = 1, dsc = 1, cur = lines.length - 1, ylin = function (l) { return gt + l.y + FS * 1.2 + 1.5 + UL / 2; }, xl = function (l) { return gcx - PW / 2 + l.x; };
       for (k = 0; k < lines.length; k++) if (t < lines[k].tr + lines[k].d + LG * 0.5) { cur = k; break; }
-      var L = lines[cur], prv = cur > 0 ? lines[cur - 1] : null, ylin = function (l) { return gt + l.y + FS * 1.2; };
+      var L = lines[cur], prv = cur > 0 ? lines[cur - 1] : null;
       if (t < tReadEnd + 0.0001) {
-        if (t >= L.tr || !prv) { dpx = dx0 + edge[cur]; dpy = ylin(L) + 1; if (t < L.tr) { dpx = dx0 - 6; } }
-        else { var hq = CL((t - (prv.tr + prv.d)) / (L.tr - (prv.tr + prv.d))), he = EASE(hq); dpx = dx0 + prv.w + (-prv.w) * he; dpy = ylin(prv) + (ylin(L) - ylin(prv)) * he - 6 * Math.sin(Math.PI * hq); }
+        if (t >= L.tr || !prv) { dpx = xl(L) + edge[cur]; dpy = ylin(L); if (t < L.tr) dpx = xl(L) - 8; }
+        else { var hq = CL((t - (prv.tr + prv.d)) / (L.tr - (prv.tr + prv.d))), he = EASE(hq); dpx = (xl(prv) + prv.w) + (xl(L) - (xl(prv) + prv.w)) * he; dpy = ylin(prv) + (ylin(L) - ylin(prv)) * he - 7 * Math.sin(Math.PI * hq); }
       } else {
-        var lastl = lines[4], mq = EASE(CL((t - tReadEnd) / 0.3)); dpx = dx0 + lastl.w + (gcx - (dx0 + lastl.w)) * mq; dpy = ylin(lastl) + (gcy - ylin(lastl)) * mq - 14 * Math.sin(Math.PI * mq);
-        dsc = 1 + 0.5 * SINE(CL((t - T_ROLL0) / (tLit - T_ROLL0))); dopa = 1 - SINE(CL((t - (tLit - 0.5)) / 0.4));
+        var lastl = lines[lines.length - 1], mq = EASE(CL((t - tReadEnd) / 0.4)); dpx = (xl(lastl) + lastl.w) + (gcx - (xl(lastl) + lastl.w)) * mq; dpy = ylin(lastl) + (gcy - ylin(lastl)) * mq - 16 * Math.sin(Math.PI * mq);
+        dsc = 1 + 0.55 * SINE(CL((t - T_ROLL0) / (tLit - T_ROLL0))); dopa = 1 - SINE(CL((t - (tLit - 0.55)) / 0.4));
       }
-      dot.style.transform = "translate(" + dpx.toFixed(2) + "px," + dpy.toFixed(2) + "px) scale(" + dsc.toFixed(3) + ")"; dot.style.opacity = (t < T0 - 0.3 ? 0 : dopa).toFixed(3);
-      // the roll: the sheet is bent into a cylinder of the glass's size (curvature grows with the time); light spreads outward from the middle strips as it closes
-      var rp = EASE(CL((t - T_ROLL0) / (T_ROLL1 - T_ROLL0))), kap = (2 * Math.PI / PW) * rp, fl = CL((t - (T_ROLL0 + 0.3)) / (T_ROLL1 - T_ROLL0 - 0.2));
-      csh.style.width = (PW - (PW - gw * 1.08) * rp).toFixed(1) + "px"; csh.style.left = (gcx - (PW - (PW - gw * 1.08) * rp) / 2).toFixed(1) + "px"; csh.style.opacity = (CL((t - 0.3) / 0.8) * (1 - CL((t - tLit) / 0.4)) * 0.14).toFixed(3);
+      dot.style.transform = "translate(" + dpx.toFixed(2) + "px," + dpy.toFixed(2) + "px) scale(" + dsc.toFixed(3) + ")"; dot.style.opacity = (dopa * CL((t - (lines[0].tr - 0.35)) / 0.3)).toFixed(3);
+      // the scroll: closed at first, it unrolls; later it rolls up again around the light. Curvature grows from 0 (flat) to a full circle.
+      var rp = t < T_ROLL0 ? 1 - EASE(CL((t - T_UN0) / (T_UN1 - T_UN0))) : EASE(CL((t - T_ROLL0) / (T_ROLL1 - T_ROLL0))), kap = (2 * Math.PI / PW) * rp;
+      var fl = CL((t - (T_ROLL0 + 0.35)) / (T_ROLL1 - T_ROLL0 - 0.25)), cw = PW - (PW - gw * 1.08) * rp;
+      csh.style.width = cw.toFixed(1) + "px"; csh.style.left = (gcx - cw / 2).toFixed(1) + "px"; csh.style.opacity = (CL(t / 0.6) * (1 - CL((t - tLit) / 0.4)) * 0.14).toFixed(3);
       for (i = 0; i < strips.length; i++) {
         var S = strips[i], al = kap * S.s, xo, zo, dd = Math.abs(S.s) / (PW / 2);
         if (kap < 1e-5) { xo = S.s; zo = 0; } else { xo = Math.sin(al) / kap; zo = (Math.cos(al) - 1) / kap; }
         S.el.style.transform = "translate3d(" + (xo - S.s).toFixed(3) + "px,0," + zo.toFixed(3) + "px) rotateY(" + (al * 180 / Math.PI).toFixed(3) + "deg)";
-        var amb = CL((fl * 1.5 - dd * 0.95) / 0.45), sh = rp > 0 ? Math.max(0, 1 - Math.cos(Math.min(Math.abs(al), Math.PI / 2))) * 0.22 : 0;
-        var core = mixc(AMB_EDGE, AMB_CORE, Math.max(0, Math.cos(Math.min(Math.abs(al), Math.PI / 2))) * (1 - dd * 0.35)); S.el.style.background = amb <= 0 ? "rgb(255,255,255)" : (amb >= 1 ? core : mixc(PAPER, rgbOf(core), amb)); S.shade.style.opacity = sh.toFixed(3); S.warmw.style.opacity = amb.toFixed(3); S.inkw.style.opacity = (1 - amb).toFixed(3);
-        for (k = 0; k < lines.length; k++) { var cp = "inset(0 " + Math.max(lines[k].w - edge[k], 0).toFixed(1) + "px 0 0)"; S.inks[k].style.clipPath = cp; S.warms[k].style.clipPath = cp; }
+        var lit_ = t >= T_ROLL0 - 0.2, amb = lit_ ? CL((fl * 1.5 - dd * 0.95) / 0.45) : 0, cosf = Math.max(0, Math.cos(Math.min(Math.abs(al), Math.PI / 2)));
+        var core = mixc(AMB_EDGE, AMB_CORE, cosf * (1 - dd * 0.35));
+        S.el.style.background = amb <= 0 ? "rgb(253,252,249)" : (amb >= 1 ? core : mixc(PAPER, rgbOf(core), amb));
+        S.shade.style.opacity = (rp > 0 ? (1 - cosf) * (0.24 - 0.10 * amb) : 0).toFixed(3); S.sheen.style.opacity = (rp > 0 ? 0.35 + 0.65 * amb : 0).toFixed(3); S.warmw.style.opacity = amb.toFixed(3); S.inkw.style.opacity = (1 - amb).toFixed(3);
+        for (k = 0; k < lines.length; k++) { var cp = "inset(0 " + Math.max(lines[k].w - edge[k], 0).toFixed(1) + "px 0 0)"; for (var q = 0; q < S.inks[k].length; q++) { S.inks[k][q].style.clipPath = cp; S.warms[k][q].style.clipPath = cp; } }
       }
       for (var k = 0; k < n; k++) {
         var q = Math.min(Math.max((t - (ARRIVE + k * 0.08)) / WASH, 0), 1), e = 1 - Math.pow(1 - q, 3), to = (k === LIT && name === NAME) ? a : c;

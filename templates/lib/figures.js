@@ -27,7 +27,10 @@
     var freckles = o.freckles ? '<g fill="' + ink + '" opacity=".6"><circle cx="40" cy="72" r="1.2"/><circle cx="46" cy="75" r="1.2"/><circle cx="42" cy="77.5" r="1.2"/><circle cx="74" cy="75" r="1.2"/><circle cx="80" cy="72" r="1.2"/><circle cx="78" cy="77.5" r="1.2"/></g>' : "";
     var glasses = o.glasses ? '<g fill="none" stroke="' + ink + '" stroke-width="2.3" stroke-linejoin="round"><rect x="35" y="53" width="21" height="15" rx="6.5"/><rect x="64" y="53" width="21" height="15" rx="6.5"/><path d="M56 59.5h8"/><path d="M35 58L28 56M85 58L92 56"/></g>' : "";
     var headset = o.headset ? '<path d="M26 56C24 24 42 10 60 10S96 24 94 56" fill="none" stroke="' + ink + '" stroke-width="3.4" stroke-linecap="round"/><rect x="18" y="50" width="13" height="24" rx="6.5" fill="' + ink + '"/><rect x="89" y="50" width="13" height="24" rx="6.5" fill="' + ink + '"/>' : "";
-    var mouth = o.mouth === "open" ? '<path d="M52 80C55 88 65 88 68 80Z" fill="' + ink + '" stroke="' + ink + '" stroke-width="2" stroke-linejoin="round"/>' : '<path d="M52 82C56 86.5 64 86.5 68 82" fill="none" stroke="' + ink + '" stroke-width="2.4" stroke-linecap="round"/>';
+    var mouth = '<path class="m-m" d="M52 82C56 86.5 64 86.5 68 82" fill="none" stroke="' + ink + '" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path class="m-a" opacity="0" d="M52 81.2C55 79.2 65 79.2 68 81.2C67 89.6 53 89.6 52 81.2Z" fill="' + ink + '" stroke="' + ink + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+      '<ellipse class="m-o" opacity="0" cx="60" cy="84.5" rx="4.6" ry="5.2" fill="' + ink + '"/>' +
+      '<path class="m-e" opacity="0" d="M53 82C57 84.6 63 84.6 67 82C65.5 87.2 54.5 87.2 53 82Z" fill="' + ink + '" stroke="' + ink + '" stroke-width="1.6" stroke-linejoin="round"/>';
     var brows = o.brows === false ? "" : '<g fill="none" stroke="' + ink + '" stroke-width="2.3" stroke-linecap="round"><path d="M40 50C43.5 47.5 49 47.5 53 49.5"/><path d="M67 49.5C71 47.5 76.5 47.5 80 50"/></g>';
     return '<svg class="lf-face" viewBox="0 0 120 120" width="' + s + '" height="' + s + '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision" style="overflow:visible;display:block">' +
       '<defs><clipPath id="' + id + 'c"><path d="' + HEAD + '"/></clipPath></defs>' +
@@ -47,7 +50,7 @@
       brows + glasses +
       '<g class="lf-eyes" style="transform-origin:60px 58px"><g class="lf-look"><ellipse cx="47" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/><ellipse cx="73" cy="59" rx="2.5" ry="3.2" fill="' + ink + '"/></g></g>' +
       freckles + '<path d="M60 60C58.5 66 56 69.5 60.5 70.5" fill="none" stroke="' + ink + '" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<g class="lf-mouth" style="transform-origin:60px 82px">' + mouth + "</g>" + headset + "</svg>";
+      '<g class="lf-mouth">' + mouth + "</g>" + headset + "</svg>";
   };
   // a portrait in a flat disc (head and shoulders, cropped by the disc), as it sits beside a name in a card
   LF.avatar = function (style, size, o) {
@@ -65,7 +68,14 @@
   LF.blink = function (tl, sel, times) { [].concat(times).forEach(function (t) { tl.to(sel + " .lf-eyes", { scaleY: 0.08, duration: 0.07, ease: "power1.in" }, t); tl.to(sel + " .lf-eyes", { scaleY: 1, duration: 0.11, ease: "power1.out" }, t + 0.09); }); };
   LF.nod = function (tl, sel, t, deg) { deg = deg == null ? 5 : deg; tl.to(sel, { rotation: deg, duration: 0.28, ease: "sine.inOut", transformOrigin: "50% 90%" }, t); tl.to(sel, { rotation: 0, duration: 0.4, ease: "sine.inOut" }, t + 0.3); };
   LF.look = function (tl, sel, t, dx, dy) { tl.to(sel + " .lf-look", { x: dx || 0, y: dy || 0, duration: 0.3, ease: "power2.inOut" }, t); };                                                          // the eyes glance (in the face's own units, a few at most)
-  LF.talk = function (tl, sel, t, n) { for (var i = 0; i < (n || 4); i++) { tl.to(sel + " .lf-mouth", { scaleY: 1.5, duration: 0.09, ease: "sine.out" }, t + i * 0.22); tl.to(sel + " .lf-mouth", { scaleY: 1, duration: 0.12, ease: "sine.in" }, t + i * 0.22 + 0.1); } };
+  // speech: the mouth moves through real shapes (open a, round o, narrow e, closed) in an uneven rhythm, with a tiny head movement, then rests closed. dur is in seconds.
+  var SPEECH = [["a", 0.13], ["e", 0.09], ["o", 0.12], ["m", 0.06], ["a", 0.15], ["e", 0.08], ["m", 0.05], ["o", 0.11], ["a", 0.14], ["e", 0.1], ["m", 0.07], ["a", 0.12], ["o", 0.1], ["e", 0.09], ["m", 0.08]];
+  LF.talk = function (tl, sel, t, dur) {
+    var tt = t, i = 0, set = function (name, at) { tl.to(sel + " .lf-mouth path, " + sel + " .lf-mouth ellipse", { opacity: 0, duration: 0.03 }, at); tl.to(sel + " .lf-mouth .m-" + name, { opacity: 1, duration: 0.03 }, at + 0.004); };
+    while (tt < t + dur) { var v = SPEECH[i % SPEECH.length]; set(v[0], tt); tt += v[1]; i++; }
+    set("m", t + dur);
+    tl.to(sel + " .lf-face", { rotation: 1.2, duration: dur * 0.5, ease: "sine.inOut", transformOrigin: "50% 90%" }, t); tl.to(sel + " .lf-face", { rotation: 0, duration: dur * 0.5, ease: "sine.inOut" }, t + dur * 0.5);
+  };
   LF.bob = function (tl, sel, t, dur) { var n = Math.max(1, Math.round(dur / 2.4)); tl.to(sel, { y: "-=3", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1 }, t); };
   LF.out = function (tl, sel, t) { tl.to(sel, { opacity: 0, scale: 0.92, y: -6, duration: 0.35, ease: "power2.in" }, t); };
   root.LF = LF;

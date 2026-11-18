@@ -61,7 +61,7 @@
         tl.to(t.el.querySelector("svg.g"), { opacity: 0, duration: 0.6 }, at + 0.1);
         tl.fromTo(t.el, { scale: 1 }, { scale: 1.06, duration: 0.4, ease: "sine.out", yoyo: true, repeat: 1 }, at);
       });
-      LM.out(tl, "#n-b", 6.3, 0.5);
+      LM.out(tl, "#n-b", 5.85, 0.45);
       // 6.4 s "Lantern.": the lockup arrives, lit, in the middle of all of it
       tl.fromTo("#en-stage", { opacity: 0, scale: 1.04, filter: "blur(10px)", transformOrigin: "50% 50%" }, { opacity: 1, scale: 1.1, filter: "blur(0px)", duration: 1.2, ease: "power3.out" }, 6.55);
       tl.to("#en-glow", { opacity: 1, duration: 1.4, ease: "sine.inOut" }, 6.6);
@@ -69,7 +69,13 @@
       tl.to(tag, { opacity: 1, filter: "blur(0px)", duration: 1.1, ease: "power2.out" }, 8.2);
       tl.to(["#en-grid", "#en-glow"], { scale: 1.025, duration: 3.2, ease: "sine.inOut", transformOrigin: "50% 50%" }, 7.9); tl.to("#en-stage", { scale: 1.13, duration: 3.2, ease: "sine.inOut" }, 7.9);
       var HOST = document.querySelector('[data-composition-id="s-end"]'), put = function (id, html, css) { var d = document.createElement("div"); d.id = id; d.style.cssText = "position:absolute;opacity:0;" + css; d.innerHTML = html; HOST.appendChild(d); return d; };
-      put("en-ppl", LF.group(["bob", "curly", "short", "long"], 92, 0.06), "left:775px;top:590px;"); LF.pop(tl, "#en-ppl", 5.0); LF.blink(tl, "#en-ppl", [6.4]); LF.out(tl, "#en-ppl", 6.9);
+      put("en-ppl", LF.group(["bob", "curly", "short", "long"], 92, 0.06), "left:775px;top:590px;opacity:1;");
+      // they rise in from below the frame after the line, and leave the same way, one after another, before the lantern arrives (6.55 s)
+      var EPL = document.querySelectorAll("#en-ppl .lf-group > span"); LF.blink(tl, "#en-ppl", [5.9]);
+      EPL.forEach(function (e, i) {
+        tl.fromTo(e, { y: 520, opacity: 1 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 4.95 + i * 0.04);
+        tl.to(e, { y: 520, duration: 0.55, ease: "power3.in" }, 5.55 + i * 0.045);
+      });
       window.__timelines["s-end"] = tl;
     })();
   </script>
