@@ -3,7 +3,7 @@
 #   earshot + real-sound  (MIT)    https://github.com/Leonxlnx/earshot     ears for the agent, and a soundtrack process built on real licensed recordings
 #   Recordly              (AGPL-3) https://github.com/webadderallorg/Recordly   screen recorder/editor with auto-zoom, for footage of the app working
 #   hyperframes skills     (checked only)  https://github.com/heygen-com/hyperframes   the render contract, per-type notes, registry, media-use
-# usage: install_companions.sh [--models]      (--models downloads Earshot's two models, about 1.1 GB)
+# usage: install_companions.sh [--models] [--extras]      (--extras prints the install commands for the animation skills in references/dependencies.md)      (--models downloads Earshot's two models, about 1.1 GB)
 set -euo pipefail
 # HyperFrames skills (heygen-com/hyperframes): the render contract freebird builds on. Installing them is the person's step, so this only checks.
 if [ -d "$HOME/.claude/skills/hyperframes" ] || ls -d "$HOME"/.claude/plugins/cache/hyperframes/hyperframes/* >/dev/null 2>&1; then echo "hyperframes skills: found"; else echo "hyperframes skills: MISSING. Install (you run it):  npx skills add heygen-com/hyperframes --all   (or the HyperFrames Claude plugin)"; fi
@@ -15,3 +15,10 @@ if command -v uv >/dev/null; then uv tool install "earshot[mcp] @ git+https://gi
 [ "${1:-}" = "--models" ] && earshot doctor --fetch
 echo "Earshot MCP for Claude Code:  claude mcp add earshot --scope user -e EARSHOT_THREADS=3 -- earshot mcp"
 echo "Recordly: download a release from https://github.com/webadderallorg/Recordly/releases, or:  git clone https://github.com/webadderallorg/Recordly.git && cd Recordly && npm install && npm run dev"
+if [ "${1:-}" = "--extras" ] || [ "${2:-}" = "--extras" ]; then cat <<'X'
+Animation skills (you run these; read a SKILL.md before installing; see references/dependencies.md):
+  npx skills add https://github.com/greensock/gsap-skills          # GSAP, official
+  npx skills@latest add emilkowalski/skills                         # animation principles and review
+  npx skills add LottieFiles/motion-design-skill                    # motion principles, official
+X
+fi

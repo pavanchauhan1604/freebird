@@ -11,6 +11,16 @@ Freebird adds a taste, a narration pipeline, a sound workflow and a review loop 
 | **Screen footage** | Recordly (auto-zoom recorder) or the scripted fallback in `scripts/` | [webadderallorg/Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0, run it, never bundle it) | by hand; see [screen-recording.md](screen-recording.md) |
 | **Plumbing** | `ffmpeg`, `node`, Python 3 | your package manager | by hand |
 
+## Animation skills (surveyed 2026-11-18; not installed or run here)
+
+HyperFrames is the engine; these three sharpen the motion. Install with `scripts/install_companions.sh --extras` (prints the commands) or by hand; read a skill's `SKILL.md` first.
+
+| Skill | Source, licence | Why freebird wants it | Caution |
+|---|---|---|---|
+| GSAP (core, timeline, plugins, utils, performance ...) | [greensock/gsap-skills](https://github.com/greensock/gsap-skills), official, MIT; `npx skills add https://github.com/greensock/gsap-skills` | every scene is a GSAP timeline | skip `gsap-scrolltrigger` and `gsap-react` for video |
+| Emil Kowalski's animation skills (`emil-design-eng`, `review-animations`, `improve-animations`, `animation-vocabulary`, `choreograph`) | [emilkowalski/skills](https://github.com/emilkowalski/skills), one designer, MIT, 57.9k stars; `npx skills@latest add emilkowalski/skills` | a refinement checklist for the creative-director pass: easing, timing, choreography | written for UI; take the principles, not the web specifics |
+| LottieFiles motion-design-skill | [LottieFiles/motion-design-skill](https://github.com/LottieFiles/motion-design-skill), official, MIT, 3.3k stars; `npx skills add LottieFiles/motion-design-skill` | motion principles (timing, easing, choreography); implementation-agnostic | principles only; it does not author Lottie JSON |
+
 ## How the HyperFrames skills relate to freebird
 
 - **HyperFrames owns the contract**: paused GSAP timelines registered under `window.__timelines`, `class="clip"` with `data-start`/`data-duration`, no `Date.now`, no unseeded random, no `repeat: -1`, fonts as local files, `check`/`snapshot`/`render`. Freebird never overrides it; when this skill and `hyperframes` disagree about the render contract, `hyperframes` wins.
