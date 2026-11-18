@@ -24,3 +24,7 @@ Cues are listed from the animation's own events (export them: e.g. `tl.__events 
 - **knock**: a soft knock with a tick of metal when a part lands (the lantern's cap and base).
 - **note**: a soft glass note per letter as the name is lit, climbing a pentatonic scale.
 - Levels: ticks about −24 dBFS peak, glow about −18, everything else under the glow. Never add a reverb to the voice to "blend" it; blend with the bed.
+
+## Master the mix once
+
+Three separate tracks are summed by the renderer, which then lowers everything when one peak passes its ceiling (the Lantern film lost 3.8 dB that way and measured -17.4 LUFS). After `narrate.py mix`, `score.py` and `sfx.py`, run `scripts/master_mix.sh assets/voice`: it widens the bed to stereo (Earshot found the film perfectly mono; after widening it measured side -7.0 dB vs mid), adds a little low end, keeps voice and effects centred, normalises to -14 LUFS with a -1.5 dBTP limiter, and writes `mix.wav`; `build_index.py` then uses that single track. Check it with `earshot measure` and finish with `earshot critique` (without `--fast`).

@@ -32,7 +32,7 @@ A way of making **any video** (launch film, explainer, tutorial, feature update,
 | 3 Narration | script, voice, timing | Kokoro `af_heart` (`narrate.py`, `retime.py`), `fit_timing.py`, Earshot `describe` on the track |
 | 4 Scenes | compositions from `motion.js` | `hyperframes` contract, `hyperframes-registry` (search before hand-building), `gsap-timeline`, `gsap-core`, `gsap-utils`, `gsap-plugins`, `gsap-performance`, `choreograph`, `animate`, `motion-design` |
 | 5 Footage | the real app working, if needed | Recordly or `record_demo.sh`, `media-use` |
-| 6 Sound | real effects, bed, ears | Openverse (`sfx_search.py`), `sfx.py`, `score.py`, Earshot (`sheet`, `timeline`, `critique`), `real-sound`, `see_audio.py` |
+| 6 Sound | real effects, bed, ears, one mastered mix | Openverse (`sfx_search.py`), `sfx.py`, `score.py`, `master_mix.sh` (stereo bed, -14 LUFS, -1.5 dBTP limiter), Earshot (`measure`, `sheet`, `timeline`, `critique`), `real-sound`, `see_audio.py` |
 | 7 Review (twice) | check, snapshots, the creative director | `hyperframes` `check` and `snapshot`, `motion-design` checklist, `emil-design-eng`, `animation-vocabulary` (to name a defect exactly), Earshot `critique` |
 | 8 Captions | switchable track and sidecars | `make_captions.py` |
 | 9 Export | 1080p60 master, share copy, player | `hyperframes render`, `export.sh` |

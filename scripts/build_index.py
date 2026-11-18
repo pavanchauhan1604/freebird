@@ -16,7 +16,8 @@ for s in S:
     st, d = T["scenes"][s["key"]]
     hosts += f'      <div id="{s["id"]}" data-composition-id="{s["id"]}" data-composition-src="{s["src"]}" data-start="{st}" data-duration="{d}" data-track-index="{z}" data-track-kind="graphics" data-width="1920" data-height="1080"></div>\n'; z += 1
 audio = ""
-for i, (aid, f) in enumerate([("narration", "narration.wav"), ("bed", "bed.wav"), ("sfx", "sfx.wav")]):
+TRACKS = [("mix", "mix.wav")] if os.path.exists("assets/voice/mix.wav") else [("narration", "narration.wav"), ("bed", "bed.wav"), ("sfx", "sfx.wav")]   # one mastered track once master_mix.sh has run
+for i, (aid, f) in enumerate(TRACKS):
     if os.path.exists(f"assets/voice/{f}"):
         audio += f'      <audio id="{aid}" class="clip" src="assets/voice/{f}" data-start="0" data-duration="{total}" data-track-index="{40 + i}" data-volume="1"></audio>\n'
 html = f'''<!doctype html>

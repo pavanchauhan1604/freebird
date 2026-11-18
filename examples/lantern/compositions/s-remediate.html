@@ -91,7 +91,7 @@
       tl.fromTo("#rm-tree", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 8.9);
       row("#r-h1", 12.0); leader("h1", "#r-h1", 12.0); row("#r-h2", 12.3); leader("h2", "#r-h2", 12.3); row("#r-p", 12.6); leader("p", "#r-p", 12.6);
       row("#r-list", 12.95); leader("list", "#r-list", 12.95); row("#r-li1", 13.25); row("#r-li2", 13.5); row("#r-li3", 13.75);
-      ORDER.forEach(function (k, i) { tl.fromTo("#bd-" + k, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 14.5 + i * 0.17); });
+      ORDER.forEach(function (k, i) { tl.fromTo("#bd-" + k, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, 14.5 + i * 0.17); });
       // ---- 16.0 s "And for every image, it writes a clear description, in plain, human words."
       tl.to(["#bd-h1", "#bd-h2", "#bd-p", "#bd-list", "#bd-foot"], { opacity: 0, duration: 0.4 }, 15.75);
       title("#t4", 16.1, 20.9); LM.mark2(tl, "#m4", "hlul", C.orange[0], 16.9, 0.9);

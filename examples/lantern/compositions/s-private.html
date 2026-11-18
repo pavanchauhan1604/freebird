@@ -60,7 +60,7 @@
       LM.out(tl, "#f2", L.f3 - 0.1, 0.35); LM.words(tl, "#f3", L.f3 + 0.1, 0.1); LM.mark2(tl, "#fm3", "hlul", C.green[0], L.f3 + 0.6, 0.8);
       tl.fromTo("#pv-out", { opacity: 0, x: 18, filter: "blur(6px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, L.f3 + 0.9);
       tl.set(out, { opacity: 1 }, L.f3 + 1.1); tl.fromTo(out, { strokeDashoffset: ol }, { strokeDashoffset: ol * 0.02, duration: 0.9, ease: "power2.inOut" }, L.f3 + 1.1);
-      tl.fromTo("#pv-lock", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, L.f3 + 1.95);
+      tl.fromTo("#pv-lock", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, L.f3 + 1.95);
       tl.to("#pv-lock", { scale: 1.1, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 3 }, L.f3 + 2.5);                      // ambient: the lock breathes once it has landed
       tl.to("#pv-zone-b rect", { strokeDashoffset: -112, duration: END, ease: "none" }, 0);                                         // ambient: the boundary drifts slowly, a pure function of time
       tl.fromTo("#k1", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f3 + 0.4); tl.fromTo("#k2", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f3 + 2.5);
