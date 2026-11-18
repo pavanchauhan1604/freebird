@@ -26,19 +26,7 @@ SPEC.md                     the film's plan: structure with seconds, narration t
 
 ## The creative director's pass
 
-The creative director is a standing role with this skill's taste (see [taste.md](taste.md)), not a one-off step: every phase and section is looked at through it (storyline, script, each scene, sound, captions, export). The full pass below is run **twice** before a film is called done: once on the first complete build, and again on the result of fixing it, over every scene and the audio sheet. Review the contact sheets as an art director would, scene by scene, and write the defects before fixing them.
-
-- **Hierarchy and focus:** one focal object per scene; is anything competing? Is there dead space for more than ~3 s that a larger object, a centred start or an arriving second object would fix?
-- **Type:** nothing under 28 px; nothing clipped, wrapped badly or leaving the canvas; chips never touching a name; numbers aligned when settled.
-- **Colour:** each stage and tool in its own accent; amber only on the light; no more than one saturated colour per object; status colours consistent.
-- **Marks:** a mix of highlight / line / both / outline; none repeated twice in a row; no wobble.
-- **Motion:** every arrival has a matching exit; transitions overlap 0.4 s; no object pops; paths are smooth; nothing moves "off" (a rotating icon turns about its own centre; a card does not rise into the rail).
-- **Collisions:** persistent rail vs content; lockup vs tiles; labels vs lines; layers vs titles.
-- **Sync:** the visual beat is on the phrase that names it (check with `silencedetect`), not a second early.
-- **Story:** does every scene earn its time; does the closing avoid repeating the opening; is any claim larger than the product?
-- **Numbers:** arbitrary-looking placeholders, consistent across scenes (the funnel's numbers match the master report's).
-
-Fix, re-snapshot, repeat until a pass finds nothing worth fixing. Then say honestly what you did not check (audio by ear, motion watched live).
+See [creative-director.md](creative-director.md): the stance, the audits (motion semantics, meaning, layout, cleanliness, the Notion benchmark, taste, story, sound), the evidence to build first, the report format and the regression list. It is run twice, with an independent reviewer, and it changes the film.
 
 ## Export
 

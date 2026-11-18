@@ -86,5 +86,12 @@
     tl.set(pp, { opacity: 1 }, t); tl.fromTo(pp, { strokeDashoffset: pl }, { strokeDashoffset: -L, duration: d, ease: "power1.inOut" }, t); tl.set(pp, { opacity: 0 }, t + d + 0.02);
     return pp;
   };
+  // a ground that changes colour to change the idea: a full-bleed tint behind everything in a scene, fading in and out (the cards stay put). Call once per tint.
+  LM.field = function (tl, rootSel, color, tin, tout) {
+    var root = document.querySelector(rootSel), f = document.createElement("div");
+    f.setAttribute("aria-hidden", "true"); f.style.cssText = "position:absolute;left:0;top:0;width:1920px;height:1080px;background:" + color + ";opacity:0"; root.insertBefore(f, root.firstChild);
+    tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power2.out" }, tin); tl.to(f, { opacity: 0, duration: 0.45, ease: "power1.in" }, tout);
+    return f;
+  };
   root.LM = LM;
 })(window);

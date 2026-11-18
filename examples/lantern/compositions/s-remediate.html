@@ -12,7 +12,7 @@
     .bd { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 26px; display: flex; align-items: center; justify-content: center; opacity: 0; }
     #rm-desc { position: absolute; left: 11%; top: 61%; display: flex; gap: 10px; align-items: center; background: #fff; border-radius: 14px; padding: 10px 18px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 26px; opacity: 0; }
     #rm-desc i { width: 10px; height: 10px; border-radius: 50%; background: #F2711C; display: block; opacity: 0.25; }
-    #rm-ok { position: absolute; right: 18px; top: 18px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 10px 18px 10px 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
+    #rm-ok { position: absolute; right: 18px; bottom: 18px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 10px 18px 10px 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
     #rm-ok svg { width: 28px; height: 28px; overflow: visible; }
     /* the vision model */
     #rm-vm { position: absolute; left: 880px; top: 330px; width: 910px; padding: 34px 38px; background: #fff; border-radius: 22px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); display: flex; gap: 28px; align-items: center; opacity: 0; }
@@ -114,7 +114,8 @@
       tl.to("#rm-glow", { opacity: 1, duration: 1.1, ease: "power2.out" }, 26.7);
       tl.fromTo("#rm-ok", { opacity: 0, y: -8, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.2)" }, 26.9); tl.to("#rm-okck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 27.2);
       tl.to(["#rm-glow", "#rm-ok"], { opacity: 0, duration: 0.5, ease: "power1.in" }, 28.9);                         
-      tl.to("#rm", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 28.98);                         // the scene leaves as one blurred sheet; the page returns in the export scene
+      tl.to('[data-composition-id="s-remediate"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 28.98);                         // the scene leaves as one blurred sheet; the page returns in the export scene
+      LM.field(tl, '[data-composition-id="s-remediate"]', "#F0ECFF", 0.0, 28.95);
       window.__timelines["s-remediate"] = tl;
     })();
   </script>

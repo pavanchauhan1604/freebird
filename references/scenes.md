@@ -8,7 +8,13 @@ Each pattern below exists as working code in [`examples/lantern/compositions/`](
 
 ## Intro: the name
 
-The product's mark animates itself (in the example: an ember reads a plain page word by word, the page lights, a lantern assembles around the light, the camera pulls back into a lockup, the name swells to full weight, the tagline clears in). Rules that made it premium: the ember **arrives on a curve with a short trail**, each word is **lit amber as it is read and settles to ink**, the ink **warms as the light gathers**, **one thin ring of light** leaves the glass, the camera **drifts in** while it is read, every part eases. It exposes its beats (`tl.__events`) for the sound. Keep one source file for the animation if the app plays it too (the app may use a simpler launch screen; the film keeps the long one).
+The product's mark animates itself, and it does so by **reading**: this is the idea, and it is kept even when the first execution is rejected. In the Lantern example ([`examples/lantern/ignite/ignite.js`](../examples/lantern/ignite/ignite.js)):
+1. A sentence in large **real** type (about 64 px on screen) sits left of an empty **vessel**, the lantern's glass drawn as a hairline with the folded corner of a page. The words begin **blurred and illegible**: a page nobody can read.
+2. A small **reading eye** (an amber ring and dot, flat) moves word by word. Each word it passes clears to crisp ink and is underlined in amber; the eye hops between words and blinks as it changes line.
+3. Each read word lifts along a curve into the vessel and settles inside it, small, in warm brown. The vessel **fills with light from the bottom** (a crisp level, no glow) as words arrive.
+4. The eye follows the last word into the glass and becomes its light; the sentence is left inside the lit glass for a moment and then melts into it.
+5. The lantern assembles around the light (cap lowers with a small swing, base rises, the glass takes the weight), the camera pulls back, the name swells to full weight with the lit amber letter, the tagline clears in.
+What failed the first time and must not come back (studio-quality.md): a glossy 3D page, grey dash bars standing for text, a glowing orb with a comet trail, an amber haze, concentric rings. The first execution of a good idea is rebuilt flat and crisp; the idea is not abandoned. Keep one file for the animation if the app plays it too.
 
 ## Bridge
 

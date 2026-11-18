@@ -42,6 +42,10 @@ White cards, radius 24–30, shadow `0 24px 48px rgba(0,0,0,.10)` plus a 1 px ri
 - Text and state that change over time are computed from time in `paint()`; never in callbacks.
 - A slow drift on large objects (scale 1 → 1.03 over seconds) keeps stills alive. A thin ring of light, a trail behind an ember, a word lit amber as it is read, then settling to ink are the "premium" touches.
 
+## Small figures (from the Notion benchmark)
+
+A film has room for **small ink figures** that make it feel made by people: faces and avatars at 56-120 px, drawn in one style (white face, bold ink outline, solid hair, dot eyes, a stipple shade on one side), from `templates/lib/figures.js`. Use them where a person is part of the story: the owner who receives a report, the reviewer a file goes to, the uploader of a new file, the teacher with a handwritten page. They sit **beside type or inside a card** (grey avatar disc, name in bold), arrive with `LF.pop`, blink or nod once, and leave with the scene. Never a big mascot, never the same face for two different people, never more than three in a frame, never over the accent colour of a stage. The film's one carrier stays the ember.
+
 ## Content in frames
 
 - A neutral sample document (a generic orientation page), generic file names (`handbook.pdf`), generic site names. No phone numbers, emails, people.

@@ -23,6 +23,7 @@
     .ph .dn { position: relative; flex: none; width: 44px; height: 44px; } .ph .dn svg { width: 44px; height: 44px; overflow: visible; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="vf" data-composition-id="s-verify" data-width="1920" data-height="1080">
     <h2 class="ttl" id="b1"><span class="ln" style="display:block"><span class="w">How</span> <span class="w">do</span> <span class="w">we</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm1">know?</span></span></span></h2>
     <h2 class="ttl" id="b2"><span class="ln" style="display:block"><span class="w">Every</span> <span class="w">phase</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm2">checks.</span></span></span></h2>
@@ -31,7 +32,8 @@
     <h2 class="ttl" id="b5"><span class="ln" style="display:block"><span class="w">Then</span> <span class="w">a</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm5">person.</span></span></span></h2>
     <div id="vf-page"><img src="assets/demo/page.jpg" alt="" /><svg id="vf-ov" viewBox="0 0 454 588" aria-hidden="true"></svg><div id="vf-tk"></div><div class="pl" id="vf-pl1">Original</div><div class="pl" id="vf-pl2">Rebuilt</div><div id="vf-div"></div>
       <div id="vf-same"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="vf-sck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Identical</div>
-      <div id="vf-rev"><i></i><span><b>Needs review</b><br><span style="color:#6e6e73;font-weight:700">Table layout unclear</span></span></div></div>
+      <div id="vf-rev"><i></i><span><b>Needs review</b><br><span style="color:#6e6e73;font-weight:700">Table layout unclear</span></span></div>
+    <div id="vf-who" style="position:absolute;left:484px;top:424px;opacity:0"></div></div>
     <div id="vf-list">
       <div class="ph" id="p1"><div class="hl"></div><div class="nb">1</div><div class="tx"><div class="tt">Read</div><div class="ds">The model reads the rendered page</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
       <div class="ph" id="p2"><div class="hl"></div><div class="nb">2</div><div class="tx"><div class="tt">Words</div><div class="ds">What it read, against what is said</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
@@ -83,8 +85,11 @@
       tl.fromTo("#vf-rev", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, L.v5 + 3.3);
       done("#p4", L.v5 + 4.3);
       tl.to("#vf-page", { scale: 1.015, transformOrigin: "50% 50%", duration: END - L.v1, ease: "none" }, L.v1);   // ambient: the page drifts very slowly
+      $("#vf-who").innerHTML = LF.avatar("bun", 128, { glasses: true });
+      LF.pop(tl, "#vf-who", L.v5 + 3.5); LF.blink(tl, "#vf-who", [L.v5 + 4.9]); LF.nod(tl, "#vf-who", L.v5 + 4.2, 5);   // a person looks at what could not be proved
       // ---- the scene leaves as one blurred sheet
-      tl.to("#vf", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      tl.to('[data-composition-id="s-verify"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      LM.field(tl, '[data-composition-id="s-verify"]', "#F0ECFF", 0.0, 27.8);
       window.__timelines["s-verify"] = tl;
     })();
   </script>

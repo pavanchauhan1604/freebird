@@ -68,7 +68,8 @@
       LM.out(tl, "#f3", L.f4 - 0.1, 0.35); LM.words(tl, "#f4", L.f4 + 0.1, 0.1); LM.mark2(tl, "#fm4", "hlul", C.green[0], L.f4 + 2.0, 0.8);
       tl.fromTo("#k3", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f4 + 1.0);
       // ---- the scene leaves as one blurred sheet
-      tl.to("#pv", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      tl.to('[data-composition-id="s-private"]', { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      LM.field(tl, '[data-composition-id="s-private"]', "#F0ECFF", 0.0, 17.9);
       window.__timelines["s-private"] = tl;
     })();
   </script>

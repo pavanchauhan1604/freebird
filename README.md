@@ -21,6 +21,9 @@ Needs `ffmpeg`, `node`, and the HyperFrames skills/CLI (`npx hyperframes@0.9.34`
 | `SKILL.md` | the skill: what good looks like, the ten-phase workflow, hard rules, commands, pitfalls |
 | `references/video-types.md` | **one taste, any video**: the spine, length, narration and closing for each type |
 | `references/dependencies.md` | **what freebird is built on** (HyperFrames skills, Kokoro, Openverse, Earshot, Recordly) and how they relate |
+| `references/studio-quality.md` | **studio quality**: the idea first, one visual language, no glows or placeholders, designed layout, directed motion, the tells of generated work |
+| `references/creative-director.md` | **the review**: a director who changes things, not a checker; audits, evidence, report format, regression list |
+| `references/notion-grammar.md` | **the Notion benchmark**: how Notion's own films are built, measured from the films |
 | `references/taste.md` | the visual system: palette, type, marks, motion, content rules |
 | `references/narration.md` | how to write and time the script |
 | `references/voice.md` | **the voice we chose** (Kokoro `af_heart`, plain take) and why, with settings |
@@ -31,8 +34,8 @@ Needs `ffmpeg`, `node`, and the HyperFrames skills/CLI (`npx hyperframes@0.9.34`
 | `references/pipeline.md` | project layout, the review loop, the creative director's pass, export, pitfalls |
 | `references/brief.md` | defaults to take and facts to extract from the product |
 | `references/feedback-log.md` | the prompting history, grouped, with the rule each item became |
-| `scripts/` | `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `record_demo.sh`, `tap.js`, `build_index.py`, `fit_timing.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
-| `templates/` | `lib/motion.js` (titles, marks, odometer, S-curves, pulse, follow-a-path), Manrope (SIL OFL) |
+| `scripts/` | `study_reference.py` (cut list and contact sheet of any reference film), `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `record_demo.sh`, `tap.js`, `build_index.py`, `fit_timing.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
+| `templates/` | `lib/motion.js` (titles, marks, odometer, S-curves, pulse, follow-a-path), `lib/figures.js` (small ink faces and avatars with pop, blink, nod), Manrope (SIL OFL) |
 | `examples/lantern/` | compositions, script, layout, score, sound cues, timing and the SPEC of the example film |
 
 ## Companion tools (installed from upstream, never vendored)

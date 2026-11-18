@@ -32,7 +32,7 @@
     .dlp.bad { color: #B7285E; } .dlp.bad span { text-decoration: line-through; text-decoration-thickness: 3px; }
     /* shared */
     #rp-share { left: 130px; top: 922px; width: 1660px; height: 98px; display: flex; align-items: center; gap: 22px; padding: 0 34px; border-radius: 26px; }
-    #rp-share .av { width: 58px; height: 58px; border-radius: 50%; background: #C93BA6; color: #fff; font-weight: 800; font-size: 28px; display: flex; align-items: center; justify-content: center; flex: none; }
+    #rp-share .av { width: 72px; height: 72px; flex: none; }
     #rp-share .tx { font-weight: 800; font-size: 33px; letter-spacing: -0.025em; white-space: nowrap; } #rp-share .tx em { font-style: normal; color: #6e6e73; font-weight: 700; }
     #rp-share .fm { display: flex; gap: 12px; } #rp-share .push { margin-left: auto; display: flex; align-items: center; gap: 16px; }
     #rp-share .ck { width: 42px; height: 42px; flex: none; }
@@ -58,6 +58,7 @@
     .fl { position: absolute; left: 0; top: 0; width: 34px; height: 26px; margin: -13px 0 0 -17px; border-radius: 8px; opacity: 0; }
   </style>
   <script src="assets/lib/motion.js"></script>
+  <script src="assets/lib/figures.js"></script>
   <div id="rp" data-composition-id="s-report" data-width="1920" data-height="1080">
     <h2 class="ttl" id="ra"><span class="w">Then,</span> <span class="w"><span class="mk" id="mra">reporting.</span></span></h2>
     <h2 class="ttl" id="rb"><span class="w">A</span> <span class="w">report</span> <span class="w">for</span> <span class="w"><span class="mk" id="mrb">every</span></span> <span class="w"><span class="mk" id="mrb2">site.</span></span></h2>
@@ -76,7 +77,7 @@
       <div class="hs"><h4><span style="color:#6e6e73;opacity:1">History</span><span id="rp-delta">+5 points</span></h4><div id="rp-chart"></div></div>
     </div>
     <div class="cd" id="rp-tbl"><div class="th2"><div class="fb" id="rp-fb"></div><span>File</span><span>Findings</span><span>Link</span></div><div id="rp-rows"></div></div>
-    <div class="cd" id="rp-share"><div class="av">SO</div><div class="tx">Sent to the site owner <em>· Excel and HTML</em></div><div class="fm"><span class="chip c-g" id="sf0">Excel</span><span class="chip c-t" id="sf1">HTML</span></div><div class="push"><span class="chip c-i" id="s-fix">19 files to fix</span><svg class="ck" viewBox="0 0 42 42"><circle cx="21" cy="21" r="20" fill="#2FA463"/><path id="s-ck" d="M12 21.5l6.5 6.5 12-13" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="cd" id="rp-share"><div class="av" id="rp-av"></div><div class="tx">Sent to the site owner <em>· Excel and HTML</em></div><div class="fm"><span class="chip c-g" id="sf0">Excel</span><span class="chip c-t" id="sf1">HTML</span></div><div class="push"><span class="chip c-i" id="s-fix">19 files to fix</span><svg class="ck" viewBox="0 0 42 42"><circle cx="21" cy="21" r="20" fill="#2FA463"/><path id="s-ck" d="M12 21.5l6.5 6.5 12-13" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
     <div class="cd" id="rp-master">
       <div class="mh"><div class="nm">Master report<span>calstatela.edu · 283 sites</span></div><div class="mk4"><div id="mk0">283<span>sites</span></div><div id="mk1">57,420<span>files hosted</span></div><div id="mk2" style="color:#23834D">53%<span>accessible</span></div><div id="mk3" style="color:#B7285E">1,284<span>broken links</span></div></div></div>
       <div class="mt" id="rp-mt"><div class="band" id="bd1" style="left:360px;width:600px;background:rgba(35,131,77,0.07)"></div><div class="band" id="bd2" style="left:1000px;width:250px;background:rgba(62,123,250,0.07)"></div><div class="band" id="bd3" style="left:1260px;width:250px;background:rgba(230,73,128,0.08)"></div>
@@ -110,12 +111,9 @@
         var lb = document.createElement("div"); lb.className = "lb"; lb.style.left = (x - 15) + "px"; lb.textContent = LBL[i]; ch.appendChild(lb);
         tl.fromTo(bar, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, 10.45 + i * 0.16); tl.fromTo(lb, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.5 + i * 0.16);
       });
-      var svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 " + CW + " 190"); ch.appendChild(svg);
-      var pts = BL.map(function (b, i) { return [i * 92 + 46, 150 - b * 8]; }), d = "M" + pts[0][0] + " " + pts[0][1];
-      for (var i = 1; i < pts.length; i++) { var m = (pts[i - 1][0] + pts[i][0]) / 2; d += " C" + m + " " + pts[i - 1][1] + " " + m + " " + pts[i][1] + " " + pts[i][0] + " " + pts[i][1]; }
-      var path = document.createElementNS(ns, "path"); path.setAttribute("d", d); path.setAttribute("fill", "none"); path.setAttribute("stroke", "#E64980"); path.setAttribute("stroke-width", 4); path.setAttribute("stroke-linecap", "round"); path.setAttribute("opacity", 0); svg.appendChild(path);
-      var L = path.getTotalLength(); path.setAttribute("stroke-dasharray", L + " " + (L + 4)); path.setAttribute("stroke-dashoffset", L); tl.set(path, { opacity: 1 }, 11.2); tl.fromTo(path, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 11.2);
-      pts.forEach(function (p, i) { var c = document.createElementNS(ns, "circle"); c.setAttribute("cx", p[0]); c.setAttribute("cy", p[1]); c.setAttribute("r", 7); c.setAttribute("fill", "#fff"); c.setAttribute("stroke", "#E64980"); c.setAttribute("stroke-width", 3.5); c.setAttribute("opacity", 0); svg.appendChild(c); tl.fromTo(c, { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 11.3 + i * 0.2); });
+      // one series, one meaning: the accessible share, rising; the last bar says its value (a second line that fell read as the opposite)
+      var top = document.createElement("div"); top.id = "hb-val"; top.textContent = "60%"; top.style.cssText = "position:absolute;left:" + (5 * 92 + 18 - 14) + "px;bottom:" + (60 * 1.9 + 38) + "px;width:86px;text-align:center;font-weight:800;font-size:30px;color:#23834D;opacity:0;white-space:nowrap"; ch.appendChild(top);
+      tl.fromTo(top, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 11.4);
       tl.fromTo("#rp-delta", { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 12.0);
       // ---------- every file, and what was found
       swap("#rb", "#rc", 12.35, 12.7); LM.mark2(tl, "#mrc", "hlul", C.magenta[0], 13.7, 0.9);
@@ -131,7 +129,9 @@
       tl.fromTo("#rp-fb", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 15.9); tl.to("#rp-fb", { opacity: 0, duration: 0.8, ease: "power1.inOut" }, 17.3);
       // ---------- made to be shared
       swap("#rc", "#rd", 22.15, 22.5); LM.mark2(tl, "#mrd", "hl", C.magenta[0], 23.3, 0.8);
+      $("#rp-av").innerHTML = LF.avatar("curly", 72, { freckles: true });
       tl.fromTo("#rp-share", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 22.9);
+      LF.blink(tl, "#rp-av", [24.6, 26.4]); LF.nod(tl, "#rp-av", 23.75, 4);
       ["#sf0", "#sf1"].forEach(function (s, i) { tl.fromTo(s, { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" }, 23.7 + i * 0.2); });
       tl.fromTo("#s-fix", { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 24.9); tl.fromTo("#s-ck", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 25.8);
       ["c-i", "c-t", "c-g"].forEach(function (cls, i) { document.querySelectorAll("#rp-rows ." + cls).forEach(function (c) { tl.fromTo(c, { y: 0 }, { y: -4, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 1 }, 25.1 + i * 0.15); }); });
@@ -167,6 +167,7 @@
         var t = st.p * DUR; od[0].set(47 * ease((t - 5.3) / 1.5)); od[1].set(19 * ease((t - 6.95) / 1.4)); od[2].set(6 * ease((t - 8.75) / 1.2)); od[3].set(60 * ease((t - 10.25) / 1.3)); oq.set(11341 * ease((t - 38.7) / 2.3));
       };
       tl.to(st, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      LM.field(tl, '[data-composition-id="s-report"]', "#FBEEF8", 0.0, 42.06);
       window.__timelines["s-report"] = tl;
     })();
   </script>

@@ -42,7 +42,7 @@
     #pr-grid { position: absolute; left: 130px; top: 290px; width: 920px; height: 540px; }
     .tl { position: absolute; width: 34px; height: 34px; border-radius: 9px; background: #e9e9e4; opacity: 0; }
     .tl.on { background: #CBEEF2; } .tl.fx { background: #FFE1CD; } .tl.me { background: #fff; box-shadow: 0 0 0 3px #12A3B4; }
-    #pr-scn { position: absolute; left: 130px; top: 856px; opacity: 0; }
+    #pr-scn { position: absolute; left: 130px; top: 800px; opacity: 0; }
     #pr-scncap { margin-top: 2px; font-weight: 800; font-size: 34px; letter-spacing: -0.02em; color: #6e6e73; }
     #pr-inv { position: absolute; left: 1130px; top: 250px; width: 660px; height: 560px; padding: 34px 40px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
     #pr-inv h3 { font-weight: 800; font-size: 30px; letter-spacing: -0.02em; color: #6e6e73; margin-bottom: 14px; }
@@ -250,6 +250,8 @@
         });
       };
       tl.to(state, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      LM.field(tl, '[data-composition-id="s-procure"]', "#EDF2FF", 0.0, 7.9);
+      LM.field(tl, '[data-composition-id="s-procure"]', "#E6F6F8", 7.3, 35.55);
       window.__timelines["s-procure"] = tl;
     })();
   </script>

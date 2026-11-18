@@ -79,3 +79,14 @@ The author's prompts while the example film was made, grouped, with the rule eac
 | "Add which voice model we chose" | The voice decision is written down with its comparison and settings (`voice.md`). |
 | "Rename our skill to freebird" | The skill, its folder, its venv and its docs are named freebird. |
 | "Make this shareable; it will be used on my other machine" | No machine-specific paths; one install block; companions installed from upstream. |
+
+
+## Studio quality, the Notion study, avatars and the review (November 2026)
+
+| What the user said | The rule it became |
+|---|---|
+| "The creative director just agrees with whatever is there ... how did it miss the loop arrow going the wrong way?" | The review is a director, not a checker: a verdict and a design change per scene, a motion-direction audit on several frames, an independent reviewer who sees only the frames, two passes ([creative-director.md](creative-director.md)). |
+| "Download the Notion videos; the latest design taste, not all of them" | 54 recent short films studied; the benchmark is the current era, with confidence labels ([notion-grammar.md](notion-grammar.md), `study_reference.py`). |
+| "Notion also has small animated figures ... build your own, clean, animatable, not images" | Hard-coded SVG ink faces and avatars with pop, blink, nod ([figures.js](../templates/lib/figures.js), taste.md "Small figures"). |
+| "The intro looks vibe-coded: the glowing amber dot on a page ... a page turning into a lantern is wrong; the reading eye or pen idea was right" | Keep a strong idea when the execution is what failed; rebuild flat and crisp, real text, one reader object; no glows or placeholder bars ([studio-quality.md](studio-quality.md)). |
+| "Add rules so nothing feels vibe-coded, and make a plan so you do not forget what I keep telling you" | studio-quality.md is read before every idea, layout and scene; the request plan lives in a PLAN file beside the project and in the task list. |

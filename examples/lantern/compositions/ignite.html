@@ -17,6 +17,7 @@
         assets: "assets/ignite",
       });
       var ev = tl.__events; if (ev) tl.to(document.getElementById("ignite-stage"), { scale: 1.25, transformOrigin: "50% 50%", duration: 1.3, ease: "power3.inOut" }, ev.pull);   // in the film the finished lockup is given more of the frame
+      if (ev) tl.to(document.getElementById("ignite-stage"), { scale: 1.29, transformOrigin: "50% 50%", duration: 3.2, ease: "none" }, ev.pull + 1.3);   // the lockup drifts in a little instead of freezing
       window.__timelines["ignite"] = tl;
     })();
   </script>

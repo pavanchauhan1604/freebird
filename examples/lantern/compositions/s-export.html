@@ -68,7 +68,7 @@
       var px = function (n, ax) { return n / 1000 * (ax ? P.w : P.h); }, layer = $("#ex-layer");
       Object.keys(R).forEach(function (k) {
         var r = R[k], b = document.createElement("div"); b.className = "bx"; b.id = "lb-" + k; b.style.cssText = "left:" + (px(r[0], 1) - 5) + "px;top:" + (px(r[1], 0) - 5) + "px;width:" + (px(r[2] - r[0], 1) + 10) + "px;height:" + (px(r[3] - r[1], 0) + 10) + "px;box-shadow:0 0 0 3px " + ROLE[k][0] + ";background:" + ROLE[k][0] + "14"; layer.appendChild(b);
-        var c = document.createElement("div"); c.className = "cp"; c.id = "lc-" + k; c.textContent = ROLE[k][1]; c.style.cssText = "left:" + (P.w + 4) + "px;top:" + ((px(r[1], 0) + px(r[3], 0)) / 2) + "px;background:" + ROLE[k][0]; layer.appendChild(c);
+        var c = document.createElement("div"); c.className = "cp"; c.id = "lc-" + k; c.textContent = ROLE[k][1]; c.style.cssText = "left:" + (P.w + 14) + "px;top:" + ((px(r[1], 0) + px(r[3], 0)) / 2) + "px;background:" + ROLE[k][0]; layer.appendChild(c);
       });
       var FN = [["orientation-week.pdf", "/documents/orientation-week.pdf"], ["syllabus-template.pdf", "/documents/syllabus-template.pdf"], ["parking-map.pdf", "/documents/parking-map.pdf"], ["financial-aid-faq.pdf", "/documents/financial-aid-faq.pdf"]], rows = $("#ex-rows");
       FN.forEach(function (n, i) {
@@ -141,6 +141,7 @@
       tl.to(["#ex-page", "#ex-layer", "#ex-sr", "#e4"], { opacity: 0, filter: "blur(9px)", duration: 0.45, ease: "power2.in" }, 12.0);
       var st = { p: 0 }, paint = function () { var t = st.p * DUR, n = 0; T0.forEach(function (x) { n += Math.min(Math.max((t - x - 0.25) / 0.3, 0), 1); }); odo.set(n); };
       tl.to(st, { p: 1, duration: DUR, ease: "none", onUpdate: paint }, 0); paint();
+      LM.field(tl, '[data-composition-id="s-export"]', "#E9F6EE", 0.0, 11.95);
       window.__timelines["s-export"] = tl;
     })();
   </script>
