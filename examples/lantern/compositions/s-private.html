@@ -1,0 +1,75 @@
+<template>
+  <style>
+    #pv { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #pv .ttl { left: 130px; top: 96px; }
+    #pv-zone { position: absolute; left: 130px; top: 360px; width: 1160px; height: 520px; border-radius: 34px; background: rgba(47,164,99,0.05); opacity: 0; }
+    #pv-zone-b { position: absolute; left: 0; top: 0; width: 1160px; height: 520px; overflow: visible; }
+    #pv-zone-b rect { fill: none; stroke: #2FA463; stroke-width: 4; stroke-linecap: round; }
+    #pv-tag { position: absolute; left: 36px; top: -26px; height: 52px; padding: 0 20px 0 14px; display: flex; align-items: center; gap: 12px; background: #2FA463; color: #fff; border-radius: 16px; font-weight: 800; font-size: 30px; box-shadow: 0 12px 26px rgba(47,164,99,0.35); white-space: nowrap; }
+    #pv-tag svg { width: 30px; height: 30px; overflow: visible; }
+    .nd { position: absolute; top: 175px; width: 290px; height: 220px; background: #fff; border-radius: 26px; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; opacity: 0; }
+    .nd svg { width: 96px; height: 96px; overflow: visible; } .nd b { font-weight: 800; font-size: 34px; letter-spacing: -0.03em; }
+    #pv-wires { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
+    #pv-out { position: absolute; left: 1380px; top: 380px; width: 400px; height: 230px; background: #f1f1ee; border-radius: 26px; border: 4px dashed #c9c9c2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; opacity: 0; }
+    #pv-out svg { width: 110px; height: 76px; overflow: visible; } #pv-out b { font-weight: 800; font-size: 32px; color: #86868B; }
+    #pv-lock { position: absolute; left: 1290px; top: 470px; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: #fff; box-shadow: 0 12px 26px rgba(0,0,0,0.2), 0 0 0 3px #2FA463; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    #pv-lock svg { width: 34px; height: 34px; overflow: visible; }
+    #pv-chips { position: absolute; left: 1330px; top: 660px; width: 470px; }
+    .ch { display: flex; align-items: center; gap: 14px; height: 74px; margin-bottom: 14px; padding: 0 22px 0 16px; background: #fff; border-radius: 20px; box-shadow: 0 14px 30px rgba(0,0,0,0.09), 0 0 0 1px rgba(0,0,0,0.05); font-weight: 800; font-size: 30px; letter-spacing: -0.02em; white-space: nowrap; opacity: 0; }
+    .ch svg { flex: none; width: 36px; height: 36px; overflow: visible; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="pv" data-composition-id="s-private" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="f1"><span class="ln" style="display:block"><span class="w">Your</span> <span class="w">files</span> <span class="w">stay</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="fm1">secure.</span></span></span></h2>
+    <h2 class="ttl" id="f2"><span class="ln" style="display:block"><span class="w">Read</span> <span class="w">right</span> <span class="w">here,</span></span><span class="ln" style="display:block"><span class="w">on</span> <span class="w"><span class="mk" id="fm2">campus.</span></span></span></h2>
+    <h2 class="ttl" id="f3"><span class="ln" style="display:block"><span class="w">Nothing</span> <span class="w">is</span></span><span class="ln" style="display:block"><span class="w">sent</span> <span class="w"><span class="mk" id="fm3">out.</span></span></span></h2>
+    <h2 class="ttl" id="f4"><span class="ln" style="display:block"><span class="w">Never</span> <span class="w">used</span> <span class="w">to</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="fm4">train.</span></span></span></h2>
+    <div id="pv-zone"><svg id="pv-zone-b" viewBox="0 0 1160 520" aria-hidden="true"><rect x="2" y="2" width="1156" height="516" rx="34" stroke-dasharray="16 12"/></svg>
+      <div id="pv-tag"><svg viewBox="0 0 30 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26V12l11-8 11 8v14z"/><path d="M12 26v-8h6v8"/></svg>University computers</div></div>
+    <div class="nd" id="n1" style="left:176px;top:535px"><svg viewBox="0 0 96 96" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8h32l16 16v64H24z" fill="#fff"/><path d="M56 8v16h16"/><path d="M36 44h24M36 58h24M36 72h14" stroke="#86868B"/></svg><b>Your file</b></div>
+    <div class="nd" id="n2" style="left:536px;top:535px"><svg viewBox="0 0 104 104" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 52C20 28 36 18 52 18s32 10 46 34C84 76 68 86 52 86S20 76 6 52z" fill="#fff"/><circle cx="52" cy="52" r="17" fill="#E5DEFF"/><circle cx="52" cy="52" r="7" fill="#1d1d1f" stroke="none"/></svg><b>Vision model</b></div>
+    <div class="nd" id="n3" style="left:896px;top:535px"><svg viewBox="0 0 96 96" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8h32l16 16v64H24z" fill="#fff"/><path d="M56 8v16h16"/><circle cx="60" cy="66" r="19" fill="#2FA463" stroke="none"/><path d="M51 66l7 7 11-13" stroke="#fff" stroke-width="5"/></svg><b>Accessible file</b></div>
+    <svg id="pv-wires" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+    <div id="pv-out"><svg viewBox="0 0 110 76" fill="none" stroke="#9a9aa0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M28 62a18 18 0 0 1-2-35 24 24 0 0 1 46-6 20 20 0 0 1 14 41z" fill="#fff"/></svg><b>Outside services</b></div>
+    <div id="pv-lock"><svg viewBox="0 0 34 34" fill="none" stroke="#2FA463" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="15" width="22" height="15" rx="4" fill="#D3EEDD"/><path d="M11 15v-4a6 6 0 0 1 12 0v4"/></svg></div>
+    <div id="pv-chips">
+      <div class="ch" id="k1"><svg viewBox="0 0 36 36" fill="none" stroke="#2FA463" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="15"/><path d="M8 28L28 8"/></svg>Nothing sent out</div>
+      <div class="ch" id="k2"><svg viewBox="0 0 36 36" fill="none" stroke="#2FA463" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="15"/><path d="M8 28L28 8"/></svg>Nothing kept by others</div>
+      <div class="ch" id="k3"><svg viewBox="0 0 36 36" fill="none" stroke="#2FA463" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="15"/><path d="M8 28L28 8"/></svg>Never used for training</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C;
+      /*TIMING*/ var L = {f1: 0.6, f2: 3.05, f3: 9.17, f4: 13.6}, D = {f1: 1.949, f2: 5.623, f3: 3.93, f4: 3.544}, END = 18.34; /*END TIMING*/
+      var W = $("#pv-wires");
+      var wire = function (x1, y1, x2, y2, col) { var p = document.createElementNS(ns, "path"); p.setAttribute("d", LM.curve(x1, y1, x2, y2)); p.setAttribute("fill", "none"); p.setAttribute("stroke", col); p.setAttribute("stroke-width", 4); p.setAttribute("stroke-linecap", "round"); W.appendChild(p); var l = p.getTotalLength(); p.setAttribute("stroke-dasharray", l + " " + (l + 4)); p.setAttribute("stroke-dashoffset", l); p.style.opacity = 0; return { p: p, l: l }; };
+      var w1 = wire(466, 645, 536, 645, "#c9c9c2"), w2 = wire(826, 645, 896, 645, "#c9c9c2");
+      // the way out: from the model, up and over the edge of campus, to a cloud that is never reached
+      var out = document.createElementNS(ns, "path"); out.setAttribute("d", "M681 535 C681 430 1100 430 1290 470"); out.setAttribute("fill", "none"); out.setAttribute("stroke", "#c9c9c2"); out.setAttribute("stroke-width", 4); out.setAttribute("stroke-linecap", "round"); out.style.opacity = 0; W.appendChild(out);
+      var ol = out.getTotalLength(); out.setAttribute("stroke-dasharray", ol + " " + (ol + 4)); out.setAttribute("stroke-dashoffset", ol);
+      // ---- "Throughout, your files stay secure."
+      LM.words(tl, "#f1", L.f1, 0.1); LM.mark2(tl, "#fm1", "hlul", C.green[0], L.f1 + D.f1 * 0.45, 0.8);
+      tl.fromTo("#pv-zone", { opacity: 0, y: 14, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, L.f1 + 0.6);
+      // ---- "The vision model runs locally, so every file is read and processed on university computers."
+      LM.out(tl, "#f1", L.f2 - 0.1, 0.35); LM.words(tl, "#f2", L.f2 + 0.1, 0.1); LM.mark2(tl, "#fm2", "hlul", C.green[0], L.f2 + 3.6, 0.8);
+      [["#n2", 0.2], ["#n1", 2.0], ["#n3", 3.4]].forEach(function (n) { tl.fromTo(n[0], { opacity: 0, y: 22, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, L.f2 + n[1]); });
+      [w1, w2].forEach(function (w, i) { tl.set(w.p, { opacity: 1 }, L.f2 + 2.3 + i * 1.3); tl.fromTo(w.p, { strokeDashoffset: w.l }, { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, L.f2 + 2.3 + i * 1.3); LM.pulse(tl, w.p, i ? "#2FA463" : "#7B5CF0", L.f2 + 2.8 + i * 1.3, 0.7, 0.35); });
+      tl.fromTo("#n2 svg circle:nth-of-type(2)", { scale: 1, transformOrigin: "50% 50%" }, { scale: 1.25, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3 }, L.f2 + 0.6);
+      // ---- "Nothing is sent to an outside service, and nothing is kept by one."
+      LM.out(tl, "#f2", L.f3 - 0.1, 0.35); LM.words(tl, "#f3", L.f3 + 0.1, 0.1); LM.mark2(tl, "#fm3", "hlul", C.green[0], L.f3 + 0.6, 0.8);
+      tl.fromTo("#pv-out", { opacity: 0, x: 18, filter: "blur(6px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, L.f3 + 0.9);
+      tl.set(out, { opacity: 1 }, L.f3 + 1.1); tl.fromTo(out, { strokeDashoffset: ol }, { strokeDashoffset: ol * 0.02, duration: 0.9, ease: "power2.inOut" }, L.f3 + 1.1);
+      tl.fromTo("#pv-lock", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, L.f3 + 1.95);
+      tl.to("#pv-lock", { scale: 1.1, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 3 }, L.f3 + 2.5);                      // ambient: the lock breathes once it has landed
+      tl.to("#pv-zone-b rect", { strokeDashoffset: -112, duration: END, ease: "none" }, 0);                                         // ambient: the boundary drifts slowly, a pure function of time
+      tl.fromTo("#k1", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f3 + 0.4); tl.fromTo("#k2", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f3 + 2.5);
+      // ---- "And no university file is ever used to train a model."
+      LM.out(tl, "#f3", L.f4 - 0.1, 0.35); LM.words(tl, "#f4", L.f4 + 0.1, 0.1); LM.mark2(tl, "#fm4", "hlul", C.green[0], L.f4 + 2.0, 0.8);
+      tl.fromTo("#k3", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, L.f4 + 1.0);
+      // ---- the scene leaves as one blurred sheet
+      tl.to("#pv", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      window.__timelines["s-private"] = tl;
+    })();
+  </script>
+</template>

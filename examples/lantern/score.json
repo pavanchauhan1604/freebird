@@ -9,7 +9,10 @@
   "export": "F",
   "cycle": "G",
   "workbench": "F",
-  "end": "C"
+  "end": "C",
+  "hard": "F",
+  "verify": "G",
+  "private": "C"
  },
  "groove": [
   [
@@ -25,19 +28,19 @@
    1
   ],
   [
-   195,
+   255.76,
    1.1
   ],
   [
-   201.8,
+   262.56,
    0
   ],
   [
-   212.8,
+   273.58,
    0
   ]
  ],
  "lit_at": 4.84,
- "lockup_at": 208.4,
+ "lockup_at": 269.16,
  "loudness": -20
 }

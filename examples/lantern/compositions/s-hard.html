@@ -1,0 +1,104 @@
+<template>
+  <style>
+    #hc { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #hc .ttl { left: 130px; top: 96px; }
+    #hc .cd { position: absolute; top: 380px; width: 400px; height: 590px; background: #fff; border-radius: 26px; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.11), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    #hc .th { position: absolute; left: 0; top: 0; width: 400px; height: 400px; background: #eeede8; overflow: hidden; }
+    #hc .th svg { position: absolute; left: 0; top: 0; width: 400px; height: 400px; overflow: visible; }
+    #hc .nm { position: absolute; left: 28px; top: 422px; font-weight: 800; font-size: 38px; letter-spacing: -0.03em; }
+    #hc .sb { position: absolute; left: 28px; top: 476px; font-weight: 700; font-size: 28px; color: #6e6e73; }
+    #hc .ok { position: absolute; left: 28px; bottom: 28px; display: flex; align-items: center; gap: 10px; background: #D3EEDD; color: #1C7A47; border-radius: 12px; padding: 6px 16px 6px 8px; font-weight: 800; font-size: 28px; opacity: 0; }
+    #hc .ok svg { width: 28px; height: 28px; overflow: visible; }
+    #hc .band { position: absolute; left: 0; right: 0; top: 0; height: 90px; background: linear-gradient(180deg, rgba(123,92,240,0), rgba(123,92,240,0.2) 70%, rgba(123,92,240,0.46) 98%, rgba(123,92,240,0)); opacity: 0; }
+    #hc .bx rect { fill: rgba(123,92,240,0.12); stroke: #7B5CF0; stroke-width: 3.5; stroke-linejoin: round; opacity: 0; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="hc" data-composition-id="s-hard" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="a1"><span class="ln" style="display:block"><span class="w">Tested</span> <span class="w">on</span> <span class="w">the</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="am">hardest</span></span> <span class="w">pages.</span></span></h2>
+    <h2 class="ttl" id="a2"><span class="ln" style="display:block"><span class="w">Read</span> <span class="w">the</span> <span class="w">way</span></span><span class="ln" style="display:block"><span class="w">it</span> <span class="w"><span class="mk" id="am2">appears.</span></span></span></h2>
+    <div class="cd" id="c1" style="left:100px"><div class="th"><svg id="s1" viewBox="0 0 400 400"></svg><div class="band"></div></div><div class="nm">Scanned</div><div class="sb">Grain, shadows, skew</div><div class="ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path class="ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tested</div></div>
+    <div class="cd" id="c2" style="left:540px"><div class="th"><svg id="s2" viewBox="0 0 400 400"></svg><div class="band"></div></div><div class="nm">Handwritten</div><div class="sb">Ink on ruled paper</div><div class="ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path class="ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tested</div></div>
+    <div class="cd" id="c3" style="left:980px"><div class="th"><svg id="s3" viewBox="0 0 400 400"></svg><div class="band"></div></div><div class="nm">Many tables</div><div class="sb">Several on one page</div><div class="ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path class="ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tested</div></div>
+    <div class="cd" id="c4" style="left:1420px"><div class="th"><svg id="s4" viewBox="0 0 400 400"></svg><div class="band"></div></div><div class="nm">At an angle</div><div class="sb">Scanned crooked</div><div class="ok"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path class="ck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Tested</div></div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C;
+      /*TIMING*/ var L = {t1: 0.6, t2: 4.16, t3: 11.33}, D = {t1: 3.061, t2: 6.665, t3: 2.838}, END = 15.37, CUE = [0.02, 0.227, 0.425, 0.735]; /*END TIMING*/
+      var seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+      var el = function (parent, name, attrs) { var e = document.createElementNS(ns, name); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+      var PG = { x: 70, y: 36, w: 260, h: 330 };
+      // 1 · a scanned page: warm paper, grain, an edge shadow, text lines that are not quite even
+      (function () {
+        var s = $("#s1"); el(s, "defs", {}).innerHTML = '<linearGradient id="sc-edge" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0.22"/><stop offset="0.16" stop-color="#000" stop-opacity="0"/></linearGradient>';
+        el(s, "rect", { x: PG.x, y: PG.y, width: PG.w, height: PG.h, fill: "#f3efe4", stroke: "rgba(0,0,0,0.14)", "stroke-width": 1.5 });
+        for (var i = 0; i < 12; i++) { var w = 150 + rnd() * 90; el(s, "rect", { x: PG.x + 24 + rnd() * 3, y: PG.y + 36 + i * 24, width: Math.min(w, 212), height: 9, rx: 2, fill: "#8d8a82", opacity: 0.8 }); }
+        el(s, "rect", { x: PG.x + 24, y: PG.y + 14, width: 120, height: 14, rx: 3, fill: "#5d5b55" });
+        for (var j = 0; j < 150; j++) el(s, "circle", { cx: PG.x + rnd() * PG.w, cy: PG.y + rnd() * PG.h, r: 0.8 + rnd() * 1.6, fill: "#6b685f", opacity: 0.12 + rnd() * 0.22 });
+        for (var k = 0; k < 7; k++) el(s, "rect", { x: PG.x, y: PG.y + rnd() * PG.h, width: PG.w, height: 2 + rnd() * 2, fill: "#000", opacity: 0.035 });
+        el(s, "rect", { x: PG.x, y: PG.y, width: PG.w, height: PG.h, fill: "url(#sc-edge)" });
+      })();
+      // 2 · handwriting: ruled lines and ink that loops like a hand wrote it
+      (function () {
+        var s = $("#s2"); el(s, "rect", { x: PG.x, y: PG.y, width: PG.w, height: PG.h, fill: "#fff", stroke: "rgba(0,0,0,0.12)", "stroke-width": 1.5 });
+        el(s, "line", { x1: PG.x + 30, y1: PG.y, x2: PG.x + 30, y2: PG.y + PG.h, stroke: "#f0a4a4", "stroke-width": 1.6 });
+        for (var i = 0; i < 9; i++) {
+          var y = PG.y + 52 + i * 31; el(s, "line", { x1: PG.x, y1: y, x2: PG.x + PG.w, y2: y, stroke: "#c7d6ee", "stroke-width": 1.6 });
+          if (i === 8) continue;
+          var d = "M" + (PG.x + 42) + " " + y, x = PG.x + 42, len = 120 + rnd() * 80;
+          while (x < PG.x + 42 + len) { var a = 5 + rnd() * 8; d += " q" + (4 + rnd() * 4) + " " + (-a * 2.2) + " " + (8 + rnd() * 5) + " " + (-a * 0.2) + " t" + (6 + rnd() * 4) + " " + (a * 0.3); x += 18; if (rnd() < 0.2) { x += 10; d += " m10 0"; } }
+          el(s, "path", { d: d, fill: "none", stroke: "#27489e", "stroke-width": 2.3, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0.88 });
+        }
+      })();
+      // 3 · a page with several tables
+      (function () {
+        var s = $("#s3"); el(s, "rect", { x: PG.x, y: PG.y, width: PG.w, height: PG.h, fill: "#fff", stroke: "rgba(0,0,0,0.12)", "stroke-width": 1.5 });
+        el(s, "rect", { x: PG.x + 20, y: PG.y + 16, width: 110, height: 12, rx: 3, fill: "#5d5b55" });
+        [[PG.y + 44, 3, 4], [PG.y + 150, 4, 3], [PG.y + 252, 2, 3]].forEach(function (t, n) {
+          var y0 = t[0], rows = t[1], cols = t[2], x0 = PG.x + 20, w = PG.w - 40, rh = 28;
+          el(s, "rect", { x: x0, y: y0, width: w, height: rh * rows, fill: "none", stroke: "#8d8d92", "stroke-width": 1.8 });
+          el(s, "rect", { x: x0, y: y0, width: w, height: rh, fill: "#E5DEFF", stroke: "#8d8d92", "stroke-width": 1.8 });
+          for (var r = 1; r < rows; r++) el(s, "line", { x1: x0, y1: y0 + r * rh, x2: x0 + w, y2: y0 + r * rh, stroke: "#8d8d92", "stroke-width": 1.4 });
+          for (var c = 1; c < cols; c++) el(s, "line", { x1: x0 + c * w / cols, y1: y0, x2: x0 + c * w / cols, y2: y0 + rh * rows, stroke: "#8d8d92", "stroke-width": 1.4 });
+          for (var r2 = 0; r2 < rows; r2++) for (var c2 = 0; c2 < cols; c2++) el(s, "rect", { x: x0 + c2 * w / cols + 8, y: y0 + r2 * rh + 10, width: w / cols - 26, height: 7, rx: 2, fill: r2 ? "#b9b9bd" : "#7B5CF0", opacity: r2 ? 0.8 : 0.6 });
+        });
+      })();
+      // 4 · a scan taken at an angle: the page lies crooked on a darker bed
+      (function () {
+        var s = $("#s4"); el(s, "rect", { x: 0, y: 0, width: 400, height: 400, fill: "#cfcdc6" });
+        el(s, "path", { d: "M400 0 L400 120 L300 0 Z", fill: "#9c9a93" });
+        var g = el(s, "g", { transform: "rotate(-9 200 205)" });
+        el(g, "rect", { x: PG.x - 10, y: PG.y - 2, width: PG.w + 20, height: PG.h + 10, fill: "#fff", stroke: "rgba(0,0,0,0.18)", "stroke-width": 1.5 });
+        el(g, "rect", { x: PG.x + 14, y: PG.y + 20, width: 130, height: 14, rx: 3, fill: "#5d5b55" });
+        for (var i = 0; i < 11; i++) el(g, "rect", { x: PG.x + 14, y: PG.y + 54 + i * 25, width: 120 + ((i * 53) % 110), height: 9, rx: 2, fill: "#8d8d92", opacity: 0.85 });
+      })();
+
+      var cards = ["#c1", "#c2", "#c3", "#c4"];
+      // the boxes a reading draws on each card (violet, one per block)
+      var BOX = { c1: [[92, 62, 150, 18], [94, 100, 212, 150], [94, 262, 190, 90]], c2: [[102, 64, 204, 64], [102, 134, 190, 64], [102, 200, 170, 124]], c3: [[90, 78, 220, 86], [90, 184, 220, 86], [90, 286, 220, 58]], c4: [[96, 70, 140, 24], [96, 110, 206, 130], [102, 256, 190, 90]] };
+      cards.forEach(function (id, i) {
+        var th = $(id + " .th"), s = th.querySelector("svg"), g = el(s, "g", { class: "bx" });
+        BOX[id.slice(1)].forEach(function (b, n) { var r = el(g, "rect", { x: b[0], y: b[1], width: b[2], height: b[3], rx: 8, pathLength: 1, "stroke-dasharray": 1, "stroke-dashoffset": 1 }); r.id = id.slice(1) + "b" + n; });
+      });
+
+      // ---- "We tested that vision model on the hardest pages."
+      LM.words(tl, "#a1", L.t1, 0.1); LM.mark2(tl, "#am", "hlul", C.violet[0], L.t1 + D.t1 * 0.45, 0.8);
+      // ---- "Scanned documents. Handwritten ones. Pages with several tables. And scans taken at an angle."
+      cards.forEach(function (id, i) {
+        var t = L.t2 + CUE[i] * D.t2 - 0.05;
+        tl.fromTo(id, { opacity: 0, y: 26, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.75, ease: "power3.out" }, t);
+      });
+      // ---- "Each one is read the way it appears on the page."
+      LM.out(tl, "#a1", L.t3 - 0.1, 0.35); LM.words(tl, "#a2", L.t3 + 0.1, 0.1); LM.mark2(tl, "#am2", "hlul", C.violet[0], L.t3 + 0.9, 0.8);
+      cards.forEach(function (id, i) {
+        var t = L.t3 + 0.15 + i * 0.55, band = $(id + " .band");
+        tl.set(band, { y: -90 }, 0); tl.to(band, { opacity: 1, duration: 0.25, ease: "power1.out" }, t); tl.to(band, { y: 400, duration: 1.1, ease: "none" }, t); tl.to(band, { opacity: 0, duration: 0.25, ease: "power1.in" }, t + 1.0);
+        [0, 1, 2].forEach(function (n) { tl.to("#" + id.slice(1) + "b" + n, { opacity: 1, strokeDashoffset: 0, duration: 0.6, ease: "sine.inOut" }, t + 0.25 + n * 0.28); });
+        tl.fromTo(id + " .ok", { opacity: 0, y: 8, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.2)" }, t + 1.0); tl.to(id + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t + 1.15);
+      });
+      // ---- the scene leaves as one blurred sheet
+      tl.to("#hc", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      window.__timelines["s-hard"] = tl;
+    })();
+  </script>
+</template>

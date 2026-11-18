@@ -25,6 +25,21 @@
   "src": "compositions/s-remediate.html"
  },
  {
+  "id": "s-hard",
+  "key": "hard",
+  "src": "compositions/s-hard.html"
+ },
+ {
+  "id": "s-verify",
+  "key": "verify",
+  "src": "compositions/s-verify.html"
+ },
+ {
+  "id": "s-private",
+  "key": "private",
+  "src": "compositions/s-private.html"
+ },
+ {
   "id": "s-export",
   "key": "export",
   "src": "compositions/s-export.html"

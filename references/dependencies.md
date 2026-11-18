@@ -11,9 +11,15 @@ Freebird adds a taste, a narration pipeline, a sound workflow and a review loop 
 | **Screen footage** | Recordly (auto-zoom recorder) or the scripted fallback in `scripts/` | [webadderallorg/Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0, run it, never bundle it) | by hand; see [screen-recording.md](screen-recording.md) |
 | **Plumbing** | `ffmpeg`, `node`, Python 3 | your package manager | by hand |
 
-## Animation skills (surveyed 2026-11-18; not installed or run here)
+## Animation skills (default dependencies)
 
-HyperFrames is the engine; these three sharpen the motion. Install with `scripts/install_companions.sh --extras` (prints the commands) or by hand; read a skill's `SKILL.md` first.
+HyperFrames is the engine; these three are **always used**, on every video. `scripts/install_companions.sh` installs them (skip with `--no-animation-skills`). How they are used:
+
+- **Before writing a scene:** load `gsap-timeline` and `gsap-core` (position parameter, labels, defaults, no `delay` chains) and `motion-design` (pick one motion personality for the film, signature easing, duration palette, entrance pattern).
+- **While writing:** `choreograph` and `animate` (Emil Kowalski) for any scene with several things moving.
+- **In every creative-director pass:** run `motion-design`'s 8-step checklist and quality rules (three motion layers, directional easing, enter longer than exit, the 1/3 rules) over every scene and write the defects.
+- **`review-animations` and `improve-animations` cannot be started by Claude** (they are reserved for the user). At the end of a film, tell the user to run `/review-animations` over the compositions and then act on what it reports.
+- A scene that never used them is not reviewed. Say in the report which of the three were actually loaded and used.
 
 | Skill | Source, licence | Why freebird wants it | Caution |
 |---|---|---|---|

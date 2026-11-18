@@ -8,8 +8,8 @@ It encodes one author's taste (light paper ground, Manrope, one accent per stage
 
 ```bash
 git clone git@github.com:<you>/freebird.git ~/.claude/skills/freebird
-~/.claude/skills/freebird/scripts/setup.sh --voice        # venv (~/.freebird-venv) with numpy, soundfile, kokoro
-~/.claude/skills/freebird/scripts/install_companions.sh   # Earshot + real-sound skills; prints how to get Recordly
+~/.claude/skills/freebird/scripts/install_all.sh          # voice venv, Earshot + real-sound, GSAP, Emil Kowalski, LottieFiles; then a doctor report
+~/.claude/skills/freebird/scripts/doctor.sh               # any time: every dependency, by phase, present or missing
 ```
 
 Needs `ffmpeg`, `node`, and the HyperFrames skills/CLI (`npx hyperframes@0.9.34`); `install_companions.sh` checks for them. Everything freebird builds on is listed in [`references/dependencies.md`](references/dependencies.md) and is installed from its own source, never copied here. Nothing in the repo is machine-specific: paths are relative or come from `FREEBIRD_VENV` (default `~/.freebird-venv`) and `FREEBIRD_CACHE` (default `~/.cache/freebird`). To share it with another machine or person, they run the three lines above. Then ask Claude for a launch film ("make a Notion-style launch film for this app") and it follows `SKILL.md`.
@@ -31,7 +31,7 @@ Needs `ffmpeg`, `node`, and the HyperFrames skills/CLI (`npx hyperframes@0.9.34`
 | `references/pipeline.md` | project layout, the review loop, the creative director's pass, export, pitfalls |
 | `references/brief.md` | defaults to take and facts to extract from the product |
 | `references/feedback-log.md` | the prompting history, grouped, with the rule each item became |
-| `scripts/` | `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `record_demo.sh`, `tap.js`, `build_index.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
+| `scripts/` | `narrate.py`, `retime.py`, `score.py`, `sfx.py`, `sfx_search.py`, `see_audio.py`, `capture_screen.sh`, `record_demo.sh`, `tap.js`, `build_index.py`, `fit_timing.py`, `make_captions.py`, `export.sh`, `check_report.py`, `setup.sh`, `install_companions.sh` |
 | `templates/` | `lib/motion.js` (titles, marks, odometer, S-curves, pulse, follow-a-path), Manrope (SIL OFL) |
 | `examples/lantern/` | compositions, script, layout, score, sound cues, timing and the SPEC of the example film |
 

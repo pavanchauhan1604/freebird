@@ -26,7 +26,7 @@ SPEC.md                     the film's plan: structure with seconds, narration t
 
 ## The creative director's pass
 
-Review the contact sheets as an art director would, scene by scene, and write the defects before fixing them.
+The creative director is a standing role with this skill's taste (see [taste.md](taste.md)), not a one-off step: every phase and section is looked at through it (storyline, script, each scene, sound, captions, export). The full pass below is run **twice** before a film is called done: once on the first complete build, and again on the result of fixing it, over every scene and the audio sheet. Review the contact sheets as an art director would, scene by scene, and write the defects before fixing them.
 
 - **Hierarchy and focus:** one focal object per scene; is anything competing? Is there dead space for more than ~3 s that a larger object, a centred start or an arriving second object would fix?
 - **Type:** nothing under 28 px; nothing clipped, wrapped badly or leaving the canvas; chips never touching a name; numbers aligned when settled.
@@ -66,3 +66,10 @@ Tell the user the sizes; if an upload channel limits file size, send the share c
 | `ReferenceError` in one scene only | a helper constant (e.g. `NS`) removed from `motion.js` while another helper uses it | grep for every identifier a helper uses before deleting |
 | A host element scaled by CSS fights GSAP | CSS transform on a GSAP-animated element | animate the scale in GSAP on the host, not in CSS |
 | Odd fractions on rolling digits | leading digits shown as zeros | hide leading zeros and stray commas (`LM.odometer` does) |
+
+## Adding or changing scenes in a finished film
+
+- **Keep earlier scenes where they are.** Their beats are written against their own timing; a longer take anywhere else would move every scene after it. Give each unchanged scene its old `start`, `duration` and absolute line times in `layout.json`, let only the new scenes flow, and shift the scenes after them by the length that was added. Retime, then compare every old scene's start and duration with the old `timing.json` before going on.
+- **Keep the voice takes you already have.** `narrate.py` caches a take by text and target; if its cache key changes (a rebuilt tool, a new voice setting) every line is voiced again and every length drifts. Before re-voicing, copy the old take over the new key for each unchanged line and check that `voice.json` still shows the old lengths.
+- **Write a new scene's beats from the voice, not by guess:** put a `/*TIMING*/` block in it and run `scripts/fit_timing.py` after every retime; place the visual beat on the phrase that names it (`silencedetect` on the narration gives each phrase's start).
+- A scene that has no shared element with its neighbour leaves as one blurred sheet and the next one arrives with its own entrance; do not rely on a previous scene's leftover object.

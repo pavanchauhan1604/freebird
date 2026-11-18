@@ -2,7 +2,7 @@
   <style>
     #ex { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
     #ex .ttl { left: 900px; top: 100px; }
-    #ex-page { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; background: #fff; box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06); }
+    #ex-page { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; opacity: 0; background: #fff; box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06); }
     #ex-page img, #ex-mini img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
     #ex-mini { position: absolute; left: 130px; top: 110px; width: 664px; height: 860px; background: #fff; box-shadow: 0 30px 60px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06); opacity: 0; transform-origin: 0 0; }
     #ex-div { position: absolute; left: 130px; top: 104px; width: 3px; height: 872px; background: #2FA463; border-radius: 2px; box-shadow: 0 0 14px 2px rgba(47,164,99,0.5); opacity: 0; }
@@ -81,6 +81,7 @@
       var title = function (id, tin, tout) { LM.words(tl, id, tin, 0.1); if (tout) LM.out(tl, id, tout, 0.4); };
       var odo = LM.odometer($("#ex-od"), 1, 30); odo.set(0);
 
+      tl.fromTo("#ex-page", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 0.1);
       // ---- 0.6 s "And once a file is remediated, you simply replace the original."
       title("#e1", 0.6, 4.4); LM.mark2(tl, "#em1", "hl", C.green[0], 1.5, 0.8);
       tl.fromTo("#ex-win", { opacity: 0, y: 18, filter: "blur(7px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 0.8);

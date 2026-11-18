@@ -1,0 +1,90 @@
+<template>
+  <style>
+    #vf { position: absolute; inset: 0; font-family: Manrope, "Helvetica Neue", Arial, sans-serif; color: #1d1d1f; }
+    #vf .ttl { left: 130px; top: 96px; }
+    #vf-page { position: absolute; left: 130px; top: 360px; width: 454px; height: 588px; background: #fff; box-shadow: 0 24px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06); opacity: 0; }
+    #vf-page img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #vf-ov { position: absolute; inset: 0; width: 454px; height: 588px; overflow: visible; }
+    #vf-ov rect { fill: rgba(123,92,240,0.12); stroke: #7B5CF0; stroke-width: 3.5; stroke-linejoin: round; opacity: 0; }
+    .tk { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; opacity: 0; }
+    .tk svg { width: 30px; height: 30px; overflow: visible; }
+    #vf-div { position: absolute; left: 0; top: -14px; height: 616px; width: 4px; margin-left: -2px; background: #2FA463; border-radius: 2px; box-shadow: 0 0 14px 2px rgba(47,164,99,0.5); opacity: 0; }
+    .pl { position: absolute; top: -58px; height: 44px; padding: 0 16px; display: flex; align-items: center; background: #fff; border-radius: 14px; box-shadow: 0 10px 24px rgba(0,0,0,0.14), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; white-space: nowrap; opacity: 0; }
+    #vf-pl1 { left: 0; color: #6e6e73; } #vf-pl2 { right: 0; color: #23834D; }
+    #vf-same { position: absolute; left: 50%; bottom: -66px; margin-left: -112px; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 8px 18px 8px 10px; box-shadow: 0 12px 28px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; color: #2FA463; opacity: 0; }
+    #vf-same svg { width: 28px; height: 28px; overflow: visible; }
+    #vf-rev { position: absolute; left: 24px; right: 24px; bottom: 26px; display: flex; align-items: center; gap: 14px; background: #fff; border-radius: 16px; padding: 14px 20px; box-shadow: 0 16px 34px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06); font-weight: 800; font-size: 28px; opacity: 0; }
+    #vf-rev i { flex: none; width: 16px; height: 16px; border-radius: 50%; background: #F2711C; } #vf-rev b { font-weight: 800; }
+    #vf-list { position: absolute; left: 900px; top: 260px; width: 890px; }
+    .ph { position: relative; display: flex; align-items: center; gap: 26px; height: 150px; margin-bottom: 26px; padding: 0 34px; background: #fff; border-radius: 26px; box-shadow: 0 20px 40px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.05); opacity: 0; }
+    .ph .hl { position: absolute; inset: 0; border-radius: 26px; background: rgba(123,92,240,0.1); box-shadow: 0 0 0 3px rgba(123,92,240,0.55); opacity: 0; }
+    .ph .nb { position: relative; flex: none; width: 64px; height: 64px; border-radius: 50%; background: #7B5CF0; color: #fff; font-weight: 800; font-size: 36px; display: flex; align-items: center; justify-content: center; }
+    .ph .tx { position: relative; flex: 1; min-width: 0; } .ph .tt { font-weight: 800; font-size: 40px; letter-spacing: -0.03em; } .ph .ds { margin-top: 4px; font-weight: 700; font-size: 28px; color: #6e6e73; white-space: nowrap; }
+    .ph .dn { position: relative; flex: none; width: 44px; height: 44px; } .ph .dn svg { width: 44px; height: 44px; overflow: visible; }
+  </style>
+  <script src="assets/lib/motion.js"></script>
+  <div id="vf" data-composition-id="s-verify" data-width="1920" data-height="1080">
+    <h2 class="ttl" id="b1"><span class="ln" style="display:block"><span class="w">How</span> <span class="w">do</span> <span class="w">we</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm1">know?</span></span></span></h2>
+    <h2 class="ttl" id="b2"><span class="ln" style="display:block"><span class="w">Every</span> <span class="w">phase</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm2">checks.</span></span></span></h2>
+    <h2 class="ttl" id="b3"><span class="ln" style="display:block"><span class="w">Word</span> <span class="w">for</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm3">word.</span></span></span></h2>
+    <h2 class="ttl" id="b4"><span class="ln" style="display:block"><span class="w">Pixel</span> <span class="w">for</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm4">pixel.</span></span></span></h2>
+    <h2 class="ttl" id="b5"><span class="ln" style="display:block"><span class="w">Then</span> <span class="w">a</span></span><span class="ln" style="display:block"><span class="w"><span class="mk" id="bm5">person.</span></span></span></h2>
+    <div id="vf-page"><img src="assets/demo/page.jpg" alt="" /><svg id="vf-ov" viewBox="0 0 454 588" aria-hidden="true"></svg><div id="vf-tk"></div><div class="pl" id="vf-pl1">Original</div><div class="pl" id="vf-pl2">Rebuilt</div><div id="vf-div"></div>
+      <div id="vf-same"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path id="vf-sck" pathLength="1" d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg>Identical</div>
+      <div id="vf-rev"><i></i><span><b>Needs review</b><br><span style="color:#6e6e73;font-weight:700">Table layout unclear</span></span></div></div>
+    <div id="vf-list">
+      <div class="ph" id="p1"><div class="hl"></div><div class="nb">1</div><div class="tx"><div class="tt">Read</div><div class="ds">The model reads the rendered page</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
+      <div class="ph" id="p2"><div class="hl"></div><div class="nb">2</div><div class="tx"><div class="tt">Words</div><div class="ds">What it read, against what is said</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
+      <div class="ph" id="p3"><div class="hl"></div><div class="nb">3</div><div class="tx"><div class="tt">Pixels</div><div class="ds">The finished page, against the original</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
+      <div class="ph" id="p4"><div class="hl"></div><div class="nb">4</div><div class="tx"><div class="tt">People</div><div class="ds">Anything unproved is reviewed</div></div><div class="dn"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21" fill="#2FA463"/><path class="ck" pathLength="1" d="M12 23l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true }), $ = function (s) { return document.querySelector(s); }, ns = "http://www.w3.org/2000/svg", C = LM.C;
+      /*TIMING*/ var L = {v1: 0.6, v2: 3.37, v3: 10.49, v4: 15.8, v5: 22.44}, D = {v1: 2.268, v2: 6.626, v3: 4.809, v4: 6.135, v5: 4.616}, END = 28.26; /*END TIMING*/
+      var P = { w: 454, h: 588 }, R = { h1: [87, 79, 836, 127], h2: [90, 154, 319, 184], p: [92, 197, 805, 240], list: [107, 274, 503, 359], img: [96, 398, 903, 679], foot: [92, 918, 373, 934] };
+      var ORDER = ["h1", "h2", "p", "list", "img", "foot"], px = function (n, ax) { return n / 1000 * (ax ? P.w : P.h); };
+      var ov = $("#vf-ov"), tk = $("#vf-tk");
+      ORDER.forEach(function (k, i) {
+        var r = R[k], x = px(r[0], 1), y = px(r[1], 0), w = px(r[2] - r[0], 1), h = px(r[3] - r[1], 0), pad = 4;
+        var b = document.createElementNS(ns, "rect"); b.setAttribute("x", x - pad); b.setAttribute("y", y - pad); b.setAttribute("width", w + 2 * pad); b.setAttribute("height", h + 2 * pad); b.setAttribute("rx", 6); b.setAttribute("pathLength", 1); b.setAttribute("stroke-dasharray", 1); b.setAttribute("stroke-dashoffset", 1); b.id = "vb-" + k; ov.appendChild(b);
+        var t = document.createElement("div"); t.className = "tk"; t.id = "vt-" + k; t.style.left = (x + w + 4) + "px"; t.style.top = (y + h / 2) + "px"; t.innerHTML = '<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#2FA463"/><path d="M8 14.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; tk.appendChild(t);
+      });
+      var rise = function (sel, t, d) { tl.fromTo(sel, { opacity: 0, y: 18, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: d || 0.7, ease: "power3.out" }, t); };
+      var focus = function (id, t0, t1) { tl.fromTo(id + " .hl", { opacity: 0 }, { opacity: 1, duration: 0.3 }, t0); tl.to(id + " .hl", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, t1); };
+      var done = function (id, t) { tl.to(id + " .ck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t); };
+      // ---- "But how do we know it read the page correctly?"
+      LM.words(tl, "#b1", L.v1, 0.1); LM.mark2(tl, "#bm1", "hlul", C.violet[0], L.v1 + D.v1 * 0.6, 0.8);
+      rise("#vf-page", L.v1 + 0.2, 0.9);
+      // ---- "Remediation runs in phases, and every phase checks the model's reading against what is visible on the page."
+      LM.out(tl, "#b1", L.v2 - 0.1, 0.35); LM.words(tl, "#b2", L.v2 + 0.1, 0.1); LM.mark2(tl, "#bm2", "ul", C.violet[0], L.v2 + 1.0, 0.7);
+      ["#p1", "#p2", "#p3", "#p4"].forEach(function (id, i) { rise(id, L.v2 + 0.5 + i * 0.5, 0.65); });
+      ORDER.forEach(function (k, i) { tl.to("#vb-" + k, { opacity: 1, strokeDashoffset: 0, duration: 0.6, ease: "sine.inOut" }, L.v2 + 1.2 + i * 0.3); });
+      focus("#p1", L.v2 + 3.6, L.v2 + 5.2); done("#p1", L.v2 + 4.2);
+      // ---- "The words the model read are compared, one to one, with what a screen reader will say."
+      LM.out(tl, "#b2", L.v3 - 0.1, 0.35); LM.words(tl, "#b3", L.v3 + 0.1, 0.1); LM.mark2(tl, "#bm3", "hlul", C.violet[0], L.v3 + 0.9, 0.8);
+      focus("#p2", L.v3, L.v3 + D.v3 - 0.2);
+      ORDER.forEach(function (k, i) { tl.fromTo("#vt-" + k, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.2)" }, L.v3 + 2.1 + i * 0.4); });
+      done("#p2", L.v3 + 4.2);
+      // ---- "The finished page is compared with the original, pixel for pixel, so nothing you can see has changed."
+      LM.out(tl, "#b3", L.v4 - 0.1, 0.35); LM.words(tl, "#b4", L.v4 + 0.1, 0.1); LM.mark2(tl, "#bm4", "hlul", C.green[0], L.v4 + 0.9, 0.8);
+      focus("#p3", L.v4, L.v4 + D.v4 - 0.2);
+      tl.to(["#vb-h1", "#vb-h2", "#vb-p", "#vb-list", "#vb-img", "#vb-foot"], { opacity: 0, duration: 0.5, ease: "power1.in" }, L.v4 - 0.1);
+      tl.to(".tk", { opacity: 0, duration: 0.4, ease: "power1.in" }, L.v4 - 0.1);
+      tl.to(["#vf-pl1", "#vf-pl2"], { opacity: 1, duration: 0.4 }, L.v4 + 1.6);       tl.to("#vf-div", { opacity: 1, duration: 0.3 }, L.v4 + 2.6); tl.to("#vf-div", { x: P.w, duration: 1.4, ease: "sine.inOut" }, L.v4 + 2.75);
+      tl.to("#vf-div", { opacity: 0, duration: 0.3 }, L.v4 + 4.15);
+      tl.fromTo("#vf-same", { opacity: 0, y: 10, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.2)" }, L.v4 + 4.3); tl.to("#vf-sck", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, L.v4 + 4.5);
+      done("#p3", L.v4 + 4.7);
+      // ---- "And anything that can't be proved goes to a person, with the reasons attached."
+      LM.out(tl, "#b4", L.v5 - 0.1, 0.35); LM.words(tl, "#b5", L.v5 + 0.1, 0.1); LM.mark2(tl, "#bm5", "hlul", C.violet[0], L.v5 + 2.0, 0.8);
+      tl.to(["#vf-pl1", "#vf-pl2", "#vf-same"], { opacity: 0, duration: 0.4, ease: "power1.in" }, L.v5 - 0.1);
+      focus("#p4", L.v5, L.v5 + D.v5 - 0.2);
+      tl.fromTo("#vf-rev", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, L.v5 + 3.3);
+      done("#p4", L.v5 + 4.3);
+      // ---- the scene leaves as one blurred sheet
+      tl.to("#vf", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, END - 0.42);
+      window.__timelines["s-verify"] = tl;
+    })();
+  </script>
+</template>

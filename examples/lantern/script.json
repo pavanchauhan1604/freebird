@@ -85,7 +85,7 @@
   "target": 1.35
  },
  "r2": {
-  "text": "Lantern uses a vision model, fine-tuned for exactly this, to read each page the way a person would.",
+  "text": "Lantern runs a vision model on university computers, to read each page the way a person would.",
   "target": 6.0
  },
  "r3": {
@@ -103,6 +103,54 @@
  "r6": {
   "text": "The page looks just the same. But now, everyone can use it.",
   "target": 4.2
+ },
+ "t1": {
+  "text": "We tested that vision model on the hardest pages.",
+  "target": 3.4
+ },
+ "t2": {
+  "text": "Scanned documents. Handwritten ones. Pages with several tables. And scans taken at an angle.",
+  "target": 7.0
+ },
+ "t3": {
+  "text": "Each one is read the way it appears on the page.",
+  "target": 3.4
+ },
+ "v1": {
+  "text": "But how do we know it read the page correctly?",
+  "target": 3.2
+ },
+ "v2": {
+  "text": "Remediation runs in phases, and every phase checks the model's reading against what is visible on the page.",
+  "target": 6.6
+ },
+ "v3": {
+  "text": "The words the model read are compared, one to one, with what a screen reader will say.",
+  "target": 5.4
+ },
+ "v4": {
+  "text": "The finished page is compared with the original, pixel for pixel, so nothing you can see has changed.",
+  "target": 6.2
+ },
+ "v5": {
+  "text": "And anything that can't be proved goes to a person, with the reasons attached.",
+  "target": 4.6
+ },
+ "f1": {
+  "text": "Throughout, your files stay secure.",
+  "target": 2.4
+ },
+ "f2": {
+  "text": "The vision model runs locally, so every file is read and processed on university computers.",
+  "target": 5.6
+ },
+ "f3": {
+  "text": "Nothing is sent to an outside service, and nothing is kept by one.",
+  "target": 4.0
+ },
+ "f4": {
+  "text": "And no university file is ever used to train a model.",
+  "target": 3.6
  },
  "x1": {
   "text": "And once a file is remediated, you simply replace the original.",
